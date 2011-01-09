@@ -1,0 +1,611 @@
+/* ********************************************************************* *
+ *                                                                       *
+ *   =============================================================       *
+ *   Copyright 2011                                                      *
+ *   Christos Sioutis <christos.sioutis@gmail.com>                       *
+ *   =============================================================       *
+ *                                                                       *
+ *   This file is part of jdds.                                          *
+ *                                                                       *
+ *   jdds is free software: you can redistribute it and/or               *
+ *   modify it under the terms of the GNU General Public License         *
+ *   as published by the Free Software Foundation, either version 3 of   *
+ *   the License, or (at your option) any later version.                 *
+ *                                                                       *
+ *   jdds is distributed in the hope that it will be useful,             *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of      *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
+ *   GNU General Public License for more details.                        *
+ *                                                                       *
+ *   You should have received a copy of the GNU General Public           *
+ *   License along with jdds.                                            *
+ *   If not, see <http://www.gnu.org/licenses/>.                         *
+ *                                                                       *
+ * ********************************************************************* */
+
+
+#include "dds_dcps.idl"
+
+module RTPS {
+
+	typedef octet GuidPrefix_t[12];
+	
+	typedef octet EntityKey[3];
+
+    //RTPS Types	
+	struct EntityId_t {
+		EntityKey entityKey;
+		octet entityKind;
+	};
+	
+
+	const octet ENTITY_KIND_USER_DEFINED					= 0x00;
+	const octet ENTITY_KIND_BUILT_IN 						= 0xc0;
+	const octet ENTITY_KIND_VENDOR_SPECIFIC 				= 0x40;
+	const octet ENTITY_KIND_UNKNOWN_USER_DEFINED 			= 0x00;
+	const octet ENTITY_KIND_UNKNOWN_BUILT_IN 				= 0x00;
+	const octet ENTITY_KIND_PARTICIPANT_USER_DEFINED 		= 0x00;
+	const octet ENTITY_KIND_PARTICIPANT_BUILT_IN 			= 0xc1;
+	const octet ENTITY_KIND_WRITER_WITH_KEY_USER_DEFINED 	= 0x02;
+	const octet ENTITY_KIND_WRITER_WITH_KEY_BUILT_IN 		= 0xc2;
+	const octet ENTITY_KIND_WRITER_NO_KEY_USER_DEFINED 		= 0x03;
+	const octet ENTITY_KIND_WRITER_NO_KEY_BUILT_IN 			= 0xc3;
+	const octet ENTITY_KIND_READER_NO_KEY_USER_DEFINED 		= 0x04;
+	const octet ENTITY_KIND_READER_NO_KEY_BUILT_IN 			= 0xc4;
+	const octet ENTITY_KIND_READER_WITH_KEY_USER_DEFINED 	= 0x07;
+	const octet ENTITY_KIND_READER_WITH_KEY_BUILT_IN 		= 0xc7;
+	
+	struct GUID_t {
+		GuidPrefix_t guidPrefix;
+		EntityId_t entityId;
+	};
+		
+	struct Time_t { 
+		long seconds;
+		unsigned long fraction;
+	};
+	
+    struct Duration_t {
+        long sec;
+        unsigned long nanosec;
+    };
+			
+	struct VendorId_t {
+		octet vendorId[2];
+	};
+		
+	struct SequenceNumber_t {
+		long high;
+		unsigned long low;
+	};
+
+	struct FragmentNumber_t {
+		unsigned long value;
+	};
+	
+	const unsigned long FRAGMENTNUMBER_UNKNOWN = 0;
+
+	struct Locator_t {
+		long kind;
+		unsigned long port;
+		octet address[16];
+	};
+	
+	const unsigned long LOCATOR_PORT_INVALID  = 0;
+	const long          LOCATOR_KIND_INVALID  = -1;
+	const long          LOCATOR_KIND_RESERVED = 0;
+	const long          LOCATOR_KIND_UDPv4    = 1;
+	const long          LOCATOR_KIND_UDPv6    = 2;
+	
+	struct TopicKind_t {
+		long value;
+	};
+	
+	const long NO_KEY = 1;
+	const long WITH_KEY = 2;
+	
+	struct ReliabilityKind_t {
+		long value;
+	};
+	
+	const long BEST_EFFORT = 1;
+	const long RELIABLE = 3;
+		
+	struct Count_t { 
+		long value;
+	};
+	
+	struct ProtocolVersion_t {
+		octet major;
+		octet minor;
+	};
+		
+	struct KeyHash_t {
+		octet value[16];
+	};
+	
+	struct StatusInfo_t {
+		octet value[4];
+	};	
+
+	struct ContentFilterProperty_t {
+		string<256> contentFilteredTopicName;
+		string<256> relatedTopicName;
+		string<256> filterClassName;
+		string filterExpression;
+		sequence<string> expressionParameters;
+	};
+	
+	typedef sequence<long> FilterResult_t;
+	typedef long FilterSignature_t[4];
+		
+	struct ContentFilterInfo_t {
+		FilterResult_t filterResult;
+		sequence<FilterSignature_t> filterSignatures;
+	};	
+	
+	struct Property_t {
+		string name;
+		string value;
+	};
+	
+	struct EntityName_t {
+		string name;
+	};
+
+
+	typedef sequence<string> ParameterList;
+	
+	struct OriginalWriterInfo_t {
+		GUID_t originalWriterGUID;
+		SequenceNumber_t originalWriterSN;
+		ParameterList originalWriterQos;
+	};
+	
+	typedef unsigned long BuiltinEndpointSet_t;	
+	
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PARTICIPANT_ANNOUNCER       = 0x00000001 << 0;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PARTICIPANT_DETECTOR        = 0x00000001 << 1;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PUBLICATION_ANNOUNCER       = 0x00000001 << 2;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PUBLICATION_DETECTOR        = 0x00000001 << 3;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_SUBSCRIPTION_ANNOUNCER      = 0x00000001 << 4;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_SUBSCRIPTION_DETECTOR       = 0x00000001 << 5;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PARTICIPANT_PROXY_ANNOUNCER = 0x00000001 << 6;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PARTICIPANT_PROXY_DETECTOR  = 0x00000001 << 7;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PARTICIPANT_STATE_ANNOUNCER = 0x00000001 << 8;
+	const BuiltinEndpointSet_t DISC_BUILTIN_ENDPOINT_PARTICIPANT_STATE_DETECTOR  = 0x00000001 << 9;
+	const BuiltinEndpointSet_t BUILTIN_ENDPOINT_PARTICIPANT_MESSAGE_DATA_WRITER  = 0x00000001 << 10;
+	const BuiltinEndpointSet_t BUILTIN_ENDPOINT_PARTICIPANT_MESSAGE_DATA_READER  = 0x00000001 << 11;	
+		
+	typedef unsigned long IPv4Address_t;
+	typedef unsigned long Port_t;
+		
+	struct LocatorUDPv4_t {
+		IPv4Address_t address;
+		Port_t port;
+	};
+		
+	//RTPS Messages
+	
+	typedef EntityId_t EntityId;
+	typedef GuidPrefix_t GuidPrefix;
+	typedef VendorId_t VendorId;
+	typedef ProtocolVersion_t ProtocolVersion;
+	typedef SequenceNumber_t SequenceNumber;
+		
+	struct SequenceNumberSet {
+		SequenceNumber bitmapBase;
+		unsigned long numbits;
+		sequence<long, 8> bitmap;
+    };
+	
+	typedef FragmentNumber_t FragmentNumber;
+	
+	struct FragmentNumberSet {
+		FragmentNumber_t bitmapBase;
+		unsigned long numbits;
+		sequence<long, 8> bitmap;
+	};
+	
+	typedef Time_t Timestamp;
+	
+	typedef sequence<Locator_t, 8> LocatorList;
+	
+	struct ParameterId_t {
+		short value;
+	};
+	
+	struct Parameter {
+		ParameterId_t parameterId;
+		short length;
+		sequence<octet> value;
+	};
+
+	const short PID_PAD      = 0;
+	const short PID_SENTINEL = 1;
+	
+	typedef sequence<octet> SerializedPayload;
+	
+	typedef Count_t Count;
+	
+	typedef LocatorUDPv4_t LocatorUDPv4;
+	
+	struct RTPS_Header { 
+		octet label[4];
+		ProtocolVersion version;
+		VendorId vendorId;
+		GuidPrefix guidPrefix;
+	};
+	
+	//RTPS Submessages
+	
+	struct SubmessageHeader {
+		octet submessageId;
+		octet flags;
+		unsigned short submessageLength; /* octetsToNextHeader */
+	};
+	
+	const octet PAD            = 0x01;
+	const octet ACKNACK        = 0x06;
+	const octet HEARTBEAT      = 0x07;
+	const octet GAP            = 0x08;
+	const octet INFO_TS        = 0x09;
+	const octet INFO_SRC       = 0x0c;
+	const octet INFO_REPLY_IP4 = 0x0d;
+	const octet INFO_DST       = 0x0e;
+	const octet INFO_REPLY     = 0x0f;
+	const octet NACK_FRAG      = 0x12;
+	const octet HEARTBEAT_FRAG = 0x13;
+	const octet DATA           = 0x15;
+	const octet DATA_FRAG      = 0x16;
+
+	struct AckNackSubmessage {
+		SubmessageHeader header;
+		EntityId readerId;
+		EntityId writerId;
+		SequenceNumberSet readerSNState;
+		Count count; 
+	};
+	
+	typedef unsigned short Flags;
+	
+	struct DataSubmessage {
+		SubmessageHeader header;
+		Flags extraFlags;
+		unsigned short octetsToInlineQos;
+		EntityId readerId;
+		EntityId writerId;
+		SequenceNumber writerSN;
+		sequence<ParameterList> inlineQos;
+		sequence<SerializedPayload> serializedPayload;
+	};
+	
+	struct DataFragSubmessage {
+		SubmessageHeader header;
+		Flags extraFlags;
+		unsigned short octetsToInlineQos;
+		EntityId readerId;
+		EntityId writerId;
+		SequenceNumber writerSN;
+		FragmentNumber fragmentStartingNum;
+		unsigned short fragmentsInSubmessage;
+		unsigned short fragmentSize;
+		unsigned long sampleSize;
+		sequence<ParameterList> inlineQos;
+		sequence<SerializedPayload> serializedPayload;
+	};	
+	
+	struct GapSubmessage {
+		SubmessageHeader header;
+		EntityId readerId;
+		EntityId writerId;
+		SequenceNumber gapStart;
+		SequenceNumberSet gapList;
+	};	
+	
+	struct HeartBeatSubmessage {
+		SubmessageHeader header;
+		EntityId readerId;
+		EntityId writerId;
+		SequenceNumber firstSN;
+		SequenceNumber lastSN;
+		Count count;
+	};	
+
+	struct InfoDestinationSubmessage {
+		SubmessageHeader header;
+		GuidPrefix guidPrefix;
+	};
+	
+	struct InfoReplySubmessage {
+		SubmessageHeader header;
+		LocatorList unicastLocatorList;
+		sequence<LocatorList> multicastLocatorList;		
+	};
+	
+	struct InfoSourceSubmessage {
+		SubmessageHeader header;
+		long unused;
+		ProtocolVersion version;
+		VendorId vendorId;
+		GuidPrefix guidPrefix;
+	};
+	
+	struct InfoTimestampSubmessage {
+		SubmessageHeader header;
+		sequence<Timestamp> timestamp;
+	};
+	
+	struct PadSubmessage {
+		SubmessageHeader header;
+	};
+
+	struct NackFragSubmessage {
+		SubmessageHeader header;
+		EntityId readerId;
+		EntityId writerId;
+		SequenceNumber writerSN;
+		SequenceNumberSet fragmentNumberState;
+		Count count;
+	};
+	
+	struct InfoReplyIp4Submessage {
+		SubmessageHeader header;
+		LocatorUDPv4 unicastLocator;
+		LocatorUDPv4 multicastLocator;
+	};
+	
+    const short DEFAULT_PORT_BASE_NUMBER     = 7400;
+    const short DEFAULT_DOMAIN_ID_GAIN       = 250;
+    const short DEFAULT_PARTICIPANT_ID_GAIN  = 2;
+    const short DEFAULT_ADDITIONAL_OFFSET_D0 = 0;
+    const short DEFAULT_ADDITIONAL_OFFSET_D1 = 10;
+    const short DEFAULT_ADDITIONAL_OFFSET_D2 = 1;
+    const short DEFAULT_ADDITIONAL_OFFSET_D3 = 11;
+    
+	struct ParticipantMessageData {
+		GuidPrefix_t participantGuidPrefix;
+		octet kind[4];
+		sequence<octet> data;
+	};
+	
+	struct ParticipantProxy { 
+		ProtocolVersion_t protocolVersion;
+		GuidPrefix_t guidPrefix;
+		VendorId_t vendorId;
+		boolean expectsInlineQos;
+		sequence<BuiltinEndpointSet_t> availableBuiltinEndpoints;
+		sequence<Locator_t> metatrafficUnicastLocatorList;
+        sequence<Locator_t> metatrafficMulticastLocatorList;
+        sequence<Locator_t> defaultMulticastLocatorList;
+        sequence<Locator_t> defaultUnicastLocatorList;
+		Count_t manualLivelinessCount;	
+	};
+	
+	enum ChangeKind_t {
+		ALIVE,
+		NOT_ALIVE_DISPOSED,
+		NOT_ALIVE_UNREGISTERED
+	};
+	
+	struct CacheChange {
+		ChangeKind_t kind;
+		GUID_t writerGuid;
+		DDS::InstanceHandle_t instanceHandle;
+		SequenceNumber_t sequenceNumber;
+		SerializedPayload dataValue;
+	};
+	
+	struct WriterProxy {
+		GUID_t remoteWriterGuid;
+		sequence<Locator_t> unicastLocatorList;
+		sequence<Locator_t> multicastLocatorList;
+		sequence<CacheChange> changes_from_writer;
+	};
+	
+	struct ReaderProxy { 
+		GUID_t remoteReaderGuid;
+		sequence<Locator_t> unicastLocatorList;
+		sequence<Locator_t> multicastLocatorList;
+		sequence<CacheChange> changes_from_reader;
+		boolean expectsInlineQos;
+		boolean isActive;	
+	};
+    
+	 struct SPDPdiscoveredParticipantData {
+		DDS::ParticipantBuiltinTopicData ddsParticipantData;
+	    ParticipantProxy participantProxy;
+		Duration_t leaseDuration;
+	};
+
+	struct DiscoveredWriterData {
+		DDS::PublicationBuiltinTopicData ddsPublicationData;
+		WriterProxy writerProxy;
+	};
+
+	struct DiscoveredReaderData {
+		DDS::SubscriptionBuiltinTopicData ddsSubscriptionData;
+		ReaderProxy readerProxy;
+		ContentFilterProperty_t contentFilterProperty;
+	};
+	
+	struct DiscoveredTopicData {
+		DDS::TopicBuiltinTopicData ddsTopicData;
+	};
+	
+	//p182
+	const short PID_USER_DATA = 0x002c;
+	typedef DDS::UserDataQosPolicy PID_USER_DATA_TYPE;
+	
+	const short PID_TOPIC_NAME = 0x0005;
+	typedef  string<256> PID_TOPIC_NAME_TYPE;
+	
+	const short PID_TYPE_NAME = 0x0007;
+	typedef string<256> PID_TYPE_NAME_TYPE;
+	
+	const short PID_GROUP_DATA = 0x002d;
+	typedef DDS::GroupDataQosPolicy PID_GROUP_DATA_TYPE;
+	
+	const short PID_TOPIC_DATA = 0x002e;
+	typedef DDS::TopicDataQosPolicy PID_TOPIC_DATA_TYPE;
+	
+	const short PID_DURABILITY = 0x001d;
+	typedef DDS::DurabilityQosPolicy PID_DURABILITY_TYPE;
+	
+	const short PID_DURABILITY_SERVICE = 0x001e;
+	typedef DDS::DurabilityServiceQosPolicy PID_DURABILITY_SERVICE_TYPE;
+	
+	const short PID_DEADLINE = 0x0023;
+	typedef DDS::DeadlineQosPolicy PID_DEADLINE_TYPE;
+	
+	const short PID_LATENCY_BUDGET = 0x0027;
+	typedef DDS::LatencyBudgetQosPolicy PID_LATENCY_BUDGET_TYPE;
+	
+	const short PID_LIVELINESS = 0x001b;
+	typedef DDS::LivelinessQosPolicy PID_LIVELINESS_TYPE;
+	
+	const short PID_RELIABILITY = 0x001A;
+	typedef DDS::ReliabilityQosPolicy PID_RELIABILITY_TYPE;
+	
+	const short PID_LIFESPAN = 0x002b;
+	typedef DDS::LifespanQosPolicy PID_LIFESPAN_TYPE;
+	
+	const short PID_DESTINATION_ORDER = 0x0025;
+	typedef DDS::DestinationOrderQosPolicy PID_DESTINATION_ORDER_TYPE;
+	
+	const short PID_HISTORY = 0x0040;
+	typedef DDS::HistoryQosPolicy PID_HISTORY_TYPE;
+	
+	const short PID_RESOURCE_LIMITS = 0x0041;
+	typedef DDS::ResourceLimitsQosPolicy PID_RESOURCE_LIMITS_TYPE;
+	
+	const short PID_OWNERSHIP = 0x001f;
+	typedef DDS::OwnershipQosPolicy PID_OWNERSHIP_TYPE;
+	
+	const short PID_OWNERSHIP_STRENGTH = 0x0006;
+	typedef DDS::OwnershipStrengthQosPolicy PID_OWNERSHIP_STRENGTH_TYPE;
+	
+	const short PID_PRESENTATION = 0x0021;
+	typedef DDS::PresentationQosPolicy PID_PRESENTATION_TYPE;
+	
+	const short PID_PARTITION = 0x0029;
+	typedef DDS::PartitionQosPolicy PID_PARTITION_TYPE;
+	
+	const short PID_TIME_BASED_FILTER = 0x0004;
+	typedef DDS::TimeBasedFilterQosPolicy PID_TIME_BASED_FILTER_TYPE;
+	
+	const short PID_TRANSPORT_PRIORITY = 0x0049;
+	typedef DDS::TransportPriorityQosPolicy PID_TRANSPORT_PRIORITY_TYPE;
+	
+	const short PID_PROTOCOL_VERSION  = 0x0015;
+	typedef ProtocolVersion_t PID_PROTOCOL_VERSION_TYPE;
+	
+	const short PID_VENDORID  = 0x0016;
+	typedef VendorId_t PID_VENDORID_TYPE;
+	
+	const short PID_UNICAST_LOCATOR  = 0x002f;
+	typedef Locator_t PID_UNICAST_LOCATOR_TYPE;
+	
+	const short PID_MULTICAST_LOCATOR  = 0x0030;
+	typedef Locator_t PID_MULTICAST_LOCATOR_TYPE;
+	
+	const short PID_MULTICAST_IPADDRESS  = 0x0011;
+	typedef IPv4Address_t PID_MULICAST_IPADDRESS_TYPE;
+	
+	const short PID_DEFAULT_UNICAST_LOCATOR  = 0x0031;
+	typedef Locator_t PID_DEFAULT_UNICAST_LOCATOR_TYPE;
+	
+	const short PID_DEFAULT_MULTICAST_LOCATOR  = 0x0048;
+	typedef Locator_t PID_DEFAULT_MULTICAST_LOCATOR_TYPE;
+	
+	const short PID_METATRAFFIC_UNICAST_LOCATOR  = 0x0032;
+	typedef Locator_t PID_METRATRAFFIC_UNICAST_LOCATOR_TYPE;
+	
+	const short PID_METATRAFFIC_MULTICAST_LOCATOR  = 0x0033;
+	typedef Locator_t PID_METATRAFFIC_MULTICAST_LOCATOR_TYPE;
+	
+	const short PID_DEFAULT_UNICAST_IPADDRESS  = 0x000c;
+	typedef IPv4Address_t PID_DEFAULT_UNICAST_IPADDRESS_TYPE;
+	
+	const short PID_DEFAULT_UNICAST_PORT  = 0x000e;
+	typedef Port_t PID_DEFAULT_UNICAST_PORT_TYPE;
+	
+	const short PID_METATRAFFIC_UNICAST_IPADDRESS  = 0x0045;
+	typedef IPv4Address_t PID_METATRAFFIC_UNICAST_IPADDRESS_TYPE;
+	
+	const short PID_METATRAFFIC_UNICAST_PORT = 0x000d;
+	typedef Port_t PID_METATRAFFIC_UNICAST_PORT_TYPE;
+	
+	const short PID_METATRAFFIC_MULTICAST_IPADDRESS = 0x000b;
+	typedef IPv4Address_t PID_METATRAFFIC_MULTICAST_IPADDRESS_TYPE;
+	
+	const short PID_METATRAFFIC_MULTICAST_PORT = 0x0046;
+	typedef Port_t PID_METATRAFFIC_MULTICAST_PORT_TYPE;
+	
+	const short PID_EXPECTS_INLINE_QOS = 0x0043;
+	typedef boolean PID_EXPECTS_INLINE_QOS_TYPE;
+	
+	const short PID_PARTICIPANT_MANUAL_LIVELINESS_COUNT = 0x0034;
+	typedef Count_t PID_PARTICIPANT_MANUAL_LIVELINESS_COUNT_TYPE;
+	
+	const short PID_PARTICIPANT_BUILTIN_ENDPOINTS = 0x0044;
+	typedef unsigned long PID_PARTICIPANT_BUILTIN_ENDPOINTS_TYPE;
+	
+	const short PID_PARTICIPANT_LEASE_DURATION = 0x0002;
+	typedef Duration_t PID_PARTICIPANT_LEASE_DURATION_TYPE;
+	
+	const short PID_CONTENT_FILTER_PROPERTY = 0x0035;
+	typedef ContentFilterProperty_t PID_CONTENT_FILTER_PROPERTY_TYPE;
+	
+	const short PID_PARTICIPANT_GUID = 0x0050;
+	typedef GUID_t PID_PARTICIPANT_GUID_TYPE;
+	
+	const short PID_PARTICIPANT_ENTITYID = 0x0051;
+	typedef EntityId_t PID_PARTICIPANT_ENTITYID_TYPE;
+	
+	const short PID_GROUP_GUID = 0x0052;
+	typedef GUID_t PID_GROUP_GUID_TYPE;
+	
+	const short PID_GROUP_ENTITYID = 0x0053;
+	typedef EntityId_t PID_GROUP_ENTITYID_TYPE;
+	
+	const short PID_BUILTIN_ENDPOINT_SET = 0x0058;
+	typedef BuiltinEndpointSet_t PID_BUILTIN_ENDPOINT_SET_TYPE;
+	
+	const short PID_PROPERTY_LIST = 0x0059;
+	typedef sequence<Property_t> PID_PROPERTY_LIST_TYPE;
+	
+	const short PID_TYPE_MAX_SIZE_SERIALIZED = 0x0060;
+	typedef long PID_TYPE_MAX_SIZE_SERIALIZED_TYPE;
+	
+	const short PID_ENTITY_NAME = 0x0062;
+	typedef EntityName_t PID_ENTITY_NAME_TYPE;
+	
+	const short PID_KEY_HASH = 0x0070;
+	typedef KeyHash_t PID_KEY_HASH_TYPE;
+	
+	const short PID_STATUS_INFO = 0x0071;
+	typedef StatusInfo_t PID_STATUS_INFO_TYPE;
+	
+	//p188
+	const short PID_CONTENT_FILTER_INFO = 0x0055;
+	typedef ContentFilterInfo_t PID_CONTENT_FILTER_INFO_TYPE;
+	
+	const short PID_COHERENT_SET = 0x0056;
+	typedef SequenceNumber_t PID_COHERENT_SET_TYPE;
+	
+	const short PID_DIRECTED_WRITE = 0x0057;
+	typedef sequence<GUID_t> PID_DIRECTED_WRITE_TYPE;
+	
+	const short PID_ORIGINAL_WRITER_INFO = 0x0061;
+	typedef OriginalWriterInfo_t PID_ORIGINAL_WRITER_INFO_TYPE;	
+    
+    
+    //p193
+    typedef short EncapsulationIdentifier; //octet[2]
+    const EncapsulationIdentifier CDR_BE = 0x0000;
+    const EncapsulationIdentifier CDR_LE = 0x0001;
+    const EncapsulationIdentifier PL_CDR_BE = 0x0002;
+    const EncapsulationIdentifier PL_CDR_LE = 0x0003;
+    
+};
