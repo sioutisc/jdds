@@ -28,7 +28,10 @@
 package rtjdds.rtps.portable;
 
 import java.io.IOException;
+import java.nio.ByteOrder;
 
+import org.omg.CORBA.Any;
+import org.omg.CORBA.TypeCode;
 import org.omg.CORBA.portable.InputStream;
 
 import rtjdds.util.BitUtility;
@@ -95,12 +98,21 @@ public class CDROutputPacket extends OutputPacket {
 	}
 
 	public InputStream create_input_stream() {
-		return new CDRInputBuffer(buffer,limit,isLittleEndian);
+		if(isLittleEndian)
+			return new CDRInputBuffer(buffer,limit,ByteOrder.LITTLE_ENDIAN);
+		return new CDRInputBuffer(buffer,limit,ByteOrder.BIG_ENDIAN);
+		//return new CDRInputBuffer(buffer,limit,isLittleEndian);
 	}
 	
 	public CDRInputBuffer create_cdr_input_stream() {
-		return new CDRInputBuffer(buffer,limit,isLittleEndian);
+		if(isLittleEndian)
+			return new CDRInputBuffer(buffer,limit,ByteOrder.LITTLE_ENDIAN);
+		return new CDRInputBuffer(buffer,limit,ByteOrder.BIG_ENDIAN);	
+//		return new CDRInputBuffer(buffer,limit,isLittleEndian);
 	}
+	
+	
+	
 	
 	/**
 	 * Returns the internal byte array used as writing buffer
@@ -396,19 +408,19 @@ public class CDROutputPacket extends OutputPacket {
 //				"Method not implemented!");
 	}
 
-//	public void write_Object(Object value) {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "write_Object()", 
-//		"Method not implemented!");
-//	}
-//
-//	public void write_TypeCode(TypeCode value) {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "write_TypeCode()", 
-//		"Method not implemented!");
-//	}
-//
-//	public void write_any(Any value) {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "write_anys()", 
-//		"Method not implemented!");
-//	}
+	public void write_Object(org.omg.CORBA.Object value) {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "write_Object()", 
+		"Method not implemented!");
+	}
+
+	public void write_TypeCode(TypeCode value) {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "write_TypeCode()", 
+		"Method not implemented!");
+	}
+
+	public void write_any(Any value) {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "write_anys()", 
+		"Method not implemented!");
+	}
 
 }

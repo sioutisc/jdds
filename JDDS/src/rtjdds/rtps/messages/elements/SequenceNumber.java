@@ -108,8 +108,8 @@ public class SequenceNumber extends SubmessageElement implements Comparable, Cop
 	public void copyFrom(Copyable obj) {
 		if (obj instanceof SequenceNumber && obj != null) {
 			SequenceNumber sn = (SequenceNumber)obj;
-//			_value = sn._value;
-			_value.copyFrom(sn._value);
+			_value = sn._value;
+			//_value.copyFrom(sn._value);
 		}
 		else {
 			GlobalProperties.logger.log(Logger.WARN,this.getClass(),"copyFrom()",
@@ -120,8 +120,9 @@ public class SequenceNumber extends SubmessageElement implements Comparable, Cop
 	public void copyTo(Copyable obj) {
 		if (obj instanceof SequenceNumber && obj != null) {
 			SequenceNumber sn = (SequenceNumber)obj;
-//			sn._value = _value;
-			_value.copyTo(sn._value);
+			sn._value = _value;
+			//_value.copyTo(sn._value);
+			
 		}
 		else {
 			GlobalProperties.logger.log(Logger.WARN,this.getClass(),"copyTo()",

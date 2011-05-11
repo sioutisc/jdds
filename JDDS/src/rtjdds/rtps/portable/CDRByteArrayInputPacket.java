@@ -28,6 +28,11 @@
 package rtjdds.rtps.portable;
 
 import java.io.IOException;
+import java.nio.ByteOrder;
+
+import org.omg.CORBA.Any;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.TypeCode;
 
 import rtjdds.util.GlobalProperties;
 import rtjdds.util.Logger;
@@ -132,9 +137,27 @@ public class CDRByteArrayInputPacket extends InputPacket {
 		isLittleEndian = value;
 	}
 	
-	public boolean getEndianess() {
-		return isLittleEndian;
+	@Override
+	public void setEndianess(ByteOrder isLittleEndian) {
+		if(isLittleEndian == ByteOrder.LITTLE_ENDIAN)
+			this.isLittleEndian = true;
+		this.isLittleEndian = false;
+		// TODO Auto-generated method stub
+		
+	}	
+	
+//	public boolean getEndianess() {
+//		return isLittleEndian;
+//	}
+	
+	
+	public ByteOrder getEndianess() {
+		if(isLittleEndian == true){
+			return ByteOrder.LITTLE_ENDIAN;
+		}
+		return ByteOrder.BIG_ENDIAN;
 	}
+	
 	
 	/**
 	 * Used to check the preconditions over buffer bounds.
@@ -435,22 +458,22 @@ public class CDRByteArrayInputPacket extends InputPacket {
 		return 0;
 	}
 	
-//	public Object read_Object() {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_Object()", 
-//		"Method not implemented!");
-//		return null;
-//	}
-//	
-//	public TypeCode read_TypeCode() {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_TypeCode()", 
-//		"Method not implemented!");
-//		return null;
-//	}
-//	
-//	public Any read_any() {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_any()", 
-//		"Method not implemented!");
-//		return null;
-//	}
+	public org.omg.CORBA.Object read_Object() {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_Object()", 
+		"Method not implemented!");
+		return null;
+	}
+	
+	public TypeCode read_TypeCode() {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_TypeCode()", 
+		"Method not implemented!");
+		return null;
+	}
+	
+	public Any read_any() {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_any()", 
+		"Method not implemented!");
+		return null;
+	}
 	
 }

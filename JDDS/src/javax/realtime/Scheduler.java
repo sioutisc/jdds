@@ -1,6 +1,6 @@
 //================================================================
 //
-//	InputPacket.java - Created by kerush, 2006 9-nov-06 12:46:26 
+//	Scheduler.java - Created by kerush, 2007 10/feb/07 19:35:54
 //
 //================================================================
 //
@@ -25,27 +25,8 @@
 // 51 Franklin Street, Fifth Floor,   Boston, MA  02110-1301, USA.
 //
 //================================================================
-package rtjdds.rtps.portable;
+package javax.realtime;
 
-import java.nio.ByteOrder;
+public interface Scheduler {
 
-import org.omg.CORBA.portable.InputStream;
-
-public abstract class InputPacket extends InputStream{
-	
-	public abstract byte[] getBuffer();
-	
-	public abstract int getLength();
-	
-	public abstract int getCursorPosition();
-	
-	public abstract void setLength(int newLength);
-	
-	public abstract void setCursorPosition(int newLength);
-						 
-	public abstract void setEndianess(ByteOrder isLittleEndian);
-	
-	public abstract ByteOrder getEndianess();
-
-	public abstract void setEndianess(boolean isLittleEndian);	
 }

@@ -34,7 +34,7 @@ import DDS.InstanceHandle;
 import DDS.LivelinessLostStatus;
 import DDS.OfferedDeadlineMissedStatus;
 import DDS.OfferedIncompatibleQosStatus;
-import DDS.PublicationMatchStatus;
+import DDS.PublicationMatchedStatus;
 import DDS.Publisher;
 import DDS.StatusCondition;
 import DDS.SubscriptionBuiltinTopicData;
@@ -49,7 +49,7 @@ import DDS.Topic;
  * @author kerush
  *
  */
-public class DataWriterImpl implements DataWriter {
+public abstract class DataWriterImpl implements DataWriter {
 
 	/* (non-Javadoc)
 	 * @see DDS.DataWriterOperations#set_qos(DDS.DataWriterQos)
@@ -126,7 +126,7 @@ public class DataWriterImpl implements DataWriter {
 	/* (non-Javadoc)
 	 * @see DDS.DataWriterOperations#get_publication_match_status()
 	 */
-	public PublicationMatchStatus get_publication_match_status() {
+	public PublicationMatchedStatus get_publication_matched_status() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -134,8 +134,9 @@ public class DataWriterImpl implements DataWriter {
 	/* (non-Javadoc)
 	 * @see DDS.DataWriterOperations#assert_liveliness()
 	 */
-	public void assert_liveliness() {
+	public int assert_liveliness() {
 		// TODO Auto-generated method stub
+		return 0;
 
 	}
 

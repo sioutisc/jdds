@@ -32,6 +32,9 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import org.omg.CORBA.Any;
+import org.omg.CORBA.TypeCode;
+
 import rtjdds.util.GlobalProperties;
 import rtjdds.util.Logger;
 
@@ -77,6 +80,13 @@ public class CDRInputBuffer extends InputPacket {
 		this(buffer);
 		_buffer.order(order); 
 	}
+	
+	public CDRInputBuffer(byte[] buffer, int limit, ByteOrder endianess){
+		_buffer = ByteBuffer.allocateDirect(limit);
+		_buffer = ByteBuffer.wrap(buffer);
+		_buffer.rewind();
+	}
+	
 	
 	/**
 	 * Sets the buffer of the packet to the given one.<br/>
@@ -174,23 +184,27 @@ public class CDRInputBuffer extends InputPacket {
 	 * Reads an array of bytes from the packet
 	 */
 	public void read_octet_array(byte[] v, int offset, int length) {
-		if (currPos+length <= limit) {
-			System.arraycopy(buffer,currPos,v,offset,length);
-			currPos += length; 
+		if (getCursorPosition()+length <= getLength()) {
+			System.arraycopy(getBuffer(),getCursorPosition(),v,offset,length);
+			setCursorPosition(getCursorPosition() + length); 
 		}
 		else {
 // 			copy only the rest
-			System.arraycopy(buffer,currPos,v,offset,limit-currPos);
-			currPos = limit;
+			System.arraycopy(getBuffer(),getCursorPosition(),v,offset, getLength() - getCursorPosition());
+			setCursorPosition(getLength());
 //			 log the event...
-			if (!bufferFull) {
+			if (! isFull()) {
 				GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_octet_array()", 
 					"CDRInputPacket buffer is full, message will be truncated");
 //				 the message will be truncated and no more writes are possible
-				bufferFull = true;
+				//bufferFull = true;
 			}
 		}
 	}
+	
+	public boolean isFull(){
+		return (getCursorPosition() == getLength());
+	}	
 	
 	public boolean read_boolean() {
 		return read_octet()!=0;
@@ -209,7 +223,7 @@ public class CDRInputBuffer extends InputPacket {
         byte b2 = read_octet();
 
         short ret = 0;
-        if (isLittleEndian) {
+        if (getEndianess() == ByteOrder.LITTLE_ENDIAN) {
             ret |= b2 & 0xFF;
             ret <<= 8;
             ret |= b1 & 0xFF;
@@ -233,7 +247,7 @@ public class CDRInputBuffer extends InputPacket {
         byte b4 = read_octet();
 
         int ret = 0;
-        if (isLittleEndian) {
+        if (getEndianess() == ByteOrder.LITTLE_ENDIAN) {
             ret |= b4 & 0xFF;
             ret <<= 8;
             ret |= b3 & 0xFF;
@@ -269,7 +283,7 @@ public class CDRInputBuffer extends InputPacket {
         byte b8 = read_octet();
 
         long ret = 0;
-        if (isLittleEndian) {
+        if (getEndianess() == ByteOrder.LITTLE_ENDIAN) {
             ret += ((long) (b8 & 0xFF)) << 56;
             ret += ((long) (b7 & 0xFF)) << 48;
             ret += ((long) (b6 & 0xFF)) << 40;
@@ -406,22 +420,32 @@ public class CDRInputBuffer extends InputPacket {
 		return 0;
 	}
 	
-//	public Object read_Object() {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_Object()", 
-//		"Method not implemented!");
-//		return null;
-//	}
-//	
-//	public TypeCode read_TypeCode() {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_TypeCode()", 
-//		"Method not implemented!");
-//		return null;
-//	}
-//	
-//	public Any read_any() {
-//		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_any()", 
-//		"Method not implemented!");
-//		return null;
-//	}
+	@Override
+	public void setEndianess(boolean isLittleEndian) {
+		if(isLittleEndian == true){
+			setEndianess(ByteOrder.LITTLE_ENDIAN);
+		}
+		setEndianess(ByteOrder.BIG_ENDIAN);
+		// TODO Auto-generated method stub
+		
+	}	
+	
+	public org.omg.CORBA.Object read_Object() {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_Object()", 
+		"Method not implemented!");
+		return null;
+	}
+	
+	public TypeCode read_TypeCode() {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_TypeCode()", 
+		"Method not implemented!");
+		return null;
+	}
+	
+	public Any read_any() {
+		GlobalProperties.logger.log(Logger.WARN, this.getClass(), "read_any()", 
+		"Method not implemented!");
+		return null;
+	}
 	
 }

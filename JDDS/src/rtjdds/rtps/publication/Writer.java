@@ -55,7 +55,7 @@ import DDS.InstanceHandle;
 import DDS.LivelinessLostStatus;
 import DDS.OfferedDeadlineMissedStatus;
 import DDS.OfferedIncompatibleQosStatus;
-import DDS.PublicationMatchStatus;
+import DDS.PublicationMatchedStatus;
 import DDS.Publisher;
 import DDS.ReliabilityQosPolicyKind;
 import DDS.StatusCondition;
@@ -207,13 +207,14 @@ public abstract class Writer extends Endpoint implements DataWriter {
 		return null;
 	}
 
-	public PublicationMatchStatus get_publication_match_status() {
+	public PublicationMatchedStatus get_publication_matched_status() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void assert_liveliness() {
+	public int assert_liveliness() {
 		// TODO Auto-generated method stub
+		return 0;
 
 	}
 

@@ -69,8 +69,9 @@ public class VendorId extends SubmessageElement implements Copyable {
 
 	public void copyFrom(Copyable obj) {
 		if (obj instanceof VendorId) {
-			VendorId src = (VendorId) obj;;
-			value.copyFrom(src);
+			VendorId src = (VendorId) obj;
+			value = src.value;
+			//value.copyFrom(src);
 		}
 		else {
 			GlobalProperties.logger.log(Logger.SEVERE,this.getClass(),"copyFrom()",
@@ -81,7 +82,8 @@ public class VendorId extends SubmessageElement implements Copyable {
 	public void copyTo(Copyable obj) {
 		if (obj instanceof VendorId) {
 			VendorId dst = (VendorId) obj;;
-			value.copyTo(dst);
+			//value.copyTo(dst);
+			dst.value = value;
 		}
 		else {
 			GlobalProperties.logger.log(Logger.SEVERE,this.getClass(),"copyFrom()",

@@ -1,0 +1,62 @@
+// ************************************************************************
+//    $Id$
+// ************************************************************************
+//
+//                               jTools
+//
+//               Copyright (C) 2001-2003 by Angelo Corsaro.
+//                         <corsaro@cs.wustl.edu>
+//                          All Rights Reserved.
+//
+//   Permission to use, copy, modify, and distribute this software and
+//   its  documentation for any purpose is hereby  granted without fee,
+//   provided that the above copyright notice appear in all copies and
+//   that both that copyright notice and this permission notice appear
+//   in  supporting  documentation. I don't make  any  representations
+//   about the  suitability  of this  software for any  purpose. It is
+//   provided "as is" without express or implied warranty.
+//
+//
+// *************************************************************************
+//  
+// *************************************************************************
+package jtools.time;
+
+/**
+ * The class <code>MeasuredVariable</code> represent a variable
+ * measured by some performance test.
+ *
+ * @author <a href="mailto:corsaro@doc.cs.wustl.edu">Angelo Corsaro</a>
+ * @version 1.0
+ */
+public class MeasuredVariable {
+
+    private String name;
+    private Object value;
+    
+    public MeasuredVariable(String name, Object value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public Object getValue() {
+        return this.value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+    
+
+    public String toString() {
+        return this.name + " = " + this.value.toString();
+    }
+}

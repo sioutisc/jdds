@@ -1,3 +1,0 @@
-package rtjdds.rtps.types;
-
-

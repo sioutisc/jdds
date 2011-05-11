@@ -34,8 +34,27 @@ import javax.realtime.LTMemory;
 import javax.realtime.MemoryArea;
 import javax.realtime.RealtimeThread;
 
+import org.omg.CORBA.Context;
+import org.omg.CORBA.ContextList;
+import org.omg.CORBA.DomainManager;
+import org.omg.CORBA.ExceptionList;
+import org.omg.CORBA.NVList;
+import org.omg.CORBA.NamedValue;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.Policy;
+import org.omg.CORBA.Request;
+import org.omg.CORBA.SetOverrideType;
+
 import DDS.DataWriterListener;
+import DDS.DataWriterQosHolder;
+import DDS.Duration_t;
 import DDS.InstanceHandle;
+import DDS.InstanceHandleSeqHolder;
+import DDS.LivelinessLostStatusHolder;
+import DDS.OfferedDeadlineMissedStatusHolder;
+import DDS.OfferedIncompatibleQosStatusHolder;
+import DDS.PublicationMatchedStatusHolder;
+import DDS.SubscriptionBuiltinTopicDataHolder;
 import DDS.Time_t;
 
 
@@ -61,7 +80,7 @@ import rtjdds.rtps.messages.elements.Timestamp;
 import rtjdds.rtps.portable.CDROutputPacket;
 import rtjdds.rtps.structure.TopicImpl;
 import rtjdds.rtps.structure.local.ParticipantImpl;
-import rtjdds.rtps.transport.InetSocketLocator;
+//import rtjdds.rtps.transport.InetSocketLocator;
 import rtjdds.rtps.types.DATA;
 import rtjdds.rtps.types.EntityId_t;
 import rtjdds.rtps.types.INFO_TS;
@@ -71,7 +90,7 @@ import rtjdds.util.GUIDPrefixFactory;
 import rtjdds.util.GlobalProperties;
 import rtjdds.util.Logger;
 import rtjdds.util.collections.RTListIterator;
-import test.latency.SendLatency;
+//import test.latency.SendLatency;
 
 public class StatelessWriter extends Writer {
 
@@ -136,6 +155,148 @@ public class StatelessWriter extends Writer {
 //    	}
     	
     }
+
+	@Override
+	public int get_qos(DataWriterQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int wait_for_acknowledgments(Duration_t max_wait) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_liveliness_lost_status(LivelinessLostStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_offered_deadline_missed_status(
+			OfferedDeadlineMissedStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_offered_incompatible_qos_status(
+			OfferedIncompatibleQosStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_publication_matched_status(
+			PublicationMatchedStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_matched_subscriptions(
+			InstanceHandleSeqHolder subscription_handles) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_matched_subscription_data(
+			SubscriptionBuiltinTopicDataHolder subscription_data,
+			int subscription_handle) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_instance_handle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result, ExceptionList exclist,
+			ContextList ctxlist) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _duplicate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainManager[] _get_domain_managers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _get_interface_def() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Policy _get_policy(int policy_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int _hash(int maximum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean _is_a(String repositoryIdentifier) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _is_equivalent(Object other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _non_existent() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void _release() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Request _request(String operation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _set_policy_override(Policy[] policies,
+			SetOverrideType set_add) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 

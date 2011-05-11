@@ -95,8 +95,9 @@ public class ProtocolVersion extends SubmessageElement implements Comparable, Co
 
 	public void copyFrom(Copyable obj) {
 		if (obj instanceof ProtocolVersion) {
-			ProtocolVersion src = (ProtocolVersion) obj;;
-			value.copyFrom(src);
+			ProtocolVersion src = (ProtocolVersion) obj;
+			value = ((ProtocolVersion) obj).value;
+			//value.copyFrom(src);
 		}
 		else {
 			GlobalProperties.logger.log(Logger.SEVERE,this.getClass(),"copyFrom()",
@@ -106,8 +107,9 @@ public class ProtocolVersion extends SubmessageElement implements Comparable, Co
 
 	public void copyTo(Copyable obj) {
 		if (obj instanceof ProtocolVersion) {
-			ProtocolVersion dst = (ProtocolVersion) obj;;
-			value.copyTo(dst);
+			ProtocolVersion dst = (ProtocolVersion) obj;
+			dst.value = ((ProtocolVersion) obj).value;
+			//value.copyTo(dst);
 		}
 		else {
 			GlobalProperties.logger.log(Logger.SEVERE,this.getClass(),"copyTo()",

@@ -49,7 +49,7 @@ import DDS.SubscriberQos;
 import DDS.Topic;
 import DDS.TopicQos;
 
-public class PublisherImpl extends EntityImpl implements Publisher {
+public abstract class PublisherImpl extends EntityImpl implements Publisher {
 	
 	/* the participant */
 	private ParticipantImpl _participant = null;

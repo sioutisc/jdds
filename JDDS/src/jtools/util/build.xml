@@ -1,0 +1,17 @@
+<!-- $Id$ -->
+
+<project name="Time Tests" default="all" basedir="../../..">
+
+   <property file="jtools-build-bootstrap.properties"/>
+   <property file="jtools-build.properties"/>
+
+    <target name="all"> 
+      <javac srcdir="${jtools.srcdir}"
+             destdir="${jtools.classdir}"
+             classpath="${jtools.classdir}:${jtools.rtjlib}"
+             debug="${jtools.debug}"
+             optimize="${jtools.optimization}"
+             includes="jtools/util/*.java"/>
+   </target>
+ 
+</project>
