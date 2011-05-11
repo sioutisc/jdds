@@ -1,0 +1,243 @@
+module rtjdds {
+
+module rtps {
+
+// -------------------------------------------------------------------------
+//
+// Value Types that appears on the wire
+//
+// -------------------------------------------------------------------------
+
+module types {
+
+// -------------------------------------------------------------------------
+// TIME as defined in RFC 1305 aka NTP, time = seconds + (fraction / 2^32)
+// -------------------------------------------------------------------------
+	struct Time_t{
+	    long seconds;
+	    unsigned long fraction;
+	};
+
+// -------------------------------------------------------------------------
+// Identifier for the Vendor
+// -------------------------------------------------------------------------
+	struct VendorId_t{
+	    octet vendorId[2];
+	};
+
+// -------------------------------------------------------------------------
+// Sequence number for messages (64 bits)
+// -------------------------------------------------------------------------
+	struct SequenceNumber_t{
+	    long long value;
+	};
+
+// -------------------------------------------------------------------------
+// Fragment of a message
+// -------------------------------------------------------------------------
+	struct FragmentNumber_t{
+	    unsigned long value;
+	};
+
+// -------------------------------------------------------------------------
+// Locator of an Entity 
+// -------------------------------------------------------------------------
+	typedef long LocatorKind;
+	const LocatorKind LOCATOR_KIND_INVALID 	= -1;
+	const LocatorKind LOCATOR_PORT_INVALID 	= 0;
+	const LocatorKind LOCATOR_KIND_RESERVED = 0;
+	const LocatorKind LOCATOR_KIND_UDPv4 	= 1;
+	const LocatorKind LOCATOR_KIND_UDPv6 	= 2;
+	struct Locator_t{
+	    LocatorKind kind;
+	    unsigned long port;
+	    octet address[16];
+	};
+
+// -------------------------------------------------------------------------
+// Topic Kind, to distinguish between single instance and multiple instaces topic
+// -------------------------------------------------------------------------
+	typedef long TopicKind;
+	const TopicKind NO_KEY 		= 1;
+	const TopicKind WITH_KEY 	= 2;
+
+// -------------------------------------------------------------------------
+// Reliability Kind to distinguish between Best Effort and Reliable implementations
+// -------------------------------------------------------------------------
+	typedef long ReliabilityKind;
+	const ReliabilityKind BEST_EFFORT 	= 1;
+	const ReliabilityKind RELIABLE 		= 3;
+
+
+// -------------------------------------------------------------------------
+// Counter for progressive message counting
+// -------------------------------------------------------------------------
+	struct Count_t{
+	    long value;
+	};
+
+// -------------------------------------------------------------------------
+// Protocol Version in major and minor releases
+// -------------------------------------------------------------------------
+	struct ProtocolVersion_t{
+	    octet major;
+	    octet minor;
+	};
+	
+// -------------------------------------------------------------------------
+// Protocol Identifier (constant at {'R','T','P','S'})
+// -------------------------------------------------------------------------
+	struct ProtocolId_t{
+	    octet value[4];
+	};
+
+// -------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------
+	struct KeyHashPrefix_t{
+	    octet value[12];
+	};
+
+// -------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------
+	struct KeyHashSuffix_t{
+	    octet value[4];
+	};
+
+// -------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------
+	struct ContentFilterProperty_t {
+	    string<256> contentFilteredTopicName;
+	    string<256> relatedTopicName;
+	    string<256> filterClassName;
+	    string filterExpression;
+	    sequence<string> expressionParameters;
+	}; 
+
+// -------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------
+	typedef sequence<long> FilterResult_t;
+	typedef long FilterSignature_t[4];
+	struct ContentFilterInfo_t {
+	    FilterResult_t filterResult;
+	    sequence<FilterSignature_t> filterSignatures;
+	};
+
+// -------------------------------------------------------------------------
+// Locator specialized for UDPv4 protocol
+// -------------------------------------------------------------------------
+	struct LocatorUDPv4_t{
+	    unsigned long address;
+	    unsigned long port;
+	}; 
+
+// -------------------------------------------------------------------------
+// GuidPrefix: 12 octets that uniquely identifies the Participant within the Domain
+// -------------------------------------------------------------------------
+	struct GuidPrefix_t {
+		octet prefix[12];
+	};
+
+// -------------------------------------------------------------------------
+// EntityId: 4 octets that uniquely identifies the Entity within the Participant.
+//			 The first 3 bytes identifies the Entity, the last byte identifies
+//			 the kind of the Entity.
+// -------------------------------------------------------------------------
+	struct EntityId_t {
+	    octet entityKey[3];
+	    octet entityKind;	/* encodes the kind of entity, see defines */
+	};
+
+	/* PREDEFINITED entityKinds */
+	const octet  USER_DEFINED_UNKNOWN 		= 0x00;
+	const octet  USER_DEFINED_WRITER_W_KEY 	= 0x02;
+	const octet  USER_DEFINED_WRITER_NO_KEY = 0x03;
+	const octet  USER_DEFINED_READER_NO_KEY = 0x04;
+	const octet  USER_DEFINED_READER_W_KEY 	= 0x07;
+	const octet  BUILT_IN_UNKNOWN 			= 0xc0;
+	const octet  BUILT_IN_PARTICIPANT 		= 0xc1;
+	const octet  BUILT_IN_WRITER_W_KEY 		= 0xc2;
+	const octet  BUILT_IN_WRITER_NO_KEY 	= 0xc3;
+	const octet  BUILT_IN_READER_NO_KEY 	= 0xc4;
+	const octet  BUILT_IN_READER_W_KEY 		= 0xc7;
+
+// -------------------------------------------------------------------------
+// GUID: Global Unique IDentifier for every DCPS Entity
+// -------------------------------------------------------------------------	 
+	struct GUID_t {
+	    /* prefix (12 bytes) */
+	    GuidPrefix_t guidPrefix;
+	    /* entityId (4 bytes) */
+	    EntityId_t entityId;
+	};
+
+// -------------------------------------------------------------------------
+// SubmessageKind - is an octet
+// -------------------------------------------------------------------------
+	typedef octet SubmessageKind;
+	const SubmessageKind PAD			=	0x01;
+	const SubmessageKind DATA			=	0x02;
+	const SubmessageKind NOKEY_DATA		= 	0x03;
+	const SubmessageKind ACKNACK		=	0X06;
+	const SubmessageKind HEARTBEAT		=	0X07;
+	const SubmessageKind GAP			=	0X08;
+	const SubmessageKind INFO_TS		=	0X09;
+	const SubmessageKind INFO_SRC		=	0x0c;
+	const SubmessageKind INFO_REPLY_IP4	=	0x0d;
+	const SubmessageKind INFO_DST		=	0x0e;
+	const SubmessageKind INFO_REPLY		=	0x0f;
+	const SubmessageKind DATA_FRAG		=	0x10;
+	const SubmessageKind NOKEY_DATA_FRAG=	0x11;
+	const SubmessageKind NACK_FRAG		=	0x12;
+	const SubmessageKind HEARTBEAT_FRAG	= 	0x13;
+	
+
+}; // end module types
+
+}; // end module rtps
+
+}; // end module rtjdds
+
+// -------------------------------------------------------------------------
+// CONSTANTS NOT ALLOWED TO BE DESCRIBED BY IDL --> Mapped in a Java file...
+// -------------------------------------------------------------------------
+
+//	const Time_t TIME_ZERO 		= {0,0};
+//	const Time_t TIME_INVALID 	= {-1, 0xffffffff};
+//	const Time_t TIME_INFINITE 	= {0x7fffffff, 0xffffffff};
+
+//	const VendorId_t VENDORID_UNKNOWN = {0,0};
+
+//	const SequenceNumeber_t SEQUENCENUMBER_UNKNOWN = {-1,0};
+
+//	const octet[16] LOCATOR_ADDRESS_INVALID = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+//	const Locator_t LOCATOR_INVALID 		= {LOCATOR_KIND_INVALID,LOCATOR_PORT_INVALID,LOCATOR_ADDRESS_INVALID};
+
+//	const ProtocolVersion_t PROTOCOLVERSION_1_0 = {1,0};
+//	const ProtocolVersion_t PROTOCOLVERSION_1_1 = {1,1};
+//	const ProtocolVersion_t PROTOCOLVERSION_1_2 = {1,2};
+//	const ProtocolVersion_t PROTOCOLVERSION 	= {1,2};
+
+//	const LocatorUDPv4_t LOCATORUDPv4_INVALID = {0,0};
+
+//	const GuidPrefix_t GUIDPREFIX_UNKNOWN	= {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+	/* PREDEFINITED EntityIds */
+//	const EntityId_t ENTITYID_UNKNOWN {0x00,0x00,0x00,0x00}	/* defined by PIM, not subject to changes */
+//	const EntityId_t ENTITYID_PARTICIPANT {0x00,0x00,0x01,0xc1}
+	// SEDP = Simple Entity Discovery Protocol
+//	const EntityId_t ENTITYID_SEDP_BUILTIN_TOPIC_WRITER {0x00,0x00,0x01,0xc2}
+//	const EntityId_t ENTITYID_SEDP_BUILTIN_TOPIC_READER {0x00,0x00,0x01,0xc7}
+//	const EntityId_t ENTITYID_SEDP_BUILTIN_PUBLICATIONS_WRITER {0x00,0x00,0x03,0xc2}
+//	const EntityId_t ENTITYID_SEDP_BUILTIN_PUBLICATIONS_READER {0x00,0x00,0x03,0xc7}
+//	const EntityId_t ENTITYID_SEDP_BUILTIN_SUBSCRIPTIONS_WRITER {0x00,0x00,0x04,0xc2}
+//	const EntityId_t ENTITYID_SEDP_BUILTIN_SUBSCRIPTIONS_READER {0x00,0x00,0x04,0xc7}
+	// Simple Participant Discovery Protocol
+//	const EntityId_t ENTITYID_SPDP_BUILTIN_PARTICIPANT_WRITER {0x00,0x01,0x00,0xc2}
+//	const EntityId_t ENTITYID_SPDP_BUILTIN_PARTICIPANT_READER {0x00,0x01,0x00,0xc7}
+
+//	const GUID_t GUID_UNKNOWN {GUIDPREFIX_UNKNOWN, ENTITYID_UNKNOWN}
+
