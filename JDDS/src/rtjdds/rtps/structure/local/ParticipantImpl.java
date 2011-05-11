@@ -3,6 +3,17 @@ package rtjdds.rtps.structure.local;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import org.omg.CORBA.Context;
+import org.omg.CORBA.ContextList;
+import org.omg.CORBA.DomainManager;
+import org.omg.CORBA.ExceptionList;
+import org.omg.CORBA.NVList;
+import org.omg.CORBA.NamedValue;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.Policy;
+import org.omg.CORBA.Request;
+import org.omg.CORBA.SetOverrideType;
+
 import rtjdds.rtps.database.Database;
 import rtjdds.rtps.exceptions.RTjDDSException;
 import rtjdds.rtps.messages.RTPSHeader;
@@ -30,19 +41,27 @@ import rtjdds.util.collections.Copyable;
 import DDS.ContentFilteredTopic;
 import DDS.DomainParticipantListener;
 import DDS.DomainParticipantQos;
+import DDS.DomainParticipantQosHolder;
 import DDS.Duration_t;
+import DDS.InstanceHandleSeqHolder;
 import DDS.MultiTopic;
+import DDS.ParticipantBuiltinTopicDataHolder;
 import DDS.Publisher;
 import DDS.PublisherListener;
 import DDS.PublisherQos;
+import DDS.PublisherQosHolder;
 import DDS.StatusCondition;
 import DDS.Subscriber;
 import DDS.SubscriberListener;
 import DDS.SubscriberQos;
+import DDS.SubscriberQosHolder;
+import DDS.Time_tHolder;
 import DDS.Topic;
+import DDS.TopicBuiltinTopicDataHolder;
 import DDS.TopicDescription;
 import DDS.TopicListener;
 import DDS.TopicQos;
+import DDS.TopicQosHolder;
 
 public class ParticipantImpl extends EntityImpl implements DDS.DomainParticipant, Copyable {
 
@@ -330,7 +349,8 @@ public class ParticipantImpl extends EntityImpl implements DDS.DomainParticipant
 		return 0;
 	}
 
-	public void assert_liveliness() {
+	public int assert_liveliness() {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
@@ -373,6 +393,179 @@ public class ParticipantImpl extends EntityImpl implements DDS.DomainParticipant
 	public int get_status_changes() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Publisher create_publisher(PublisherQos qos,
+			PublisherListener a_listener, int mask) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Subscriber create_subscriber(SubscriberQos qos,
+			SubscriberListener a_listener, int mask) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Topic create_topic(String topic_name, String type_name,
+			TopicQos qos, TopicListener a_listener, int mask) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int get_qos(DomainParticipantQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_default_publisher_qos(PublisherQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_default_subscriber_qos(SubscriberQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_default_topic_qos(TopicQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_discovered_participants(
+			InstanceHandleSeqHolder participant_handles) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_discovered_participant_data(
+			ParticipantBuiltinTopicDataHolder participant_data,
+			int participant_handle) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_discovered_topics(InstanceHandleSeqHolder topic_handles) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_discovered_topic_data(
+			TopicBuiltinTopicDataHolder topic_data, int topic_handle) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean contains_entity(int a_handle) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int get_current_time(Time_tHolder current_time) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_instance_handle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result, ExceptionList exclist,
+			ContextList ctxlist) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _duplicate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainManager[] _get_domain_managers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _get_interface_def() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Policy _get_policy(int policy_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int _hash(int maximum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean _is_a(String repositoryIdentifier) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _is_equivalent(Object other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _non_existent() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void _release() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Request _request(String operation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _set_policy_override(Policy[] policies,
+			SetOverrideType set_add) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

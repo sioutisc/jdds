@@ -43,7 +43,7 @@ import DDS.SampleLostStatus;
 import DDS.SampleRejectedStatus;
 import DDS.StatusCondition;
 import DDS.Subscriber;
-import DDS.SubscriptionMatchStatus;
+import DDS.SubscriptionMatchedStatus;
 import DDS.TopicDescription;
 
 /**
@@ -181,7 +181,7 @@ public abstract class DataReaderImpl implements DataReader {
 	/* (non-Javadoc)
 	 * @see DDS.DataReaderOperations#get_subscription_match_status()
 	 */
-	public SubscriptionMatchStatus get_subscription_match_status() {
+	public SubscriptionMatchedStatus get_subscription_matched_status() {
 		// TODO Auto-generated method stub
 		return null;
 	}

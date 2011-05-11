@@ -31,9 +31,12 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
+import java.nio.ByteBuffer;
 
+import rtjdds.rtps.exceptions.ShuttingDownException;
 import rtjdds.rtps.portable.CDRInputBuffer;
 import rtjdds.rtps.portable.InputPacket;
+import rtjdds.rtps.transport.locators.Locator;
 import rtjdds.util.GlobalProperties;
 import rtjdds.util.Logger;
 
@@ -45,7 +48,7 @@ import rtjdds.util.Logger;
  * @author kerush
  *
  */
-public class UDPMulticastReceiver extends Receiver {
+public class UDPMulticastReceiver implements Receiver {
 	
 	/* UDP listening socket */
 	protected MulticastSocket _socket = null;
@@ -120,6 +123,12 @@ public class UDPMulticastReceiver extends Receiver {
 			_CDRpacket.setCursorPosition(0);
 		}
 		return _CDRpacket;
+	}
+
+	@Override
+	public Locator receive(ByteBuffer buffer) throws ShuttingDownException {
+		//FIXME
+		return null;
 	}
 	
 	

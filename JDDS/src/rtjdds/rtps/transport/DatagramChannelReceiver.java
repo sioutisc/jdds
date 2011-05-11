@@ -36,6 +36,7 @@ import java.nio.channels.DatagramChannel;
 
 import rtjdds.rtps.exceptions.ShuttingDownException;
 import rtjdds.rtps.messages.Data;
+import rtjdds.rtps.portable.InputPacket;
 import rtjdds.rtps.transport.locators.InetLocator;
 import rtjdds.rtps.transport.locators.Locator;
 
@@ -63,6 +64,12 @@ public class DatagramChannelReceiver implements Receiver {
 	public void shutdown() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public InputPacket receive() throws ShuttingDownException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

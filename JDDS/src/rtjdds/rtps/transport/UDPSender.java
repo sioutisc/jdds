@@ -36,6 +36,7 @@ import java.net.SocketException;
 
 import rtjdds.rtps.portable.CDROutputPacket;
 import rtjdds.rtps.portable.OutputPacket;
+import rtjdds.rtps.transport.locators.InetLocator;
 import rtjdds.rtps.transport.locators.Locator;
 import rtjdds.util.GlobalProperties;
 import rtjdds.util.Logger;
@@ -90,7 +91,7 @@ public class UDPSender extends Sender {
 	}
 
 	public void send(Locator locator) {
-		InetSocketLocator addr = (InetSocketLocator)locator;
+		InetLocator addr = (InetLocator)locator;
 		try {
 			_sendPacket.setSocketAddress(addr);
 			_sendPacket.setLength(_packet.getCursorPosition());

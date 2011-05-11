@@ -31,10 +31,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
 
 import rtjdds.rtps.exceptions.ShuttingDownException;
 import rtjdds.rtps.portable.CDRInputBuffer;
 import rtjdds.rtps.portable.InputPacket;
+import rtjdds.rtps.transport.locators.Locator;
 import rtjdds.util.GlobalProperties;
 import rtjdds.util.Logger;
 
@@ -46,7 +48,7 @@ import rtjdds.util.Logger;
  * @author kerush
  *
  */
-public class UDPUnicastReceiver extends Receiver {
+public class UDPUnicastReceiver implements Receiver {
 	
 	/* UDP listening socket */
 	protected DatagramSocket socket = null;
@@ -107,6 +109,13 @@ public class UDPUnicastReceiver extends Receiver {
 				throw new ShuttingDownException();
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public Locator receive(ByteBuffer buffer) throws ShuttingDownException {
+		// TODO Auto-generated method stub
+		//FIXME
 		return null;
 	}
 	

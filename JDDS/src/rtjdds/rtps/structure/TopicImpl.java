@@ -29,6 +29,17 @@ package rtjdds.rtps.structure;
 
 import java.net.SocketAddress;
 
+import org.omg.CORBA.Context;
+import org.omg.CORBA.ContextList;
+import org.omg.CORBA.DomainManager;
+import org.omg.CORBA.ExceptionList;
+import org.omg.CORBA.NVList;
+import org.omg.CORBA.NamedValue;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.Policy;
+import org.omg.CORBA.Request;
+import org.omg.CORBA.SetOverrideType;
+
 import rtjdds.rtps.exceptions.CollectionsException;
 import rtjdds.rtps.exceptions.RTjDDSException;
 import rtjdds.rtps.messages.elements.EntityId;
@@ -44,11 +55,13 @@ import rtjdds.util.collections.RTList;
 import rtjdds.util.collections.RTListIterator;
 import DDS.DomainParticipant;
 import DDS.InconsistentTopicStatus;
+import DDS.InconsistentTopicStatusHolder;
 import DDS.StatusCondition;
 import DDS.Topic;
 import DDS.TopicDescription;
 import DDS.TopicListener;
 import DDS.TopicQos;
+import DDS.TopicQosHolder;
 
 public class TopicImpl extends PoolManagedObject implements Copyable, TopicDescription, Topic {
 	
@@ -267,6 +280,125 @@ public class TopicImpl extends PoolManagedObject implements Copyable, TopicDescr
 
 	public DomainParticipant get_participant() {
 		return _participant;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result, ExceptionList exclist,
+			ContextList ctxlist) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _duplicate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainManager[] _get_domain_managers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _get_interface_def() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Policy _get_policy(int policy_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int _hash(int maximum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean _is_a(String repositoryIdentifier) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _is_equivalent(Object other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _non_existent() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void _release() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Request _request(String operation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _set_policy_override(Policy[] policies,
+			SetOverrideType set_add) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int set_qos(TopicQos qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_qos(TopicQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int set_listener(TopicListener a_listener, int mask) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public TopicListener get_listener() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int get_inconsistent_topic_status(
+			InconsistentTopicStatusHolder a_status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_instance_handle() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

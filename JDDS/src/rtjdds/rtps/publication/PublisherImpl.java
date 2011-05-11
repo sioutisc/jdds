@@ -27,6 +27,17 @@
 //================================================================
 package rtjdds.rtps.publication;
 
+import org.omg.CORBA.Context;
+import org.omg.CORBA.ContextList;
+import org.omg.CORBA.DomainManager;
+import org.omg.CORBA.ExceptionList;
+import org.omg.CORBA.NVList;
+import org.omg.CORBA.NamedValue;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.Policy;
+import org.omg.CORBA.Request;
+import org.omg.CORBA.SetOverrideType;
+
 import rtjdds.rtps.exceptions.RTjDDSException;
 import rtjdds.rtps.messages.elements.EntityId;
 import rtjdds.rtps.messages.elements.EntityKindEnum;
@@ -39,17 +50,20 @@ import rtjdds.util.BitUtility;
 import DDS.DataWriter;
 import DDS.DataWriterListener;
 import DDS.DataWriterQos;
+import DDS.DataWriterQosHolder;
 import DDS.DomainParticipant;
+import DDS.Duration_t;
 import DDS.Publisher;
 import DDS.PublisherListener;
 import DDS.PublisherQos;
+import DDS.PublisherQosHolder;
 import DDS.StatusCondition;
 import DDS.SubscriberListener;
 import DDS.SubscriberQos;
 import DDS.Topic;
 import DDS.TopicQos;
 
-public abstract class PublisherImpl extends EntityImpl implements Publisher {
+public class PublisherImpl extends EntityImpl implements Publisher {
 	
 	/* the participant */
 	private ParticipantImpl _participant = null;
@@ -167,6 +181,126 @@ public abstract class PublisherImpl extends EntityImpl implements Publisher {
 	public int get_status_changes() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public DataWriter create_datawriter(Topic a_topic, DataWriterQos qos,
+			DataWriterListener a_listener, int mask) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int get_qos(PublisherQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int wait_for_acknowledgments(Duration_t max_wait) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_default_datawriter_qos(DataWriterQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int copy_from_topic_qos(DataWriterQosHolder a_datawriter_qos,
+			TopicQos a_topic_qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_instance_handle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result, ExceptionList exclist,
+			ContextList ctxlist) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _duplicate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainManager[] _get_domain_managers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _get_interface_def() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Policy _get_policy(int policy_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int _hash(int maximum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean _is_a(String repositoryIdentifier) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _is_equivalent(Object other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _non_existent() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void _release() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Request _request(String operation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _set_policy_override(Policy[] policies,
+			SetOverrideType set_add) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -43,7 +43,7 @@ import DDS.SampleLostStatus;
 import DDS.SampleRejectedStatus;
 import DDS.StatusCondition;
 import DDS.Subscriber;
-import DDS.SubscriptionMatchStatus;
+import DDS.SubscriptionMatchedStatus;
 import DDS.TopicDescription;
 import rtjdds.rtps.CacheChange;
 import rtjdds.rtps.UnorderedHistoryCache;
@@ -231,7 +231,7 @@ public abstract class Reader extends Endpoint implements DataReader{
 		return null;
 	}
 
-	public SubscriptionMatchStatus get_subscription_match_status() {
+	public SubscriptionMatchedStatus get_subscription_matched_status() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -35,7 +35,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-import test.latency.PingPublisher;
+//import test.latency.PingPublisher;
 
 public class NamedPipe extends File {
 

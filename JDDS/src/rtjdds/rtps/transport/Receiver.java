@@ -30,6 +30,7 @@ package rtjdds.rtps.transport;
 import java.nio.ByteBuffer;
 
 import rtjdds.rtps.exceptions.ShuttingDownException;
+import rtjdds.rtps.portable.InputPacket;
 import rtjdds.rtps.transport.locators.Locator;
 
 public interface Receiver {
@@ -41,6 +42,9 @@ public interface Receiver {
 	 * @throws ShuttingDownException
 	 */
 	public Locator receive (ByteBuffer buffer) throws ShuttingDownException;
+	
+	public InputPacket receive() throws ShuttingDownException;
+	
 	
 	/**
 	 * 

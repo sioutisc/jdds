@@ -27,6 +27,17 @@
 //================================================================
 package rtjdds.rtps.subscription;
 
+import org.omg.CORBA.Context;
+import org.omg.CORBA.ContextList;
+import org.omg.CORBA.DomainManager;
+import org.omg.CORBA.ExceptionList;
+import org.omg.CORBA.NVList;
+import org.omg.CORBA.NamedValue;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.Policy;
+import org.omg.CORBA.Request;
+import org.omg.CORBA.SetOverrideType;
+
 import rtjdds.rtps.CacheChange;
 import rtjdds.rtps.InstanceHandle;
 import rtjdds.rtps.UnorderedHistoryCache;
@@ -47,18 +58,27 @@ import rtjdds.util.Logger;
 import DDS.DataReader;
 import DDS.DataReaderListener;
 import DDS.DataReaderQos;
+import DDS.DataReaderQosHolder;
 import DDS.Duration_t;
+import DDS.InstanceHandleSeqHolder;
 import DDS.LivelinessChangedStatus;
+import DDS.LivelinessChangedStatusHolder;
 import DDS.PublicationBuiltinTopicData;
+import DDS.PublicationBuiltinTopicDataHolder;
 import DDS.QueryCondition;
 import DDS.ReadCondition;
 import DDS.RequestedDeadlineMissedStatus;
+import DDS.RequestedDeadlineMissedStatusHolder;
 import DDS.RequestedIncompatibleQosStatus;
+import DDS.RequestedIncompatibleQosStatusHolder;
 import DDS.SampleLostStatus;
+import DDS.SampleLostStatusHolder;
 import DDS.SampleRejectedStatus;
+import DDS.SampleRejectedStatusHolder;
 import DDS.StatusCondition;
 import DDS.Subscriber;
-import DDS.SubscriptionMatchStatus;
+import DDS.SubscriptionMatchedStatus;
+import DDS.SubscriptionMatchedStatusHolder;
 import DDS.TopicDescription;
 
 public class StatelessReader extends Reader {
@@ -149,6 +169,155 @@ public class StatelessReader extends Reader {
 //		upcall to listener TODO should be done elsewhere
 		if (_listener != null)
 			_listener.on_data_available(this);
+	}
+
+	@Override
+	public int get_qos(DataReaderQosHolder qos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_sample_rejected_status(SampleRejectedStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_liveliness_changed_status(
+			LivelinessChangedStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_requested_deadline_missed_status(
+			RequestedDeadlineMissedStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_requested_incompatible_qos_status(
+			RequestedIncompatibleQosStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_subscription_matched_status(
+			SubscriptionMatchedStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_sample_lost_status(SampleLostStatusHolder status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_matched_publications(
+			InstanceHandleSeqHolder publication_handles) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_matched_publication_data(
+			PublicationBuiltinTopicDataHolder publication_data,
+			int publication_handle) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_instance_handle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Request _create_request(Context ctx, String operation,
+			NVList arg_list, NamedValue result, ExceptionList exclist,
+			ContextList ctxlist) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _duplicate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainManager[] _get_domain_managers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _get_interface_def() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Policy _get_policy(int policy_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int _hash(int maximum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean _is_a(String repositoryIdentifier) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _is_equivalent(Object other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean _non_existent() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void _release() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Request _request(String operation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object _set_policy_override(Policy[] policies,
+			SetOverrideType set_add) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
