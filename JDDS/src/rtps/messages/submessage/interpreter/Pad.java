@@ -23,11 +23,20 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.interpreter;
 
-package RTPS;
+import rtps.messages.submessage.Submessage;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+/**
+ * From OMG RTPS Standard v2.1 p44: Used to add padding to a Message if needed for memory alignment.
+ * <p>
+ * From OMG RTPS Standard v2.1 p62: The purpose of this Submessage is to allow the introduction of 
+ * any padding necessary to meet any desired memory- alignment requirements. Its has no other meaning.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class Pad extends Submessage {
+
 }

@@ -23,11 +23,49 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.entity;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.Count;
+import rtps.messages.submessage.attribute.EntityId;
+import rtps.messages.submessage.attribute.FragmentNumber;
+import rtps.messages.submessage.attribute.FragmentNumberSet;
+import rtps.messages.submessage.attribute.SequenceNumber;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+/**
+ * From OMG RTPS Standard v2.1 p44: Provides information on the state 
+ * of a Reader to a Writer, more specifically what fragments the Reader 
+ * is still missing. NackFrag messages are sent by a Reader to one or 
+ * more Writers.
+ * <p>
+ * From OMG RTPS Standard v2.1 p60: The NackFrag Submessage is used to communicate 
+ * the state of a Reader to a Writer. When a data change is sent as a series of fragments,
+ * the NackFrag Submessage allows the Reader to inform the Writer about specific fragment
+ * numbers it is still missing. This Submessage can only contain negative acknowledgements.
+ * Note this differs from an AckNack Submessage, which includes both positive and negative 
+ * acknowledgements. 
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class NackFrag extends Submessage {
+	@RTPSAttribute public EntityId readerId;
+	@RTPSAttribute public EntityId writerId;
+	@RTPSAttribute public FragmentNumber fragmentNumberState;
+	@RTPSAttribute public Count count;
+	@RTPSAttribute public SequenceNumber writerSN;
+	
+	public NackFrag(SubmessageFlag endiannessFlag
+			,EntityId readerId
+			,EntityId writerId
+			,SequenceNumber writerSN
+			,FragmentNumberSet lastFragmentNumberState
+			,Count count
+			){
+}
+	
 }

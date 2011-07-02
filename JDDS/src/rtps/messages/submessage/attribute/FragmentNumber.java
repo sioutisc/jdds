@@ -23,11 +23,30 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.attribute;
 
-package RTPS;
+import RTPS.FragmentNumber_t;
+import rtps.messages.submessage.SubmessageElement;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+public class FragmentNumber extends SubmessageElement implements Diff<FragmentNumber>{
+	private FragmentNumber_t value;
+	
+	public FragmentNumber(FragmentNumber_t val){
+		value = val;
+	}
+
+	@Override
+	public int compareTo(FragmentNumber arg0) {
+		return (int) diff(arg0);
+	}
+
+	@Override
+	public long diff(FragmentNumber e) {
+		return longValue() - e.longValue();
+	}
+
+	@Override
+	public long longValue() {
+		return value.value;
+	}
 }

@@ -23,11 +23,29 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.structure.entity;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import RTPS.GUID_t;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+
+/**
+ * From OMG RTPS Standard v2.1 p12: Base class for all RTPS entities. RTPS Entity
+ * represents the class of objects that are visible to other RTPS Entities on the
+ * network. As such, RTPS Entity objects have a globally-unique identifier (GUID)
+ * and can be referenced inside RTPS messages.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class Entity {
+	//RTPS Attributes
+	@RTPSAttribute protected GUID_t guid = new GUID_t();
+	
+	public GUID_t getGuid_t(){
+		return guid;
+	}
+	
 }

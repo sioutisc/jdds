@@ -23,11 +23,32 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.interpreter;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.Timestamp;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+
+/**
+ * From OMG RTPS Standard v2.1 p44: Provides a source timestamp for subsequent Entity Submessages
+ * 
+ * From OMG RTPS Standard v2.1 p59: This Submessage is used to send a timestamp which applies to 
+ * the Submessages that follow within the same message.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class InfoTimestamp extends Submessage {
+	@RTPSAttribute Timestamp timestamp;
+	
+	public InfoTimestamp(SubmessageFlag endiannessFlag
+						,SubmessageFlag invalidateFlag
+						,Timestamp timestamp
+						){
+		
+	}
 }

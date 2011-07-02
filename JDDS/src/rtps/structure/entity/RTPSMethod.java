@@ -23,11 +23,12 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.structure.entity;
 
-package RTPS;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+@Target({ElementType.METHOD})
+public @interface RTPSMethod {
+
 }

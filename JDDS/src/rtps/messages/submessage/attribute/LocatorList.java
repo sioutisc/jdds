@@ -23,11 +23,17 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.attribute;
 
-package RTPS;
+import java.util.Collection;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import RTPS.Locator_t;
+
+
+public class LocatorList extends List<Locator_t> {
+
+	public LocatorList(Collection<Locator_t> val) {
+		super(val);
+		// TODO Auto-generated constructor stub
+	}
 }

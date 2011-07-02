@@ -23,11 +23,45 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.entity;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.Count;
+import rtps.messages.submessage.attribute.EntityId;
+import rtps.messages.submessage.attribute.SequenceNumber;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+/**
+ * From OMG RTPS Standard v2.1 p43: Describes the information that is available
+ * in a Writer. Heartbeat messages are sent by a Writer (NO_KEY Writer or 
+ * WITH_KEY Writer) to one or more Readers (NO_KEY Reader or WITH_KEY Reader)
+ * <p>
+ * From OMG RTPS Standard v2.1 p53: This message is sent from an RTPS Writer to
+ * an RTPS Reader to communicate the sequence numbers of changes that the Writer 
+ * has available.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class Heartbeat extends Submessage {
+	@RTPSAttribute public EntityId readerId;
+	@RTPSAttribute public EntityId writerId;
+	@RTPSAttribute public SequenceNumber firstSN;
+	@RTPSAttribute public SequenceNumber lastSN;
+	@RTPSAttribute public Count count;
+	
+	public Heartbeat(SubmessageFlag endiannessFlag
+					,SubmessageFlag finalFlag
+					,SubmessageFlag livelinessFlag
+					,EntityId readerId
+					,EntityId writerId
+					,SequenceNumber firstSN
+					,SequenceNumber lastSN
+					,Count count
+					){
+	}
+	
 }

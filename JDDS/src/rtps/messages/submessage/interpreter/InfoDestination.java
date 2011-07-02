@@ -23,11 +23,33 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.interpreter;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.GuidPrefix;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+/**
+ *  From OMG RTPS Standard v2.1 p44: Provides information about the final destination
+ *  of subsequent Entity Submessages. This Submessage is primarily used for relaying 
+ *  RTPS Submessages. This is not discussed in the current specification.
+ * <p>
+ * From OMG RTPS Standard v2.1 p56: This message is sent from an RTPS Writer to an 
+ * RTPS Reader to modify the GuidPrefix used to interpret the Reader entityIds appearing
+ *  in the Submessages that follow it.
+ *  
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class InfoDestination extends Submessage {
+	@RTPSAttribute public GuidPrefix guidPrefix;
+	
+	public InfoDestination(SubmessageFlag endinannessFlag
+						  ,GuidPrefix guidPrefix
+						  ){
+		
+	}
 }

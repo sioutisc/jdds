@@ -23,11 +23,15 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.attribute;
 
-package RTPS;
+import RTPS.GuidPrefix_t;
+import rtps.messages.submessage.SubmessageElement;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+public class GuidPrefix extends SubmessageElement {
+	private GuidPrefix_t value;
+	
+	public GuidPrefix(GuidPrefix_t val){
+		value = val;
+	}
 }

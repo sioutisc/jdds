@@ -23,11 +23,19 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps;
 
-package RTPS;
+/**
+ * Annotation used to decorate attributes specifically defined in the RTPS standard
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target({ElementType.FIELD})
+public @interface RTPSAttribute {
+
 }

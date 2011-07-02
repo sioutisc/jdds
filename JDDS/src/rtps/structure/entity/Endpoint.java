@@ -23,11 +23,34 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.structure.entity;
 
-package RTPS;
+import java.util.Vector;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import rtps.RTPSAttribute;
+
+import RTPS.Locator_t;
+import RTPS.ReliabilityKind_t;
+import RTPS.TopicKind_t;
+
+
+/**
+ * From OMG RTPS Standard v2.1 p12: Specialization of RTPS Entity representing the
+ * objects that can be communication endpoints. That is, the objects that can be
+ * the sources or destinations of RTPS messages.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class Endpoint extends Entity {
+	@RTPSAttribute public TopicKind_t topicKind = null;
+	@RTPSAttribute public ReliabilityKind_t reliabilityLevel = null;
+	@RTPSAttribute public Vector<Locator_t> unicastLocatorList = new Vector<Locator_t>();
+	@RTPSAttribute public Vector<Locator_t> multicastLocatorList = new Vector<Locator_t>();
+
+	public Endpoint(Participant participant) {
+		this.getGuid_t().guidPrefix = participant.getGuid_t().guidPrefix;
+	}
+
 }

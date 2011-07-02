@@ -23,11 +23,59 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.attribute;
 
-package RTPS;
+import RTPS.SequenceNumber_t;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+public class SequenceNumberSet {
+	RTPS.SequenceNumberSet value;
+	
+	public SequenceNumberSet(SequenceNumber_t bitmapBase, int numbits, int[] bitmap){
+		value = new RTPS.SequenceNumberSet(bitmapBase,numbits,bitmap);
+	}
+	
+	/** parses a SequenceBumberSet string of the format 1234/12:00110 */
+	public SequenceNumberSet(String strSeqNumSet){
+		String[] tmp = strSeqNumSet.split("/");
+
+		SequenceNumber bitmapBase = new SequenceNumber(Integer.parseInt(tmp[0]));
+		
+		tmp = tmp[1].split(":");
+
+		int numbits = Integer.parseInt(tmp[0]);
+		
+		if(tmp[1].length() <= 32 ){
+			int[] bitmap = new int[1];
+			bitmap[0] = Integer.parseInt(tmp[1], 2);
+			value = new RTPS.SequenceNumberSet(bitmapBase.value,numbits,bitmap);
+		} else if(tmp[1].length() % 32 == 0) {
+			int[] bitmap = new int[tmp[1].length() / 32];
+			for(int i=0; i<bitmap.length; i++){
+				bitmap[i] = Integer.parseInt(tmp[1].substring(i*32,(i+1)*32), 2);				
+			}
+			value = new RTPS.SequenceNumberSet(bitmapBase.value,numbits,bitmap);
+		} else {
+			int[] bitmap = new int[(tmp[1].length() / 32) + 1];
+			for(int i=0; i<bitmap.length-1; i++){
+				bitmap[i] = Integer.parseInt(tmp[1].substring(i*32,(i+1)*32), 2);				
+			}
+			bitmap[bitmap.length-1] = Integer.parseInt(tmp[1].substring((bitmap.length-1)*32), 2);							
+			value = new RTPS.SequenceNumberSet(bitmapBase.value,numbits,bitmap);
+		}		
+	}
+	
+	public String toString(){
+		String toReturn = "";
+		toReturn += new SequenceNumber(value.bitmapBase).toString();
+		toReturn += "/";
+		toReturn += value.numbits;
+		for(int i=0; i< value.bitmap.length; i++){
+			toReturn += Integer.toString(value.bitmap[i],2);
+		}
+		return toReturn;
+	}
+	
+	//public int octets(){
+		
+	//}
 }

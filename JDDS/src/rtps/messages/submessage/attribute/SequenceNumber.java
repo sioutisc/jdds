@@ -23,11 +23,51 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.attribute;
 
-package RTPS;
+import RTPS.SequenceNumber_t;
+import rtps.messages.submessage.SubmessageElement;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+/**
+ * A sequence number is a 64-bit signed integer, that can take values in the range: -2^63 <= N <= 2^63-1. The selection of
+64 bits as the representation of a sequence number ensures the sequence numbers never1 wrap. Sequence numbers begin
+at 1.
+
+ * @author chris
+ *
+ */
+
+public class SequenceNumber extends SubmessageElement implements Diff<SequenceNumber>{
+	public SequenceNumber_t value;
+	static long HIGH = (long) Math.pow(2,32);
+	
+	
+	public SequenceNumber(SequenceNumber_t val){
+		value = val;
+	}
+	
+	public SequenceNumber(long longValue){
+		value = new SequenceNumber_t();
+		value.high = (int) (longValue / HIGH);
+		value.low = (int) (longValue % HIGH);		
+	}
+	
+	int octets(){
+		return 8;
+	}
+
+	@Override
+	public int compareTo(SequenceNumber o) {
+		return (int) diff(o);
+	}
+
+	@Override
+	public long diff(SequenceNumber e) {
+		return longValue()-e.longValue();
+	}
+	
+	@Override
+	public long longValue() {
+		return ((long) value.high) * HIGH + value.low;
+	}
 }

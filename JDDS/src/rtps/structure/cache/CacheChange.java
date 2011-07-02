@@ -23,11 +23,43 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.structure.cache;
 
-package RTPS;
+import DDS.InstanceHandle_tHelper;
+import RTPS.ChangeKind_t;
+import RTPS.GUID_t;
+import RTPS.InstanceHandle_t;
+import RTPS.SequenceNumber_t;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.attribute.SequenceNumber;
+import rtps.messages.submessage.entity.Data;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+/**
+ * From OMG RTPS Standard v2.1 p13: Represents an individual change made to a
+ * data-object. Includes the creation, modification, and deletion of data-objects.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class CacheChange implements Comparable<CacheChange> {
+	@RTPSAttribute public ChangeKind_t kind = null;
+	@RTPSAttribute public GUID_t writerGuid = null;
+	@RTPSAttribute public InstanceHandle_t instanceHandle = null;
+	@RTPSAttribute public SequenceNumber sequenceNumber = null;
+	@RTPSAttribute public Data data_value = null;
+	
+	public CacheChange(ChangeKind_t ck, GUID_t g, InstanceHandle_t ih, SequenceNumber_t sn, Data d){
+		kind = ck;
+		writerGuid = g;
+		instanceHandle = ih;
+		sequenceNumber = new SequenceNumber(sn);
+		data_value = d;
+	}
+
+	@Override
+	public int compareTo(CacheChange o) {
+		return this.sequenceNumber.compareTo(o.sequenceNumber);
+	}
+
 }

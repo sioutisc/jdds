@@ -23,11 +23,21 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.message;
 
-package RTPS;
+public class Address {
+	byte[] addr = new byte[16];
+	
+	public Address(byte[] address){
+		addr = address;
+	}
+	
+	public Address(){
+		
+	}
+	
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+	public static final Address ADDRESS_INVALID = new Address();
+
+	
 }

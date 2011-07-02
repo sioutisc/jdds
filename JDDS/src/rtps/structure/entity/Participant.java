@@ -23,11 +23,40 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.structure.entity;
 
-package RTPS;
+import java.awt.List;
+import java.util.Vector;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import RTPS.ENTITYID_PARTICIPANT;
+import RTPS.EntityId_t;
+import RTPS.Locator_t;
+import RTPS.PROTOCOLVERSION;
+import RTPS.ProtocolVersion_t;
+import RTPS.VENDORID;
+import RTPS.VendorId_t;
+
+import rtps.RTPSAttribute;
+
+
+/**
+ * From OMG RTPS Standard v2.1 p13: Container of all RTPS entities that share 
+ * common properties and are located in a single address space.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class Participant extends Entity {
+	@RTPSAttribute public ProtocolVersion_t protocolVersion = PROTOCOLVERSION.value;
+	@RTPSAttribute public VendorId_t vendorId = VENDORID.JDDS;
+	@RTPSAttribute public Vector<Locator_t> defaultUnicastLocatorList = new Vector<Locator_t>();
+	@RTPSAttribute public Vector<Locator_t> defaultMulticastLocatorList = new Vector<Locator_t>();
+	
+	private Vector<Endpoint> endpoints_ = new Vector<Endpoint>();
+	
+	public Participant(){
+		this.getGuid_t().entityId = ENTITYID_PARTICIPANT.value;
+	}
+
 }

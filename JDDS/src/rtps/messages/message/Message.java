@@ -23,11 +23,14 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.message;
 
-package RTPS;
+import java.util.Vector;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import rtps.messages.submessage.Submessage;
+
+public class Message {
+	private Header header_;
+	Vector<Submessage> subMessages_ = new Vector<Submessage>();
+	
 }

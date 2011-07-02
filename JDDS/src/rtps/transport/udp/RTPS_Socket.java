@@ -23,11 +23,42 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.transport.udp;
 
-package RTPS;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+public class RTPS_Socket {
+	InetAddress group;
+	String ip = "239.255.0.1";
+	int port = 7400;
+	 MulticastSocket sock;
+	 
+	 public RTPS_Socket() throws Exception{
+		// TODO Auto-generated constructor stub
+		group = InetAddress.getByName(ip);
+		sock = new MulticastSocket(port);
+		 sock.joinGroup(group);
+		 
+		 // get their responses!
+		 //...
+		 // OK, I'm done talking - leave the group...
+		 //s.leaveGroup(group);	
+		 
+	}
+	 
+	 public void send(byte[] bytes) throws IOException{
+		 DatagramPacket p = new DatagramPacket(bytes, bytes.length, group, port);
+		 sock.send(p);
+	 }
+	 
+	 public byte[] recv() throws IOException {
+		 byte[] buff = new byte[1000];
+		 DatagramPacket p = new DatagramPacket(buff, buff.length);
+		 sock.receive(p);
+		 return buff;
+	 }
+
 }

@@ -24,10 +24,38 @@
  * ********************************************************************* */
 
 
-package RTPS;
+package rtps.messages.submessage.interpreter;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.GuidPrefix;
+import rtps.messages.submessage.attribute.ProtocolVersion;
+import rtps.messages.submessage.attribute.VendorId;
+
+
+/**
+ * From OMG RTPS Standard v2.1 p44: Provides information about the source from 
+ * which subsequent Entity Submessages originated. This Submessage is primarily 
+ * used for relaying RTPS Submessages. This is not discussed in the current specification.
+ * 
+ * From OMG RTPS Standard v2.1 p58: This message modifies the logical source of the
+ * Submessages that follow.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class InfoSource extends Submessage {
+	@RTPSAttribute public ProtocolVersion protocolVersion;
+	@RTPSAttribute public VendorId vendorId;
+	@RTPSAttribute public GuidPrefix guidPrefix;
+	
+	public InfoSource(SubmessageFlag endiannessFlag
+					 ,ProtocolVersion protocolVersion
+					 ,VendorId vendorId
+					 ,GuidPrefix guidPrefix
+					 ){
+		
+	}
 }

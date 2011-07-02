@@ -23,11 +23,9 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage;
 
-package RTPS;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+public class NoKeyDataFrag extends Submessage {
+
 }

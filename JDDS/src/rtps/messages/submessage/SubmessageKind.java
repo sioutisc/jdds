@@ -1,3 +1,4 @@
+
 /* ********************************************************************* *
  *                                                                       *
  *   =============================================================       *
@@ -23,11 +24,46 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage;
 
-package RTPS;
+/**
+ * From OMG RTPS Standard v2.1 p30: Enumeration used to identify the kind of
+ * Submessage. The following values are reserved by this version of the protocol:
+ * DATA, GAP, HEARTBEAT, ACKNACK, PAD, INFO_TS, INFO_REPLY, INFO_DST, INFO_SRC, 
+ * DATA_FRAG, NACK_FRAG, HEARTBEAT_FRAG
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+
+public enum SubmessageKind {	
+	PAD("1"),
+	ACKNACK("6"),
+	HEARTBEAT("7"),
+	GAP("8"),
+	INFO_TS("9"),
+	INFO_SRC("c"),
+	INFO_REPLY_IP4("d"),
+	INFO_DST("e"),
+	INFO_REPLY("f"),
+	NACK_FRAG("12"),
+	HEARTBEAT_FRAG("13"),
+	DATA("15"),
+	DATA_FRAG("16");
+	
+	byte value;
+	
+	SubmessageKind(String val){
+		value = Byte.parseByte(val,16);
+	}
+	
+	public byte value(){
+		return value;
+	}
+	
+	public int octets(){
+		return 1;
+	}
 }

@@ -23,11 +23,44 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.attribute;
 
-package RTPS;
+import java.util.Collection;
+import java.util.Vector;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+import rtps.messages.submessage.SubmessageElement;
+
+public class NumberSet<E extends Diff<E>> extends SubmessageElement {
+	public static final int MAX_SET_INTERVAL = 256;
+		
+	private E base;
+	private Vector<E> set = new Vector<E>();
+	
+	public NumberSet(E base){
+		this.base = base;
+	}
+	
+	public NumberSet(E b, Collection<E> c) throws IndexOutOfBoundsException {
+		this.base = b;
+		for(E e: c){
+			add(e);
+		}
+	}
+	
+	public void add(E e) throws IndexOutOfBoundsException {
+		if(e.diff(base) > MAX_SET_INTERVAL){
+			throw new IndexOutOfBoundsException();
+		}
+		set.add(e);
+	}
+	
+	public String toString(){
+		StringBuffer s = new StringBuffer();
+		s.append(base.toString()+"\n");
+		for(E e: set){
+			s.append("--"+e.toString()+ "\n");
+		}
+		return s.toString();
+	}
+
 }

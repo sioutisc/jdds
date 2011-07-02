@@ -23,11 +23,25 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.message;
 
-package RTPS;
+import RTPS.GuidPrefix_t;
+import RTPS.PROTOCOLVERSION;
+import RTPS.ProtocolId_t;
+import RTPS.ProtocolVersion_t;
+import RTPS.VENDORID;
+import RTPS.VendorId_t;
+import rtps.RTPSAttribute;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+public class Header {
+	@RTPSAttribute public ProtocolId_t protocol = ProtocolId_t.PROTOCOL_RTPS;
+	@RTPSAttribute public ProtocolVersion_t version = PROTOCOLVERSION.value;
+	@RTPSAttribute public VendorId_t vendorId = VENDORID.JDDS;
+	@RTPSAttribute public GuidPrefix_t guidPrefix;
+	
+	public Header(GuidPrefix_t prefix){
+		guidPrefix = prefix;
+	}
+
 }

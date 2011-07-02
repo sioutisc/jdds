@@ -28,7 +28,9 @@
 
 module RTPS {
 
-	typedef octet GuidPrefix_t[12];
+	struct GuidPrefix_t {
+		octet value[12];
+	};
 	
 	typedef octet EntityKey[3];
 
@@ -113,6 +115,10 @@ module RTPS {
 		
 	struct Count_t { 
 		long value;
+	};
+	
+	enum ProtocolId_t {
+		PROTOCOL_RTPS
 	};
 	
 	struct ProtocolVersion_t {
@@ -388,10 +394,14 @@ module RTPS {
 		NOT_ALIVE_UNREGISTERED
 	};
 	
+	struct InstanceHandle_t {
+		DDS::InstanceHandle_t value;
+	};
+	
 	struct CacheChange {
 		ChangeKind_t kind;
 		GUID_t writerGuid;
-		DDS::InstanceHandle_t instanceHandle;
+		InstanceHandle_t instanceHandle;
 		SequenceNumber_t sequenceNumber;
 		SerializedPayload dataValue;
 	};

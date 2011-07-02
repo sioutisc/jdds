@@ -23,11 +23,21 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.util;
 
-package RTPS;
+public abstract class Conversions {
+	
+	  static final String HEX = "0123456789ABCDEF";
+	  public static String getHex( byte [] raw ) {
+	    if ( raw == null ) {
+	      return null;
+	    }
+	    final StringBuilder hex = new StringBuilder( 2 * raw.length );
+	    for ( final byte b : raw ) {
+	      hex.append(HEX.charAt((b & 0xF0) >> 4))
+	         .append(HEX.charAt((b & 0x0F)));
+	    }
+	    return hex.toString();
+	  }
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
 }

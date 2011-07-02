@@ -23,11 +23,35 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.interpreter;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.LocatorList;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+/**
+ * From OMG RTPS Standard v2.1 p44: Provides information about where to reply to the 
+ * entities that appear in subsequent Submessages
+ * 
+ * From OMG RTPS Standard v2.1 p57: This message is sent from an RTPS Reader to an 
+ * RTPS Writer. It contains explicit information on where to send a reply to the 
+ * Submessages that follow it within the same message.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class InfoReply extends Submessage {
+	@RTPSAttribute public LocatorList multicastLocatorList;
+	@RTPSAttribute public LocatorList unicastLocatorList;	
+	
+	public InfoReply(SubmessageFlag endiannessFlag
+					,SubmessageFlag multicastFlag
+					,LocatorList unicastLocatorList
+					,LocatorList multicastLocatorList
+					){
+	}
+	
 }

@@ -23,11 +23,28 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.structure.entity;
 
-package RTPS;
+import rtps.RTPSAttribute;
+import rtps.structure.cache.HistoryCache;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+/**
+ * From OMG RTPS Standard v2.1 p13: Specialization of RTPS Endpoint representing
+ * the objects that can be the sources of messages communicating CacheChanges.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+public class Writer extends Endpoint {
+	@RTPSAttribute public HistoryCache writer_cache = new HistoryCache();
+	
+	public Writer(Participant participant){
+		super(participant);
+	}
+	
+	@RTPSMethod public void new_change(){
+		
+	}
+
+	
 }

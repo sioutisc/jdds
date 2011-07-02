@@ -23,11 +23,42 @@
  *                                                                       *
  * ********************************************************************* */
 
+package rtps.messages.submessage.entity;
 
-package RTPS;
+import RTPS.SequenceNumberSet;
+import rtps.RTPSAttribute;
+import rtps.messages.submessage.Submessage;
+import rtps.messages.submessage.SubmessageFlag;
+import rtps.messages.submessage.attribute.EntityId;
+import rtps.messages.submessage.attribute.SequenceNumber;
 
-//#define GUIDPREFIX_UNKNOWN {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
-public interface GUIDPREFIX_UNKNOWN {
-	static final byte[] rawValue = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	public static final GuidPrefix_t value = new GuidPrefix_t(rawValue);
+
+/**
+ * From OMG RTPS Standard v2.1 p43: Describes the information that is no 
+ * longer relevant to Readers. Gap messages are sent by a Writer to one 
+ * or more Readers.
+ * <p>
+ * From OMG RTPS Standard v2,1 p52: This Submessage is sent from an RTPS Writer
+ * to an RTPS Reader and indicates to the RTPS Reader that a range of sequence 
+ * numbers is no longer relevant. The set may be a contiguous range of sequence 
+ * numbers or a specific set of sequence numbers.
+ * 
+ * @author Christos Sioutis <christos.sioutis@gmail.com>
+ *
+ */
+
+public class Gap extends Submessage {
+	@RTPSAttribute public EntityId readerId;
+	@RTPSAttribute public EntityId writerId;
+	@RTPSAttribute public SequenceNumber gapStart;
+	@RTPSAttribute public SequenceNumberSet gapList;
+	
+	public Gap(SubmessageFlag endiannessFlag
+			  ,EntityId readerId
+			  ,EntityId writerId
+			  ,SequenceNumber gapStart
+			  ,SequenceNumberSet gapList
+			  ){
+		
+	}
 }
