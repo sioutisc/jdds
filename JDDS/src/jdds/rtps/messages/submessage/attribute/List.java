@@ -23,12 +23,12 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 import java.util.Collection;
 import java.util.Vector;
 
-import rtps.messages.submessage.SubmessageElement;
+import jdds.rtps.messages.submessage.SubmessageElement;
 
 public class List<E> extends SubmessageElement{
     Vector<E> value  = new Vector<E>();

@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.message;
+package jdds.rtps.messages.message;
 
 public class Address {
 	byte[] addr = new byte[16];

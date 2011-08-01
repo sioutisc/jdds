@@ -23,16 +23,16 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.entity;
+package jdds.rtps.messages.submessage.entity;
 
-import rtps.RTPSAttribute;
-import rtps.messages.submessage.Submessage;
-import rtps.messages.submessage.SubmessageFlag;
-import rtps.messages.submessage.attribute.EntityId;
-import rtps.messages.submessage.attribute.Flags;
-import rtps.messages.submessage.attribute.ParameterList;
-import rtps.messages.submessage.attribute.SequenceNumber;
-import rtps.messages.submessage.attribute.SerializedPayload;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.submessage.Submessage;
+import jdds.rtps.messages.submessage.SubmessageFlag;
+import jdds.rtps.messages.submessage.attribute.EntityId;
+import jdds.rtps.messages.submessage.attribute.Flags;
+import jdds.rtps.messages.submessage.attribute.ParameterList;
+import jdds.rtps.messages.submessage.attribute.SequenceNumber;
+import jdds.rtps.messages.submessage.attribute.SerializedPayload;
 
 /**
  * From OMG RTPS Standard v2.1 p13: Represents the data that may be associated with

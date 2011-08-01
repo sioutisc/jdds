@@ -23,9 +23,9 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.interpreter;
+package jdds.rtps.messages.submessage.interpreter;
 
-import rtps.messages.submessage.Submessage;
+import jdds.rtps.messages.submessage.Submessage;
 
 /**
  * From OMG RTPS Standard v2.1 p44: Used to add padding to a Message if needed for memory alignment.

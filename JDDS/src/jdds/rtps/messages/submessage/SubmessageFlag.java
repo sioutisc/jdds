@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage;
+package jdds.rtps.messages.submessage;
 
 /**
  * From OMG RTPS Standard v2.1 p30: Type used to specify a Submessage flag. 

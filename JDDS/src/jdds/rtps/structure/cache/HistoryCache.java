@@ -23,16 +23,16 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.cache;
+package jdds.rtps.structure.cache;
 
 import java.util.TreeSet;
 
 import RTPS.SequenceNumber_t;
 
-import rtps.RTPSAttribute;
-import rtps.messages.submessage.attribute.SequenceNumber;
-import rtps.structure.cache.CacheChange;
-import rtps.structure.entity.RTPSMethod;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.submessage.attribute.SequenceNumber;
+import jdds.rtps.structure.cache.CacheChange;
+import jdds.rtps.structure.entity.RTPSMethod;
 
 /**
  * From OMG RTPS Standard v2.1 p13: Container class used to temporarily store and

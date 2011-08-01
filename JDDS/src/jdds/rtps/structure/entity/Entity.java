@@ -23,9 +23,9 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.entity;
+package jdds.rtps.structure.entity;
 
-import rtps.RTPSAttribute;
+import jdds.rtps.RTPSAttribute;
 import RTPS.GUID_t;
 
 

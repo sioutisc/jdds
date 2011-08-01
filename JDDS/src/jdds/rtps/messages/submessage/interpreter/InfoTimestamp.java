@@ -23,12 +23,12 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.interpreter;
+package jdds.rtps.messages.submessage.interpreter;
 
-import rtps.RTPSAttribute;
-import rtps.messages.submessage.Submessage;
-import rtps.messages.submessage.SubmessageFlag;
-import rtps.messages.submessage.attribute.Timestamp;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.submessage.Submessage;
+import jdds.rtps.messages.submessage.SubmessageFlag;
+import jdds.rtps.messages.submessage.attribute.Timestamp;
 
 
 

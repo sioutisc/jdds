@@ -23,9 +23,9 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
-import rtps.messages.submessage.SubmessageFlag;
+import jdds.rtps.messages.submessage.SubmessageFlag;
 
 public class Flags extends List<SubmessageFlag> {
 	public Flags(){

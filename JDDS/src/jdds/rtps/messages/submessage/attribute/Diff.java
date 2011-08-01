@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 /**
  * An interface for measuring the difference between objects that can represent

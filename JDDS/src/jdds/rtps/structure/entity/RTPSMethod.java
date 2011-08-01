@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.entity;
+package jdds.rtps.structure.entity;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

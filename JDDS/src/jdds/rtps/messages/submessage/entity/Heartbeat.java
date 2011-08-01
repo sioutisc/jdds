@@ -23,14 +23,14 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.entity;
+package jdds.rtps.messages.submessage.entity;
 
-import rtps.RTPSAttribute;
-import rtps.messages.submessage.Submessage;
-import rtps.messages.submessage.SubmessageFlag;
-import rtps.messages.submessage.attribute.Count;
-import rtps.messages.submessage.attribute.EntityId;
-import rtps.messages.submessage.attribute.SequenceNumber;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.submessage.Submessage;
+import jdds.rtps.messages.submessage.SubmessageFlag;
+import jdds.rtps.messages.submessage.attribute.Count;
+import jdds.rtps.messages.submessage.attribute.EntityId;
+import jdds.rtps.messages.submessage.attribute.SequenceNumber;
 
 
 /**

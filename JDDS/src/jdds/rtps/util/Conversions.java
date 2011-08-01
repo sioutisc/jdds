@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.util;
+package jdds.rtps.util;
 
 public abstract class Conversions {
 	

@@ -23,11 +23,11 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.message;
+package jdds.rtps.messages.message;
 
 import java.util.Vector;
 
-import rtps.messages.submessage.Submessage;
+import jdds.rtps.messages.submessage.Submessage;
 
 public class Message {
 	private Header header_;

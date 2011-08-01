@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 import RTPS.SequenceNumber_t;
 

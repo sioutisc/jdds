@@ -23,9 +23,9 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
-import rtps.messages.submessage.SubmessageElement;
+import jdds.rtps.messages.submessage.SubmessageElement;
 import RTPS.Count_t;
 
 public class Count extends SubmessageElement {

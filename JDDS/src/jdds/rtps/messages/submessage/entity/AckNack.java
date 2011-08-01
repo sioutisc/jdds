@@ -23,11 +23,11 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.entity;
+package jdds.rtps.messages.submessage.entity;
 
-import rtps.RTPSAttribute;
-import rtps.messages.submessage.*;
-import rtps.messages.submessage.attribute.*;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.submessage.*;
+import jdds.rtps.messages.submessage.attribute.*;
 
 /**
  * From OMG RTPS Standard v2.1 p44: Provides information on the state of a 

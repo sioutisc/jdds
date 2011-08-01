@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps;
+package jdds.rtps;
 
 /**
  * Annotation used to decorate attributes specifically defined in the RTPS standard

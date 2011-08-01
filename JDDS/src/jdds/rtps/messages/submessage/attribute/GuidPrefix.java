@@ -23,10 +23,10 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 import RTPS.GuidPrefix_t;
-import rtps.messages.submessage.SubmessageElement;
+import jdds.rtps.messages.submessage.SubmessageElement;
 
 public class GuidPrefix extends SubmessageElement {
 	private GuidPrefix_t value;

@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.message;
+package jdds.rtps.messages.message;
 
 import RTPS.GuidPrefix_t;
 import RTPS.PROTOCOLVERSION;
@@ -31,7 +31,7 @@ import RTPS.ProtocolId_t;
 import RTPS.ProtocolVersion_t;
 import RTPS.VENDORID;
 import RTPS.VendorId_t;
-import rtps.RTPSAttribute;
+import jdds.rtps.RTPSAttribute;
 
 
 public class Header {

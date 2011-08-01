@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.entity;
+package jdds.rtps.structure.entity;
 
 public class DataWriter {
 

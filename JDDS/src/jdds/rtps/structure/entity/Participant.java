@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.entity;
+package jdds.rtps.structure.entity;
 
 import java.awt.List;
 import java.util.Vector;
@@ -36,7 +36,7 @@ import RTPS.ProtocolVersion_t;
 import RTPS.VENDORID;
 import RTPS.VendorId_t;
 
-import rtps.RTPSAttribute;
+import jdds.rtps.RTPSAttribute;
 
 
 /**

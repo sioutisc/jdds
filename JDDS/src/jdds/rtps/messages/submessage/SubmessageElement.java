@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage;
+package jdds.rtps.messages.submessage;
 
 public class SubmessageElement {
 

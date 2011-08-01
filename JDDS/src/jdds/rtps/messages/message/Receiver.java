@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.message;
+package jdds.rtps.messages.message;
 
 import java.util.Vector;
 
@@ -37,8 +37,8 @@ import RTPS.TIME_INVALID;
 import RTPS.Time_t;
 import RTPS.VENDORID_UNKNOWN;
 import RTPS.VendorId_t;
-import rtps.RTPSAttribute;
-import rtps.messages.message.Header;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.message.Header;
 
 /**
  * From OMG RTPS Standard v2.1 p35: The interpretation and meaning of a Submessage

@@ -23,10 +23,10 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 import RTPS.VendorId_t;
-import rtps.messages.submessage.SubmessageElement;
+import jdds.rtps.messages.submessage.SubmessageElement;
 
 public class VendorId extends SubmessageElement {
 	private VendorId_t value;

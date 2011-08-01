@@ -23,11 +23,11 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.entity;
+package jdds.rtps.structure.entity;
 
 import java.util.Vector;
 
-import rtps.RTPSAttribute;
+import jdds.rtps.RTPSAttribute;
 
 import RTPS.Locator_t;
 import RTPS.ReliabilityKind_t;

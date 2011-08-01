@@ -24,7 +24,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage;
+package jdds.rtps.messages.submessage;
 
 /**
  * From OMG RTPS Standard v2.1 p30: Enumeration used to identify the kind of

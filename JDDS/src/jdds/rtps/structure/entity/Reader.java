@@ -23,10 +23,10 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.entity;
+package jdds.rtps.structure.entity;
 
-import rtps.RTPSAttribute;
-import rtps.structure.cache.HistoryCache;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.structure.cache.HistoryCache;
 
 /**
  * From OMG RTPS Standard v2.1 p13: Specialization of RTPS Endpoint representing

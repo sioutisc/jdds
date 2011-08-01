@@ -23,12 +23,12 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 import java.util.Collection;
 import java.util.Vector;
 
-import rtps.messages.submessage.SubmessageElement;
+import jdds.rtps.messages.submessage.SubmessageElement;
 
 public class NumberSet<E extends Diff<E>> extends SubmessageElement {
 	public static final int MAX_SET_INTERVAL = 256;

@@ -23,10 +23,10 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.messages.submessage.attribute;
+package jdds.rtps.messages.submessage.attribute;
 
 import RTPS.SequenceNumber_t;
-import rtps.messages.submessage.SubmessageElement;
+import jdds.rtps.messages.submessage.SubmessageElement;
 
 /**
  * A sequence number is a 64-bit signed integer, that can take values in the range: -2^63 <= N <= 2^63-1. The selection of

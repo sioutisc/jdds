@@ -23,7 +23,7 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.transport.udp;
+package jdds.rtps.transport.udp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

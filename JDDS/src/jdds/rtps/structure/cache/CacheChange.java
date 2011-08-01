@@ -23,16 +23,16 @@
  *                                                                       *
  * ********************************************************************* */
 
-package rtps.structure.cache;
+package jdds.rtps.structure.cache;
 
 import DDS.InstanceHandle_tHelper;
 import RTPS.ChangeKind_t;
 import RTPS.GUID_t;
 import RTPS.InstanceHandle_t;
 import RTPS.SequenceNumber_t;
-import rtps.RTPSAttribute;
-import rtps.messages.submessage.attribute.SequenceNumber;
-import rtps.messages.submessage.entity.Data;
+import jdds.rtps.RTPSAttribute;
+import jdds.rtps.messages.submessage.attribute.SequenceNumber;
+import jdds.rtps.messages.submessage.entity.Data;
 
 /**
  * From OMG RTPS Standard v2.1 p13: Represents an individual change made to a
