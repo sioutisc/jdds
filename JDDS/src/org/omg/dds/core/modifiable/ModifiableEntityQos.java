@@ -41,6 +41,6 @@ extends EntityQos<UNMOD_SELF, MOD_SELF>, ModifiableValue<UNMOD_SELF, MOD_SELF>
      * @throws  NullPointerException    if the given key or value is
      *                                  <code>null</code>.
      */
-    public <POLICY extends QosPolicy<POLICY, ?>> POLICY put(
-            QosPolicy.Id key, POLICY value);
+    //public <POLICY extends QosPolicy<POLICY, ?>> POLICY put(
+    //        QosPolicy.Id key, POLICY value);
 }

@@ -1,8 +1,36 @@
+/* ********************************************************************* *
+ *                                                                       *
+ *   =============================================================       *
+ *   Copyright 2012                                                      *
+ *   Christos Sioutis <christos.sioutis@gmail.com>                       *
+ *   =============================================================       *
+ *                                                                       *
+ *   This file is part of jdds.                                          *
+ *                                                                       *
+ *   jdds is free software: you can redistribute it and/or               *
+ *   modify it under the terms of the GNU General Public License         *
+ *   as published by the Free Software Foundation, either version 3 of   *
+ *   the License, or (at your option) any later version.                 *
+ *                                                                       *
+ *   jdds is distributed in the hope that it will be useful,             *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of      *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
+ *   GNU General Public License for more details.                        *
+ *                                                                       *
+ *   You should have received a copy of the GNU General Public           *
+ *   License along with jdds.                                            *
+ *   If not, see <http://www.gnu.org/licenses/>.                         *
+ *                                                                       *
+ * ********************************************************************* */
+
 package jdds.dds.core;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import jdds.dds.domain.JDDS_DomainParticipantFactory;
+
+import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.Duration;
 import org.omg.dds.core.GuardCondition;
 import org.omg.dds.core.InstanceHandle;
@@ -40,7 +68,9 @@ import org.omg.dds.type.TypeSupport;
 import org.omg.dds.type.dynamic.DynamicDataFactory;
 import org.omg.dds.type.dynamic.DynamicTypeFactory;
 
-public class Bootstrap extends org.omg.dds.core.Bootstrap{
+public class JDDS_Bootstrap extends Bootstrap{
+	
+	static final DomainParticipantFactory factory_ = new JDDS_DomainParticipantFactory();
 	
 	@Override
 	public ServiceProviderInterface getSPI() {
@@ -242,8 +272,7 @@ public class Bootstrap extends org.omg.dds.core.Bootstrap{
 			
 			@Override
 			public DomainParticipantFactory getParticipantFactory() {
-				// TODO Auto-generated method stub
-				return null;
+				return factory_;
 			}
 			
 			@Override

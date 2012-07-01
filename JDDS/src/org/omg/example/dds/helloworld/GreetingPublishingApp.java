@@ -30,8 +30,7 @@ import org.omg.dds.topic.Topic;
 
 public class GreetingPublishingApp {
     public static void main(String[] args) {
-        DomainParticipantFactory factory =
-            DomainParticipantFactory.getInstance(Bootstrap.createInstance());
+        DomainParticipantFactory factory = DomainParticipantFactory.getInstance(Bootstrap.createInstance());
         DomainParticipant dp = factory.createParticipant();
 
         // Implicitly create TypeSupport and register type:
