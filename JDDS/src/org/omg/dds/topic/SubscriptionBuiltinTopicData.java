@@ -18,25 +18,25 @@
 
 package org.omg.dds.topic;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.modifiable.ModifiableValue;
-import org.omg.dds.core.policy.DataRepresentationQosPolicy;
-import org.omg.dds.core.policy.DeadlineQosPolicy;
-import org.omg.dds.core.policy.DestinationOrderQosPolicy;
-import org.omg.dds.core.policy.DurabilityQosPolicy;
-import org.omg.dds.core.policy.GroupDataQosPolicy;
-import org.omg.dds.core.policy.LatencyBudgetQosPolicy;
-import org.omg.dds.core.policy.LivelinessQosPolicy;
-import org.omg.dds.core.policy.OwnershipQosPolicy;
-import org.omg.dds.core.policy.PartitionQosPolicy;
-import org.omg.dds.core.policy.PresentationQosPolicy;
-import org.omg.dds.core.policy.ReliabilityQosPolicy;
-import org.omg.dds.core.policy.TimeBasedFilterQosPolicy;
-import org.omg.dds.core.policy.TopicDataQosPolicy;
-import org.omg.dds.core.policy.TypeConsistencyEnforcementQosPolicy;
-import org.omg.dds.core.policy.UserDataQosPolicy;
+import org.omg.dds.core.DDSObject;
+import org.omg.dds.core.policy.DataRepresentation;
+import org.omg.dds.core.policy.Deadline;
+import org.omg.dds.core.policy.DestinationOrder;
+import org.omg.dds.core.policy.Durability;
+import org.omg.dds.core.policy.GroupData;
+import org.omg.dds.core.policy.LatencyBudget;
+import org.omg.dds.core.policy.Liveliness;
+import org.omg.dds.core.policy.Ownership;
+import org.omg.dds.core.policy.Partition;
+import org.omg.dds.core.policy.Presentation;
+import org.omg.dds.core.policy.Reliability;
+import org.omg.dds.core.policy.TimeBasedFilter;
+import org.omg.dds.core.policy.TopicData;
+import org.omg.dds.core.policy.TypeConsistencyEnforcement;
+import org.omg.dds.core.policy.UserData;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.ID;
 import org.omg.dds.type.Key;
@@ -45,154 +45,133 @@ import org.omg.dds.type.typeobject.TypeObject;
 
 
 @Extensibility(Extensibility.Kind.MUTABLE_EXTENSIBILITY)
-public abstract class SubscriptionBuiltinTopicData
-implements ModifiableValue<SubscriptionBuiltinTopicData,
-                           SubscriptionBuiltinTopicData>
+public interface SubscriptionBuiltinTopicData
+extends Cloneable, Serializable, DDSObject
 {
-    // -----------------------------------------------------------------------
-    // Private Constants
-    // -----------------------------------------------------------------------
-
-    private static final long serialVersionUID = 1517912242172167011L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Factory Methods
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static SubscriptionBuiltinTopicData newSubscriptionBuiltinTopicData(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().newSubscriptionBuiltinTopicData();
-    }
-
-
-
-    // -----------------------------------------------------------------------
-    // Instance Methods
-    // -----------------------------------------------------------------------
-
     @ID(0x005A) @Key
-    public abstract BuiltinTopicKey getKey();
+    public BuiltinTopicKey getKey();
 
     /**
      * @return the participantKey
      */
     @ID(0x0050)
-    public abstract BuiltinTopicKey getParticipantKey();
+    public BuiltinTopicKey getParticipantKey();
 
     /**
      * @return the topicName
      */
     @ID(0x0005)
-    public abstract String getTopicName();
+    public String getTopicName();
 
     /**
      * @return the typeName
      */
     @ID(0x0007)
-    public abstract String getTypeName();
+    public String getTypeName();
 
     @ID(0x0075) @Optional
-    public abstract List<String> getEquivalentTypeName();
+    public List<String> getEquivalentTypeName();
 
     @ID(0x0076) @Optional
-    public abstract List<String> getBaseTypeName();
+    public List<String> getBaseTypeName();
 
     @ID(0x0072) @Optional
-    public abstract TypeObject getType();
+    public TypeObject getType();
 
     /**
      * @return the durability
      */
     @ID(0x001D)
-    public abstract DurabilityQosPolicy getDurability();
+    public Durability getDurability();
 
     /**
      * @return the deadline
      */
     @ID(0x0023)
-    public abstract DeadlineQosPolicy getDeadline();
+    public Deadline getDeadline();
 
     /**
      * @return the latencyBudget
      */
     @ID(0x0027)
-    public abstract LatencyBudgetQosPolicy getLatencyBudget();
+    public LatencyBudget getLatencyBudget();
 
     /**
      * @return the liveliness
      */
     @ID(0x001B)
-    public abstract LivelinessQosPolicy getLiveliness();
+    public Liveliness getLiveliness();
 
     /**
      * @return the reliability
      */
     @ID(0x001A)
-    public abstract ReliabilityQosPolicy getReliability();
+    public Reliability getReliability();
 
     /**
      * @return the ownership
      */
     @ID(0x001F)
-    public abstract OwnershipQosPolicy getOwnership();
+    public Ownership getOwnership();
 
     /**
      * @return the destinationOrder
      */
     @ID(0x0025)
-    public abstract DestinationOrderQosPolicy getDestinationOrder();
+    public DestinationOrder getDestinationOrder();
 
     /**
      * @return the userData
      */
     @ID(0x002C)
-    public abstract UserDataQosPolicy getUserData();
+    public UserData getUserData();
 
     /**
      * @return the timeBasedFilter
      */
     @ID(0x0004)
-    public abstract TimeBasedFilterQosPolicy getTimeBasedFilter();
+    public TimeBasedFilter getTimeBasedFilter();
 
     /**
      * @return the presentation
      */
     @ID(0x0021)
-    public abstract PresentationQosPolicy getPresentation();
+    public Presentation getPresentation();
 
     /**
      * @return the partition
      */
     @ID(0x0029)
-    public abstract PartitionQosPolicy getPartition();
+    public Partition getPartition();
 
     /**
      * @return the topicData
      */
     @ID(0x002E)
-    public abstract TopicDataQosPolicy getTopicData();
+    public TopicData getTopicData();
 
     /**
      * @return the groupData
      */
     @ID(0x002D)
-    public abstract GroupDataQosPolicy getGroupData();
+    public GroupData getGroupData();
 
     @ID(0x0073)
-    public abstract DataRepresentationQosPolicy getRepresentation();
+    public DataRepresentation getRepresentation();
 
     @ID(0x0074)
-    public abstract TypeConsistencyEnforcementQosPolicy getTypeConsistency();
+    public TypeConsistencyEnforcement getTypeConsistency();
+
+
+    // -----------------------------------------------------------------------
+
+    /**
+     * Overwrite the state of this object with that of the given object.
+     */
+    public void copyFrom(SubscriptionBuiltinTopicData src);
 
 
     // --- From Object: ------------------------------------------------------
 
-    @Override
-    public abstract SubscriptionBuiltinTopicData clone();
+    public SubscriptionBuiltinTopicData clone();
 }

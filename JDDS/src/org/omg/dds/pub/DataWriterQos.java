@@ -19,105 +19,112 @@
 package org.omg.dds.pub;
 
 import org.omg.dds.core.EntityQos;
-import org.omg.dds.core.policy.DataRepresentationQosPolicy;
-import org.omg.dds.core.policy.DeadlineQosPolicy;
-import org.omg.dds.core.policy.DestinationOrderQosPolicy;
-import org.omg.dds.core.policy.DurabilityQosPolicy;
-import org.omg.dds.core.policy.DurabilityServiceQosPolicy;
-import org.omg.dds.core.policy.HistoryQosPolicy;
-import org.omg.dds.core.policy.LatencyBudgetQosPolicy;
-import org.omg.dds.core.policy.LifespanQosPolicy;
-import org.omg.dds.core.policy.LivelinessQosPolicy;
-import org.omg.dds.core.policy.OwnershipQosPolicy;
-import org.omg.dds.core.policy.OwnershipStrengthQosPolicy;
-import org.omg.dds.core.policy.ReliabilityQosPolicy;
-import org.omg.dds.core.policy.ResourceLimitsQosPolicy;
-import org.omg.dds.core.policy.TransportPriorityQosPolicy;
-import org.omg.dds.core.policy.TypeConsistencyEnforcementQosPolicy;
-import org.omg.dds.core.policy.UserDataQosPolicy;
-import org.omg.dds.core.policy.WriterDataLifecycleQosPolicy;
-import org.omg.dds.pub.modifiable.ModifiableDataWriterQos;
+import org.omg.dds.core.policy.DataRepresentation;
+import org.omg.dds.core.policy.Deadline;
+import org.omg.dds.core.policy.DestinationOrder;
+import org.omg.dds.core.policy.Durability;
+import org.omg.dds.core.policy.DurabilityService;
+import org.omg.dds.core.policy.History;
+import org.omg.dds.core.policy.LatencyBudget;
+import org.omg.dds.core.policy.Lifespan;
+import org.omg.dds.core.policy.Liveliness;
+import org.omg.dds.core.policy.Ownership;
+import org.omg.dds.core.policy.OwnershipStrength;
+import org.omg.dds.core.policy.QosPolicy;
+import org.omg.dds.core.policy.Reliability;
+import org.omg.dds.core.policy.ResourceLimits;
+import org.omg.dds.core.policy.TransportPriority;
+import org.omg.dds.core.policy.TypeConsistencyEnforcement;
+import org.omg.dds.core.policy.UserData;
+import org.omg.dds.core.policy.WriterDataLifecycle;
 
 
 public interface DataWriterQos
-extends EntityQos<DataWriterQos, ModifiableDataWriterQos>
+extends EntityQos<QosPolicy.ForDataWriter>
 {
     /**
      * @return the durability
      */
-    public DurabilityQosPolicy getDurability();
+    public Durability getDurability();
 
     /**
      * @return the durabilityService
      */
-    public DurabilityServiceQosPolicy getDurabilityService();
+    public DurabilityService getDurabilityService();
 
     /**
      * @return the deadline
      */
-    public DeadlineQosPolicy getDeadline();
+    public Deadline getDeadline();
 
     /**
      * @return the latencyBudget
      */
-    public LatencyBudgetQosPolicy getLatencyBudget();
+    public LatencyBudget getLatencyBudget();
 
     /**
      * @return the liveliness
      */
-    public LivelinessQosPolicy getLiveliness();
+    public Liveliness getLiveliness();
 
     /**
      * @return the reliability
      */
-    public ReliabilityQosPolicy getReliability();
+    public Reliability getReliability();
 
     /**
      * @return the destinationOrder
      */
-    public DestinationOrderQosPolicy getDestinationOrder();
+    public DestinationOrder getDestinationOrder();
 
     /**
      * @return the history
      */
-    public HistoryQosPolicy getHistory();
+    public History getHistory();
 
     /**
      * @return the resourceLimits
      */
-    public ResourceLimitsQosPolicy getResourceLimits();
+    public ResourceLimits getResourceLimits();
 
     /**
      * @return the transportPriority
      */
-    public TransportPriorityQosPolicy getTransportPriority();
+    public TransportPriority getTransportPriority();
 
     /**
      * @return the lifespan
      */
-    public LifespanQosPolicy getLifespan();
+    public Lifespan getLifespan();
 
     /**
      * @return the userData
      */
-    public UserDataQosPolicy getUserData();
+    public UserData getUserData();
 
     /**
      * @return the ownership
      */
-    public OwnershipQosPolicy getOwnership();
+    public Ownership getOwnership();
 
     /**
      * @return the ownershipStrength
      */
-    public OwnershipStrengthQosPolicy getOwnershipStrength();
+    public OwnershipStrength getOwnershipStrength();
 
     /**
      * @return the writerDataLifecycle
      */
-    public WriterDataLifecycleQosPolicy getWriterDataLifecycle();
+    public WriterDataLifecycle getWriterDataLifecycle();
 
-    public DataRepresentationQosPolicy getRepresentation();
+    public DataRepresentation getRepresentation();
 
-    public TypeConsistencyEnforcementQosPolicy getTypeConsistency();
+    public TypeConsistencyEnforcement getTypeConsistency();
+
+
+    // --- Modification: -----------------------------------------------------
+
+    public DataWriterQos withPolicy(QosPolicy.ForDataWriter policy);
+
+    public DataWriterQos withPolicies(QosPolicy.ForDataWriter... policy);
 }

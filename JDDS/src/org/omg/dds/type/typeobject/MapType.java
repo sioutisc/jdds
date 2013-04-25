@@ -34,18 +34,8 @@ public interface MapType extends CollectionType
     @ID(MemberId.KEY_ELEMENT_TYPE_MAPTYPE_MEMBER_ID)
     public int getKeyElementType();
 
-    /**
-     * @return  this
-     */
-    public MapType setKeyElementType(int newKeyElementType);
-
     @ID(MemberId.BOUND_MAPTYPE_MEMBER_ID)
     public long getBound();
-
-    /**
-     * @return  this
-     */
-    public MapType setBound(long newBound);
 
 
 

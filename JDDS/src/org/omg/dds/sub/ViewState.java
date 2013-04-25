@@ -18,10 +18,6 @@
 
 package org.omg.dds.sub;
 
-import java.util.Set;
-
-import org.omg.dds.core.Bootstrap;
-
 
 public enum ViewState {
     // -----------------------------------------------------------------------
@@ -43,17 +39,6 @@ public enum ViewState {
 
     // -----------------------------------------------------------------------
     // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the
-     *                  object will belong.
-     */
-    public static Set<ViewState> anyViewStateSet(Bootstrap bootstrap) {
-        return bootstrap.getSPI().anyViewStateSet();
-    }
-
-
     // -----------------------------------------------------------------------
 
     private ViewState(int value) {

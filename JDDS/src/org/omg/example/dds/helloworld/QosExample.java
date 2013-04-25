@@ -18,36 +18,36 @@
 
 package org.omg.example.dds.helloworld;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.policy.EntityFactoryQosPolicy;
-import org.omg.dds.core.policy.modifiable.ModifiableEntityFactoryQosPolicy;
+import org.omg.dds.core.ServiceEnvironment;
+import org.omg.dds.core.policy.EntityFactory;
 import org.omg.dds.domain.DomainParticipant;
 import org.omg.dds.domain.DomainParticipantFactory;
 import org.omg.dds.domain.DomainParticipantQos;
-import org.omg.dds.domain.modifiable.ModifiableDomainParticipantQos;
 
 
 public final class QosExample {
     public static void main(String[] args) {
+        ServiceEnvironment env = ServiceEnvironment.createInstance(
+                QosExample.class.getClassLoader());
         DomainParticipantFactory factory =
-            DomainParticipantFactory.getInstance(Bootstrap.createInstance());
+                DomainParticipantFactory.getInstance(env);
         DomainParticipant dp = factory.createParticipant();
 
         // Get unmodifiable QoS for inspection:
-        DomainParticipantQos dpqUnmod = dp.getQos();
-        EntityFactoryQosPolicy polUnmod = dpqUnmod.getEntityFactory();
-        System.out.println(polUnmod);
+        DomainParticipantQos dpq = dp.getQos();
+        EntityFactory pol = dpq.getEntityFactory();
+        System.out.println(pol);
 
         // Set QoS:
-        ModifiableDomainParticipantQos dpqMod = dpqUnmod.modify();
-        ModifiableEntityFactoryQosPolicy polMod = dpqMod.getEntityFactory();
-        polMod.setAutoEnableCreatedEntities(false);
+        DomainParticipantQos dpqMod = dpq.withPolicy(
+                pol.withAutoEnableCreatedEntities(false));
         dp.setQos(dpqMod);
 
         // Concise version:
-        dpqMod = dp.getQos().modify();
-        dpqMod.getEntityFactory().setAutoEnableCreatedEntities(false);
-        dp.setQos(dpqMod);
+        dp.setQos(
+            dp.getQos().withPolicy(
+                dp.getQos().getEntityFactory().withAutoEnableCreatedEntities(
+                    false)));
 
         // Restore QoS to default:
         dp.setQos(factory.getDefaultParticipantQos());

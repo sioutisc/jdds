@@ -18,9 +18,9 @@
 
 package org.omg.dds.core;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-import org.omg.dds.core.modifiable.ModifiableTime;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
@@ -31,7 +31,8 @@ import org.omg.dds.type.Nested;
  */
 @Extensibility(Extensibility.Kind.FINAL_EXTENSIBILITY)
 @Nested
-public abstract class Time implements Value<Time, ModifiableTime>
+public abstract class Time
+implements Comparable<Time>, Serializable, DDSObject
 {
     // -----------------------------------------------------------------------
     // Private Constants
@@ -53,25 +54,29 @@ public abstract class Time implements Value<Time, ModifiableTime>
      * 
      * <code>t.isValid() == false</code>
      * 
-     * @param bootstrap Identifies the Service instance to which the new
+     * @param env       Identifies the Service instance to which the new
      *                  object will belong.
      * 
      * @see     #isValid()
      */
     public static ModifiableTime newTime(
-            long time, TimeUnit units, Bootstrap bootstrap) {
-        return bootstrap.getSPI().newTime(time, units);
+            long time,
+            TimeUnit units,
+            ServiceEnvironment env)
+    {
+        return env.getSPI().newTime(time, units);
     }
 
 
     /**
-     * @param bootstrap Identifies the Service instance to which the
+     * @param env       Identifies the Service instance to which the
      *                  object will belong.
      *                  
-     * @return      An unmodifiable {@link Time} that is not valid.
+     * @return      An unmodifiable {@link org.omg.dds.core.Time} that is not valid.
      */
-    public static Time invalidTime(Bootstrap bootstrap) {
-        return bootstrap.getSPI().invalidTime();
+    public static Time invalidTime(ServiceEnvironment env)
+    {
+        return env.getSPI().invalidTime();
     }
 
 
@@ -149,8 +154,10 @@ public abstract class Time implements Value<Time, ModifiableTime>
     public abstract boolean isValid();
 
 
-    // --- From Object: ------------------------------------------------------
+    // --- Modification: -----------------------------------------------------
 
-    @Override
-    public abstract Time clone();
+    /**
+     * @return  a modifiable copy of this object's state.
+     */
+    public abstract ModifiableTime modifiableCopy();
 }

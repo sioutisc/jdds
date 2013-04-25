@@ -18,33 +18,31 @@
 
 package org.omg.dds.type.typeobject;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.ID;
 import org.omg.dds.type.Nested;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.MUTABLE_EXTENSIBILITY)
 @Nested
-public interface Type extends ModifiableValue<Type, Type>
+public interface Type extends Serializable, DDSObject, TypeLibraryElement
 {
+    // -----------------------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------------------
+
     @ID(MemberId.PROPERTY_TYPE_MEMBER_ID)
     public TypeProperty getProperty();
 
-    /**
-     * @return  this
-     */
-    public Type setProperty(TypeProperty newProperty);
-
     @ID(MemberId.ANNOTATION_TYPE_MEMBER_ID)
     public List<AnnotationUsage> getAnnotation();
-
-    /**
-     * @return  this
-     */
-    public Type setAnnotation(List<AnnotationUsage> newAnnotation);
 
 
 

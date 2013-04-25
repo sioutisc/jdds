@@ -63,33 +63,38 @@ public enum TypeKind
 
     public static final class Values {
         /** sentinel indicating "null" value */
-        public static final short NO_TYPE_VALUE          =  0;
-        public static final short BOOLEAN_TYPE_VALUE     =  1;
-        public static final short BYTE_TYPE_VALUE        =  2;
-        public static final short INT_16_TYPE_VALUE      =  3;
-        public static final short UINT_16_TYPE_VALUE     =  4;
-        public static final short INT_32_TYPE_VALUE      =  5;
-        public static final short UINT_32_TYPE_VALUE     =  6;
-        public static final short INT_64_TYPE_VALUE      =  7;
-        public static final short UINT_64_TYPE_VALUE     =  8;
-        public static final short FLOAT_32_TYPE_VALUE    =  9;
-        public static final short FLOAT_64_TYPE_VALUE    = 10;
-        public static final short FLOAT_128_TYPE_VALUE   = 11;
-        public static final short CHAR_8_TYPE_VALUE      = 12;
-        public static final short CHAR_32_TYPE_VALUE     = 13;
+        public static final int NO_TYPE_VALUE           = 0x0000;
+        public static final int PRIMITIVE_TYPE_VALUE    = 0x4000;
+        public static final int CONSTRUCTED_TYPE_VALUE  = 0x8000;
+        public static final int COLLECTION_TYPE_VALUE   = 0x0200;
+        public static final int AGGREGATION_TYPE_VALUE  = 0x0100;
+        public static final int ANNOTATION_TYPE_VALUE   = 0x0080;
+        
+        public static final int BOOLEAN_TYPE_VALUE     =  PRIMITIVE_TYPE_VALUE | 0x1;
+        public static final int BYTE_TYPE_VALUE        =  PRIMITIVE_TYPE_VALUE | 0x2;
+        public static final int INT_16_TYPE_VALUE      =  PRIMITIVE_TYPE_VALUE | 0x3;
+        public static final int UINT_16_TYPE_VALUE     =  PRIMITIVE_TYPE_VALUE | 0x4;
+        public static final int INT_32_TYPE_VALUE      =  PRIMITIVE_TYPE_VALUE | 0x5;
+        public static final int UINT_32_TYPE_VALUE     =  PRIMITIVE_TYPE_VALUE | 0x6;
+        public static final int INT_64_TYPE_VALUE      =  PRIMITIVE_TYPE_VALUE | 0x7;
+        public static final int UINT_64_TYPE_VALUE     =  PRIMITIVE_TYPE_VALUE | 0x8;
+        public static final int FLOAT_32_TYPE_VALUE    =  PRIMITIVE_TYPE_VALUE | 0x9;
+        public static final int FLOAT_64_TYPE_VALUE    =  PRIMITIVE_TYPE_VALUE | 0xA;
+        public static final int FLOAT_128_TYPE_VALUE   =  PRIMITIVE_TYPE_VALUE | 0xB;
+        public static final int CHAR_8_TYPE_VALUE      =  PRIMITIVE_TYPE_VALUE | 0xC;
+        public static final int CHAR_32_TYPE_VALUE     =  PRIMITIVE_TYPE_VALUE | 0xD;
 
-        public static final short ENUMERATION_TYPE_VALUE = 14;
-        public static final short BITSET_TYPE_VALUE      = 15;
-        public static final short ALIAS_TYPE_VALUE       = 16;
+        public static final int ENUMERATION_TYPE_VALUE =  CONSTRUCTED_TYPE_VALUE | 0x1;
+        public static final int BITSET_TYPE_VALUE      =  CONSTRUCTED_TYPE_VALUE | 0x2;
+        public static final int ALIAS_TYPE_VALUE       =  CONSTRUCTED_TYPE_VALUE | 0x3;
 
-        public static final short ARRAY_TYPE_VALUE       = 17;
-        public static final short SEQUENCE_TYPE_VALUE    = 18;
-        public static final short STRING_TYPE_VALUE      = 19;
-        public static final short MAP_TYPE_VALUE         = 20;
+        public static final int ARRAY_TYPE_VALUE       =  CONSTRUCTED_TYPE_VALUE | COLLECTION_TYPE_VALUE | 0x0004;
+        public static final int SEQUENCE_TYPE_VALUE    =  CONSTRUCTED_TYPE_VALUE | COLLECTION_TYPE_VALUE | 0x0005;
+        public static final int STRING_TYPE_VALUE      =  CONSTRUCTED_TYPE_VALUE | COLLECTION_TYPE_VALUE | 0x0006;
+        public static final int MAP_TYPE_VALUE         =  CONSTRUCTED_TYPE_VALUE | COLLECTION_TYPE_VALUE | 0x0007;
 
-        public static final short UNION_TYPE_VALUE       = 21;
-        public static final short STRUCTURE_TYPE_VALUE   = 22;
-        public static final short ANNOTATION_TYPE_VALUE  = 23;
+        public static final int UNION_TYPE_VALUE       = CONSTRUCTED_TYPE_VALUE | AGGREGATION_TYPE_VALUE | 0x0008;
+        public static final int STRUCTURE_TYPE_VALUE   = CONSTRUCTED_TYPE_VALUE | AGGREGATION_TYPE_VALUE | 0x0009;
     }
 
 
@@ -97,7 +102,7 @@ public enum TypeKind
     // Fields
     // -----------------------------------------------------------------------
 
-    public final short value;
+    public final int value;
 
 
 
@@ -105,7 +110,7 @@ public enum TypeKind
     // Constructor
     // -----------------------------------------------------------------------
 
-    private TypeKind(short value) {
+    private TypeKind(int value) {
         this.value = value;
     }
 }

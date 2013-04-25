@@ -18,40 +18,22 @@
 
 package org.omg.dds.core.status;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.modifiable.ModifiableInstanceHandle;
-import org.omg.dds.sub.DataReader;
+import org.omg.dds.core.InstanceHandle;
 
 
-public abstract class SampleRejectedStatus<TYPE>
-extends Status<SampleRejectedStatus<TYPE>, DataReader<TYPE>> {
+
+/**
+ * A (received) sample has been rejected.
+ * 
+ * @see org.omg.dds.core.event.SampleRejectedEvent
+ */
+public abstract class SampleRejectedStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = -3473343064305797468L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> SampleRejectedStatus<TYPE>
-    newSampleRejectedStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newSampleRejectedStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected SampleRejectedStatus(DataReader<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = -612709680820262641L;
 
 
 
@@ -60,21 +42,27 @@ extends Status<SampleRejectedStatus<TYPE>, DataReader<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative count of samples rejected by the {@link org.omg.dds.sub.DataReader}.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The incremental number of samples rejected since the last time the
+     * listener was called or the status was read.
      */
     public abstract int getTotalCountChange();
 
     /**
-     * @return the lastReason
+     * Reason for rejecting the last sample rejected. If no samples have been
+     * rejected, the reason is the special value {@link Kind#NOT_REJECTED}.
      */
     public abstract Kind getLastReason();
 
-    public abstract ModifiableInstanceHandle getLastInstanceHandle();
+    /**
+     * Handle to the instance being updated by the last sample that was
+     * rejected.
+     */
+    public abstract InstanceHandle getLastInstanceHandle();
 
 
 

@@ -44,6 +44,6 @@ public @interface BitSet
      * java.util.BitSet, it indicates the BitSet-annotated enum class that
      * defines the members of the bit set.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Class<? extends Enum> elementType() default Enum.class;
 }

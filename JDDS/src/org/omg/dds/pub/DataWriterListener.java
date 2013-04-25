@@ -20,20 +20,28 @@ package org.omg.dds.pub;
 
 import java.util.EventListener;
 
-import org.omg.dds.core.status.LivelinessLostStatus;
-import org.omg.dds.core.status.OfferedDeadlineMissedStatus;
-import org.omg.dds.core.status.OfferedIncompatibleQosStatus;
-import org.omg.dds.core.status.PublicationMatchedStatus;
+
+import org.omg.dds.core.event.LivelinessLostEvent;
+import org.omg.dds.core.event.OfferedDeadlineMissedEvent;
+import org.omg.dds.core.event.OfferedIncompatibleQosEvent;
+import org.omg.dds.core.event.PublicationMatchedEvent;
 
 
+/**
+ * Since a {@link org.omg.dds.pub.DataWriter} is a kind of {@link org.omg.dds.core.Entity}, it has the ability
+ * to have a listener associated with it. In this case, the associated
+ * listener must be of concrete type DataWriterListener.
+ * 
+ * @param <TYPE>    The concrete type of the data written by the DataWriter.
+ */
 public interface DataWriterListener<TYPE> extends EventListener {
     public void onOfferedDeadlineMissed(
-            OfferedDeadlineMissedStatus<TYPE> status);
+            OfferedDeadlineMissedEvent<TYPE> status);
 
     public void onOfferedIncompatibleQos(
-            OfferedIncompatibleQosStatus<TYPE> status);
+            OfferedIncompatibleQosEvent<TYPE> status);
 
-    public void onLivelinessLost(LivelinessLostStatus<TYPE> status);
+    public void onLivelinessLost(LivelinessLostEvent<TYPE> status);
 
-    public void onPublicationMatched(PublicationMatchedStatus<TYPE> status);
+    public void onPublicationMatched(PublicationMatchedEvent<TYPE> status);
 }

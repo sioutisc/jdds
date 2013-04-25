@@ -18,96 +18,25 @@
 
 package org.omg.dds.type.typeobject;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 import org.omg.dds.type.TypeKind;
 
 
-/* Literal value of an annotation member: either the default value in its
+/**
+ * The literal value of an annotation member: either the default value in its
  * definition or the value applied in its usage.
+ * 
+ * Objects of this type are immutable.
  */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface AnnotationMemberValue
-extends ModifiableValue<AnnotationMemberValue, AnnotationMemberValue>
+public interface AnnotationMemberValue extends Serializable, DDSObject
 {
-    public TypeKind discriminator();
+    public TypeKind kind();
 
-
-    public boolean booleanValue();
-
-    public void booleanValue(boolean value);
-
-
-    public byte byteValue();
-
-    public void byteValue(byte value);
-
-
-    public short int16Value();
-
-    public void int16Value(short value);
-
-
-    public short uint16Value();
-
-    public void uint16Value(short value);
-
-
-    public int int32Value();
-
-    public void int32Value(int value);
-
-
-    public int uint32Value();
-
-    public void uint32Value(int value);
-
-
-    public long int64Value();
-
-    public abstract void int64Value(long value);
-
-
-    public long uint64Value();
-
-    public void uint64Value(long value);
-
-
-    public float float32Value();
-
-    public void float32Value(float value);
-
-
-    public double float64Value();
-
-    public void float64Value(double value);
-
-
-    public BigDecimal float128Value();
-
-    public void float128Value(BigDecimal value);
-
-
-    public char characterValue();
-
-    public void characterValue(char value);
-
-
-    public char wideCharacterValue();
-
-    public void wideCharacterValue(char value);
-
-
-    public int enumerationValue();
-
-    public void enumerationValue(int value);
-
-
-    public String stringValue();
-
-    public void stringValue(String value);
+    public Object value();
 }

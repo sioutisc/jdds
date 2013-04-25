@@ -42,11 +42,6 @@ public interface CollectionType extends Type
     @ID(MemberId.ELEMENT_TYPE_COLLECTIONTYPE_MEMBER_ID)
     public int getElementType();
 
-    /**
-     * @return  this
-     */
-    public CollectionType setElementType(int newElementType);
-
 
 
     // -----------------------------------------------------------------------

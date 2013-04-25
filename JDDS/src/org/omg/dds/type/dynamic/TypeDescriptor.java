@@ -18,16 +18,18 @@
 
 package org.omg.dds.type.dynamic;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.Value;
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Optional;
 import org.omg.dds.type.TypeKind;
-import org.omg.dds.type.dynamic.modifiable.ModifiableTypeDescriptor;
 
 
-public interface TypeDescriptor
-extends Value<TypeDescriptor, ModifiableTypeDescriptor>
+/**
+ * Objects of this type are immutable.
+ */
+public interface TypeDescriptor extends Serializable, DDSObject
 {
     public boolean isConsistent();
 
@@ -67,4 +69,57 @@ extends Value<TypeDescriptor, ModifiableTypeDescriptor>
      */
     @Optional
     public DynamicType getKeyElementType();
+
+
+    // --- Modification: -----------------------------------------------------
+
+    /**
+     * Copy this descriptor and apply the given kind.
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withKind(TypeKind kind);
+
+    /**
+     * Copy this descriptor and apply the given name.
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withName(String name);
+
+    /**
+     * Copy this descriptor and apply the given base type.
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withBaseType(DynamicType baseType);
+
+    /**
+     * Copy this descriptor and apply the given discriminator type.
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withDiscriminatorType(
+            DynamicType discriminatorType);
+
+    /**
+     * Copy this descriptor and apply the given bound(s).
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withBound(int... bound);
+
+    /**
+     * Copy this descriptor and apply the given element type.
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withElementType(DynamicType elementType);
+
+    /**
+     * Copy this descriptor and apply the given key element type.
+     * 
+     * @return  a new descriptor
+     */
+    public TypeDescriptor withKeyElementType(DynamicType keyElementType);
 }

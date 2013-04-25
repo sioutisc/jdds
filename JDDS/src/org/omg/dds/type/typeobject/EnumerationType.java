@@ -29,21 +29,15 @@ import org.omg.dds.type.Nested;
 @Nested
 public interface EnumerationType extends Type
 {
+    // -----------------------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------------------
+
     @ID(MemberId.BIT_BOUND_ENUMERATIONTYPE_MEMBER_ID)
     public int getBitBound();
 
-    /**
-     * @return  this
-     */
-    public EnumerationType setBitBound(int newBitBound);
-
     @ID(MemberId.CONSTANT_ENUMERATIONTYPE_MEMBER_ID)
     public List<EnumeratedConstant> getConstant();
-
-    /**
-     * @return  this
-     */
-    public EnumerationType setConstant(List<EnumeratedConstant> newConstant);
 
 
 

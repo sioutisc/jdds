@@ -18,30 +18,31 @@
 
 package org.omg.dds.pub;
 
-import org.omg.dds.core.status.LivelinessLostStatus;
-import org.omg.dds.core.status.OfferedDeadlineMissedStatus;
-import org.omg.dds.core.status.OfferedIncompatibleQosStatus;
-import org.omg.dds.core.status.PublicationMatchedStatus;
+import org.omg.dds.core.event.LivelinessLostEvent;
+import org.omg.dds.core.event.OfferedDeadlineMissedEvent;
+import org.omg.dds.core.event.OfferedIncompatibleQosEvent;
+import org.omg.dds.core.event.PublicationMatchedEvent;
 
 
 public class DataWriterAdapter<TYPE> implements DataWriterListener<TYPE> {
-    public void onLivelinessLost(LivelinessLostStatus<TYPE> status)
+    public void onLivelinessLost(LivelinessLostEvent<TYPE> status)
     {
         // empty
     }
 
     public void onOfferedDeadlineMissed(
-            OfferedDeadlineMissedStatus<TYPE> status)
+            OfferedDeadlineMissedEvent<TYPE> status)
     {
         // empty
     }
 
     public void onOfferedIncompatibleQos(
-            OfferedIncompatibleQosStatus<TYPE> status) {
+            OfferedIncompatibleQosEvent<TYPE> status)
+    {
         // empty
     }
 
-    public void onPublicationMatched(PublicationMatchedStatus<TYPE> status)
+    public void onPublicationMatched(PublicationMatchedEvent<TYPE> status)
     {
         // empty
     }

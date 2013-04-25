@@ -18,40 +18,23 @@
 
 package org.omg.dds.core.status;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.modifiable.ModifiableInstanceHandle;
-import org.omg.dds.sub.DataReader;
+import org.omg.dds.core.InstanceHandle;
 
 
-public abstract class RequestedDeadlineMissedStatus<TYPE>
-extends Status<RequestedDeadlineMissedStatus<TYPE>, DataReader<TYPE>> {
+/**
+ * The deadline that the {@link org.omg.dds.sub.DataReader} was expecting through its
+ * {@link org.omg.dds.core.policy.Deadline} was not respected for a specific instance.
+ *
+ * @see org.omg.dds.core.event.RequestedDeadlineMissedEvent
+ * @see OfferedDeadlineMissedStatus
+ */
+public abstract class RequestedDeadlineMissedStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = 8571367679700186607L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> RequestedDeadlineMissedStatus<TYPE>
-    newRequestedDeadlineMissedStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newRequestedDeadlineMissedStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected RequestedDeadlineMissedStatus(DataReader<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = 4552827018168249989L;
 
 
 
@@ -60,15 +43,22 @@ extends Status<RequestedDeadlineMissedStatus<TYPE>, DataReader<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative number of missed deadlines detected for any instance
+     * read by the {@link org.omg.dds.sub.DataReader}. Missed deadlines accumulate; that is,
+     * each deadline period the totalCount will be incremented by one for
+     * each instance for which data was not received.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The incremental number of deadlines detected since the last time the
+     * listener was called or the status was read.
      */
     public abstract int getTotalCountChange();
 
-    public abstract ModifiableInstanceHandle getLastInstanceHandle();
-
+    /**
+     * Handle to the last instance in the {@link org.omg.dds.sub.DataReader} for which a
+     * deadline was detected.
+     */
+    public abstract InstanceHandle getLastInstanceHandle();
 }

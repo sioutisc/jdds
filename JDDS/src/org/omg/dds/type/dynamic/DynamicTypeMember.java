@@ -32,7 +32,9 @@ public interface DynamicTypeMember extends DDSObject
      */
     public List<AnnotationDescriptor> getAnnotations();
 
-    public void applyAnnotation(AnnotationDescriptor descriptor);
+    public void setAnnotation(AnnotationDescriptor descriptor);
+
+    public void setAnnotations(AnnotationDescriptor... descriptor);
 
     public int getId();
 

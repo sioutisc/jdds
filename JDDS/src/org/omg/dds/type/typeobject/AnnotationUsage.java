@@ -18,39 +18,24 @@
 
 package org.omg.dds.type.typeobject;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
 
-// The application of an annotation to some type or type member
+/**
+ * The application of an annotation to some type or type member.
+ * 
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface AnnotationUsage
-extends ModifiableValue<AnnotationUsage, AnnotationUsage> {
-    /**
-     * @param typeId the typeId to set
-     * 
-     * @return  this
-     */
-    public AnnotationUsage setTypeId(int typeId);
-
-    /**
-     * @return the typeId
-     */
+public interface AnnotationUsage extends Serializable, DDSObject
+{
     public int getTypeId();
 
-    /**
-     * @param member the member to set
-     * 
-     * @return  this
-     */
-    public AnnotationUsage setMember(List<AnnotationUsageMember> member);
-
-    /**
-     * @return the member
-     */
     public List<AnnotationUsageMember> getMember();
 }

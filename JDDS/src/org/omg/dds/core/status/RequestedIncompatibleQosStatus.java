@@ -20,41 +20,23 @@ package org.omg.dds.core.status;
 
 import java.util.Set;
 
-import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.policy.QosPolicy;
 import org.omg.dds.core.policy.QosPolicyCount;
-import org.omg.dds.sub.DataReader;
 
 
-public abstract class RequestedIncompatibleQosStatus<TYPE>
-extends Status<RequestedIncompatibleQosStatus<TYPE>, DataReader<TYPE>> {
+/**
+ * A {@link org.omg.dds.core.policy.QosPolicy} value was incompatible with what is offered.
+ *
+ * @see org.omg.dds.core.event.RequestedIncompatibleQosEvent
+ * @see OfferedIncompatibleQosStatus
+ */
+public abstract class RequestedIncompatibleQosStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = 4709309312402183531L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> RequestedIncompatibleQosStatus<TYPE>
-    newRequestedIncompatibleQosStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newRequestedIncompatibleQosStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected RequestedIncompatibleQosStatus(DataReader<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = -2043838384277714409L;
 
 
 
@@ -63,21 +45,31 @@ extends Status<RequestedIncompatibleQosStatus<TYPE>, DataReader<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative number of times the concerned {@link org.omg.dds.sub.DataReader}
+     * discovered a {@link org.omg.dds.pub.DataWriter} for the same {@link org.omg.dds.topic.Topic} with an
+     * offered QoS that was incompatible with that requested by the
+     * DataReader.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The change in totalCount since the last time the listener was called
+     * or the status was read.
      */
     public abstract int getTotalCountChange();
 
     /**
-     * @return the lastPolicyId
+     * The class of one of the policies that was found to be incompatible the
+     * last time an incompatibility was detected.
      */
-    public abstract QosPolicy.Id getLastPolicyId();
+    public abstract Class<? extends QosPolicy> getLastPolicyClass();
 
     /**
+     * A list containing for each policy the total number of times that the
+     * concerned {@link org.omg.dds.sub.DataReader} discovered a {@link org.omg.dds.pub.DataWriter} for the
+     * same {@link org.omg.dds.topic.Topic} with an offered QoS that is incompatible with that
+     * requested by the DataReader.
+     * 
      * @return  an unmodifiable set.
      */
     public abstract Set<QosPolicyCount> getPolicies();

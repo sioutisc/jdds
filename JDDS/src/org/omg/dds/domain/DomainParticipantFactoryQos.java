@@ -18,18 +18,25 @@
 
 package org.omg.dds.domain;
 
-import org.omg.dds.core.policy.EntityFactoryQosPolicy;
 import org.omg.dds.core.EntityQos;
-import org.omg.dds.domain.modifiable.ModifiableDomainParticipantFactoryQos;
+import org.omg.dds.core.policy.EntityFactory;
+import org.omg.dds.core.policy.QosPolicy;
 
 
 public interface DomainParticipantFactoryQos
-extends EntityQos<DomainParticipantFactoryQos,
-                  ModifiableDomainParticipantFactoryQos>
+extends EntityQos<QosPolicy.ForDomainParticipantFactory>
 {
     /**
      * @return the entityFactory
      */
-    public EntityFactoryQosPolicy getEntityFactory();
+    public EntityFactory getEntityFactory();
 
+
+    // --- Modification: -----------------------------------------------------
+
+    public DomainParticipantFactoryQos withPolicy(
+            QosPolicy.ForDataWriter policy);
+
+    public DomainParticipantFactoryQos withPolicies(
+            QosPolicy.ForDataWriter... policy);
 }

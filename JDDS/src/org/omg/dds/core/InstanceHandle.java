@@ -18,11 +18,14 @@
 
 package org.omg.dds.core;
 
-import org.omg.dds.core.modifiable.ModifiableInstanceHandle;
+import java.io.Serializable;
 
 
+/**
+ * An opaque handle that can be used to refer to a local or remote entity.
+ */
 public abstract class InstanceHandle
-implements Value<InstanceHandle, ModifiableInstanceHandle>
+implements Comparable<InstanceHandle>, Serializable, DDSObject
 {
     // -----------------------------------------------------------------------
     // Private Constants
@@ -37,23 +40,25 @@ implements Value<InstanceHandle, ModifiableInstanceHandle>
     // -----------------------------------------------------------------------
 
     /**
-     * @param bootstrap Identifies the Service instance to which the new
+     * @param env       Identifies the Service instance to which the new
      *                  object will belong.
      */
     public static ModifiableInstanceHandle newInstanceHandle(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().newInstanceHandle();
+            ServiceEnvironment env)
+    {
+        return env.getSPI().newInstanceHandle();
     }
 
 
     /**
-     * @param bootstrap Identifies the Service instance to which the
+     * @param env       Identifies the Service instance to which the
      *                  object will belong.
      * 
      * @return  An unmodifiable nil instance handle.
      */
-    public static InstanceHandle nilHandle(Bootstrap bootstrap) {
-        return bootstrap.getSPI().nilHandle();
+    public static InstanceHandle nilHandle(ServiceEnvironment env)
+    {
+        return env.getSPI().nilHandle();
     }
 
 
@@ -65,8 +70,10 @@ implements Value<InstanceHandle, ModifiableInstanceHandle>
     public abstract boolean isNil();
 
 
-    // --- From Object: ------------------------------------------------------
+    // --- Modification: -----------------------------------------------------
 
-    @Override
-    public abstract InstanceHandle clone();
+    /**
+     * @return  a modifiable copy of this object's state.
+     */
+    public abstract ModifiableInstanceHandle modifiableCopy();
 }

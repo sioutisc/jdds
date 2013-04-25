@@ -20,16 +20,12 @@ package org.omg.dds.topic;
 
 import java.util.List;
 
-import org.omg.dds.core.Condition;
-import org.omg.dds.sub.DataReader;
-import org.omg.dds.sub.InstanceState;
-import org.omg.dds.sub.ViewState;
 
 
 /**
  * MultiTopic is a specialization of TopicDescription that allows
  * subscriptions to combine/filter/rearrange data coming from several
- * {@link Topic}s.
+ * {@link org.omg.dds.topic.Topic}s.
  * 
  * MultiTopic allows a more sophisticated subscription that can select and
  * combine data received from multiple topics into a single resulting type
@@ -51,15 +47,15 @@ import org.omg.dds.sub.ViewState;
  *      subscriptionExpression. The number of supplied parameters must fit
  *      with the requested values in the subscriptionExpression (i.e., the
  *      number of "%n" tokens).</li>
- * <li>{@link DataReader} entities associated with a MultiTopic are alerted
- *     of data modifications by the usual Listener or {@link Condition}
+ * <li>{@link org.omg.dds.sub.DataReader} entities associated with a MultiTopic are alerted
+ *     of data modifications by the usual Listener or {@link org.omg.dds.core.Condition}
  *     mechanisms whenever modifications occur to the data associated with
  *     any of the topics relevant to the MultiTopic.</li>
  * <li>DataReader entities associated with a MultiTopic access instances that
  *     are "constructed" at the DataReader side from the instances written by
  *     multiple DataWriter entities. The MultiTopic access instance will
  *     begin to exist as soon as all the constituting Topic instances are in
- *     existence. The {@link ViewState} and {@link InstanceState} are
+ *     existence. The {@link org.omg.dds.sub.ViewState} and {@link org.omg.dds.sub.InstanceState} are
  *     computed from the corresponding states of the constituting instances:
  *     <ul><li>The viewState of the MultiTopic instance is NEW if at least
  *             one of the constituting instances has viewState = NEW,
@@ -78,12 +74,31 @@ import org.omg.dds.sub.ViewState;
  *                  topic description.
  */
 public interface MultiTopic<TYPE> extends TopicDescription<TYPE> {
+    /**
+     * @return  the subscription expression associated with the MultiTopic, 
+     *          that is, the expression specified when the MultiTopic was
+     *          created.
+     */
     public String getSubscriptionExpression();
 
     /**
+     * This operation returns the expression parameters associated with the
+     * MultiTopic, that is, the parameters specified on the last successful
+     * call to {@link #setExpressionParameters(List)}, or if
+     * {@link #setExpressionParameters(List)} was never called, the
+     * parameters specified when the MultiTopic was created.
+     * 
      * @return  an unmodifiable list.
+     * 
+     * @see     #setExpressionParameters(List)
      */
     public List<String> getExpressionParameters();
 
+    /**
+     * This operation changes the expression parameters associated with the
+     * MultiTopic.
+     * 
+     * @see     #getExpressionParameters()
+     */
     public void setExpressionParameters(List<String> expressionParameters);
 }

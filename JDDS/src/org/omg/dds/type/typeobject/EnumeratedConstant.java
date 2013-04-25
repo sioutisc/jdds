@@ -18,37 +18,21 @@
 
 package org.omg.dds.type.typeobject;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import java.io.Serializable;
+
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface EnumeratedConstant
-extends ModifiableValue<EnumeratedConstant, EnumeratedConstant>
+public interface EnumeratedConstant extends Serializable, DDSObject
 {
-    /**
-     * @param value the value to set
-     * 
-     * @return  this
-     */
-    public EnumeratedConstant setValue(int value);
-
-    /**
-     * @return the value
-     */
     public int getValue();
 
-    /**
-     * @param name the name to set
-     * 
-     * @return  this
-     */
-    public EnumeratedConstant setName(String name);
-
-    /**
-     * @return the name
-     */
     public String getName();
 }

@@ -19,81 +19,88 @@
 package org.omg.dds.sub;
 
 import org.omg.dds.core.EntityQos;
-import org.omg.dds.core.policy.DataRepresentationQosPolicy;
-import org.omg.dds.core.policy.DeadlineQosPolicy;
-import org.omg.dds.core.policy.DestinationOrderQosPolicy;
-import org.omg.dds.core.policy.DurabilityQosPolicy;
-import org.omg.dds.core.policy.HistoryQosPolicy;
-import org.omg.dds.core.policy.LatencyBudgetQosPolicy;
-import org.omg.dds.core.policy.LivelinessQosPolicy;
-import org.omg.dds.core.policy.OwnershipQosPolicy;
-import org.omg.dds.core.policy.ReaderDataLifecycleQosPolicy;
-import org.omg.dds.core.policy.ResourceLimitsQosPolicy;
-import org.omg.dds.core.policy.TimeBasedFilterQosPolicy;
-import org.omg.dds.core.policy.TypeConsistencyEnforcementQosPolicy;
-import org.omg.dds.core.policy.UserDataQosPolicy;
-import org.omg.dds.sub.modifiable.ModifiableDataReaderQos;
+import org.omg.dds.core.policy.DataRepresentation;
+import org.omg.dds.core.policy.Deadline;
+import org.omg.dds.core.policy.DestinationOrder;
+import org.omg.dds.core.policy.Durability;
+import org.omg.dds.core.policy.History;
+import org.omg.dds.core.policy.LatencyBudget;
+import org.omg.dds.core.policy.Liveliness;
+import org.omg.dds.core.policy.Ownership;
+import org.omg.dds.core.policy.QosPolicy;
+import org.omg.dds.core.policy.ReaderDataLifecycle;
+import org.omg.dds.core.policy.ResourceLimits;
+import org.omg.dds.core.policy.TimeBasedFilter;
+import org.omg.dds.core.policy.TypeConsistencyEnforcement;
+import org.omg.dds.core.policy.UserData;
 
 
 public interface DataReaderQos
-extends EntityQos<DataReaderQos, ModifiableDataReaderQos>
+extends EntityQos<QosPolicy.ForDataReader>
 {
     /**
      * @return the durability
      */
-    public DurabilityQosPolicy getDurability();
+    public Durability getDurability();
 
     /**
      * @return the deadline
      */
-    public DeadlineQosPolicy getDeadline();
+    public Deadline getDeadline();
 
     /**
      * @return the latencyBudget
      */
-    public LatencyBudgetQosPolicy getLatencyBudget();
+    public LatencyBudget getLatencyBudget();
 
     /**
      * @return the liveliness
      */
-    public LivelinessQosPolicy getLiveliness();
+    public Liveliness getLiveliness();
 
     /**
      * @return the destinationOrder
      */
-    public DestinationOrderQosPolicy getDestinationOrder();
+    public DestinationOrder getDestinationOrder();
 
     /**
      * @return the history
      */
-    public HistoryQosPolicy getHistory();
+    public History getHistory();
 
     /**
      * @return the resourceLimits
      */
-    public ResourceLimitsQosPolicy getResourceLimits();
+    public ResourceLimits getResourceLimits();
 
     /**
      * @return the userData
      */
-    public UserDataQosPolicy getUserData();
+    public UserData getUserData();
 
     /**
      * @return the ownership
      */
-    public OwnershipQosPolicy getOwnership();
+    public Ownership getOwnership();
 
     /**
      * @return the timeBasedFilter
      */
-    public TimeBasedFilterQosPolicy getTimeBasedFilter();
+    public TimeBasedFilter getTimeBasedFilter();
 
     /**
      * @return the readerDataLifecycle
      */
-    public ReaderDataLifecycleQosPolicy getReaderDataLifecycle();
+    public ReaderDataLifecycle getReaderDataLifecycle();
 
-    public DataRepresentationQosPolicy getRepresentation();
+    public DataRepresentation getRepresentation();
 
-    public TypeConsistencyEnforcementQosPolicy getTypeConsistency();
+    public TypeConsistencyEnforcement getTypeConsistency();
+
+
+    // --- Modification: -----------------------------------------------------
+
+    public DataReaderQos withPolicy(QosPolicy.ForDataReader policy);
+
+    public DataReaderQos withPolicies(QosPolicy.ForDataReader... policy);
 }

@@ -19,7 +19,7 @@
 package org.omg.dds.topic;
 
 import org.omg.dds.core.DomainEntity;
-import org.omg.dds.core.NotEnabledException;
+import org.omg.dds.core.StatusCondition;
 import org.omg.dds.core.status.InconsistentTopicStatus;
 import org.omg.dds.domain.DomainParticipant;
 
@@ -31,23 +31,40 @@ import org.omg.dds.domain.DomainParticipant;
  * A Topic is identified by its name, which must be unique in the whole
  * Domain.
  * 
- * Topic is the only TopicDescription that can be used for publications and
- * therefore associated to a {@link DataWriter}. All operations except for
- * the inherited operations {@link #setQos(org.omg.dds.core.EntityQos)},
+ * Topic is the only {@link org.omg.dds.topic.TopicDescription} that can be used for
+ * publications and therefore associated to a {@link org.omg.dds.pub.DataWriter}. All
+ * operations except for the inherited operations
+ * {@link #setQos(org.omg.dds.core.EntityQos)},
  * {@link #getQos()}, {@link #setListener(java.util.EventListener)},
- * {@link #getListener()}, {@link #enable()}, and
- * {@link #getStatusCondition()} may fail with the exception
- * {@link NotEnabledException}.
+ * {@link #getListener()}, {@link #enable()}, {@link #getStatusCondition()},
+ * and {@link #close()} may fail with the exception
+ * {@link org.omg.dds.core.NotEnabledException}.
  *
  * @param <TYPE>    The concrete type of the data that will be published and/
  *                  or subscribed by the readers and writers that use this
  *                  topic.
  */
 public interface Topic<TYPE>
-extends TopicDescription<TYPE>, DomainEntity<Topic<TYPE>,
-                                             DomainParticipant,
-                                             TopicListener<TYPE>,
-                                             TopicQos> {
-    public InconsistentTopicStatus<TYPE> getInconsistentTopicStatus(
-            InconsistentTopicStatus<TYPE> status);
+extends TopicDescription<TYPE>, DomainEntity<TopicListener<TYPE>, TopicQos>
+{
+    /**
+     * This method allows the application to retrieve the
+     * {@link org.omg.dds.core.status.InconsistentTopicStatus} of the Topic.
+     * 
+     * Each {@link org.omg.dds.core.DomainEntity} has a set of relevant communication
+     * statuses. A change of status causes the corresponding Listener to be
+     * invoked and can also be monitored by means of the associated
+     * {@link org.omg.dds.core.StatusCondition}.
+     * 
+     * @see     TopicListener
+     * @see     StatusCondition
+     */
+    public InconsistentTopicStatus getInconsistentTopicStatus();
+
+
+    // --- From Entity: ------------------------------------------------------
+
+    public StatusCondition<Topic<TYPE>> getStatusCondition();
+
+    public DomainParticipant getParent();
 }

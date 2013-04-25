@@ -36,11 +36,6 @@ public interface UnionType extends Type
     @ID(MemberId.MEMBER_UNIONTYPE_MEMBER_ID)
     public List<UnionMember> getMember();
 
-    /**
-     * @return  this
-     */
-    public UnionType setMember(List<UnionMember> newMember);
-
 
 
     // -----------------------------------------------------------------------

@@ -18,61 +18,25 @@
 
 package org.omg.dds.type.typeobject;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import java.io.Serializable;
+
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface MemberProperty
-extends ModifiableValue<MemberProperty, MemberProperty>
+public interface MemberProperty extends Serializable, DDSObject
 {
-    /**
-     * @param flag the flag to set
-     * 
-     * @return  this
-     */
-    public MemberProperty setFlag(MemberFlag flag);
-
-    /**
-     * @return the flag
-     */
     public MemberFlag getFlag();
 
-    /**
-     * @param memberId the memberId to set
-     * 
-     * @return  this
-     */
-    public MemberProperty setMemberId(int memberId);
-
-    /**
-     * @return the memberId
-     */
     public int getMemberId();
 
-    /**
-     * @param type the type to set
-     * 
-     * @return  this
-     */
-    public MemberProperty setType(int type);
+    public int getTypeId();
 
-    /**
-     * @return the type
-     */
-    public int getType();
-
-    /**
-     * @param name the name to set
-     * 
-     * @return  this
-     */
-    public MemberProperty setName(String name);
-
-    /**
-     * @return the name
-     */
     public String getName();
 }

@@ -20,10 +20,18 @@ package org.omg.dds.topic;
 
 import java.util.EventListener;
 
-import org.omg.dds.core.status.InconsistentTopicStatus;
+
+import org.omg.dds.core.event.InconsistentTopicEvent;
 
 
+/**
+ * Since {@link org.omg.dds.topic.Topic} is a kind of {@link org.omg.dds.core.Entity}, it has the ability to
+ * have an associated listener. In this case, the associated listener must be
+ * of concrete type TopicListener.
+ * 
+ * @param <TYPE>    The concrete type of the data published and/or subscribed
+ *                  by the readers and writers that use to topic.
+ */
 public interface TopicListener<TYPE> extends EventListener {
-    public void onInconsistentTopic(
-            InconsistentTopicStatus<TYPE> status);
+    public void onInconsistentTopic(InconsistentTopicEvent<TYPE> status);
 }

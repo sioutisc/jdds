@@ -18,25 +18,25 @@
 
 package org.omg.dds.topic;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.modifiable.ModifiableValue;
-import org.omg.dds.core.policy.DataRepresentationQosPolicy;
-import org.omg.dds.core.policy.DeadlineQosPolicy;
-import org.omg.dds.core.policy.DestinationOrderQosPolicy;
-import org.omg.dds.core.policy.DurabilityQosPolicy;
-import org.omg.dds.core.policy.DurabilityServiceQosPolicy;
-import org.omg.dds.core.policy.HistoryQosPolicy;
-import org.omg.dds.core.policy.LatencyBudgetQosPolicy;
-import org.omg.dds.core.policy.LifespanQosPolicy;
-import org.omg.dds.core.policy.LivelinessQosPolicy;
-import org.omg.dds.core.policy.OwnershipQosPolicy;
-import org.omg.dds.core.policy.ReliabilityQosPolicy;
-import org.omg.dds.core.policy.ResourceLimitsQosPolicy;
-import org.omg.dds.core.policy.TopicDataQosPolicy;
-import org.omg.dds.core.policy.TransportPriorityQosPolicy;
-import org.omg.dds.core.policy.TypeConsistencyEnforcementQosPolicy;
+import org.omg.dds.core.DDSObject;
+import org.omg.dds.core.policy.DataRepresentation;
+import org.omg.dds.core.policy.Deadline;
+import org.omg.dds.core.policy.DestinationOrder;
+import org.omg.dds.core.policy.Durability;
+import org.omg.dds.core.policy.DurabilityService;
+import org.omg.dds.core.policy.History;
+import org.omg.dds.core.policy.LatencyBudget;
+import org.omg.dds.core.policy.Lifespan;
+import org.omg.dds.core.policy.Liveliness;
+import org.omg.dds.core.policy.Ownership;
+import org.omg.dds.core.policy.Reliability;
+import org.omg.dds.core.policy.ResourceLimits;
+import org.omg.dds.core.policy.TopicData;
+import org.omg.dds.core.policy.TransportPriority;
+import org.omg.dds.core.policy.TypeConsistencyEnforcement;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.ID;
 import org.omg.dds.type.Key;
@@ -45,146 +45,127 @@ import org.omg.dds.type.typeobject.TypeObject;
 
 
 @Extensibility(Extensibility.Kind.MUTABLE_EXTENSIBILITY)
-public abstract class TopicBuiltinTopicData
-implements ModifiableValue<TopicBuiltinTopicData, TopicBuiltinTopicData>
+public interface TopicBuiltinTopicData
+extends Cloneable, Serializable, DDSObject
 {
-    // -----------------------------------------------------------------------
-    // Private Constants
-    // -----------------------------------------------------------------------
-
-    private static final long serialVersionUID = -3621587724397579935L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Factory Methods
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static TopicBuiltinTopicData newTopicBuiltinTopicData(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().newTopicBuiltinTopicData();
-    }
-
-
-    // -----------------------------------------------------------------------
-    // Instance Methods
-    // -----------------------------------------------------------------------
-
     @ID(0x005A) @Key
-    public abstract BuiltinTopicKey getKey();
+    public BuiltinTopicKey getKey();
 
     /**
      * @return the name
      */
     @ID(0x0005)
-    public abstract String getName();
+    public String getName();
 
     /**
      * @return the typeName
      */
     @ID(0x0007)
-    public abstract String getTypeName();
+    public String getTypeName();
 
     @ID(0x0075) @Optional
-    public abstract List<String> getEquivalentTypeName();
+    public List<String> getEquivalentTypeName();
 
     @ID(0x0076) @Optional
-    public abstract List<String> getBaseTypeName();
+    public List<String> getBaseTypeName();
 
     @ID(0x0072) @Optional
-    public abstract TypeObject getType();
+    public TypeObject getType();
 
     /**
      * @return the durability
      */
     @ID(0x001D)
-    public abstract DurabilityQosPolicy getDurability();
+    public Durability getDurability();
 
     /**
      * @return the durabilityService
      */
     @ID(0x001E)
-    public abstract DurabilityServiceQosPolicy getDurabilityService();
+    public DurabilityService getDurabilityService();
 
     /**
      * @return the deadline
      */
     @ID(0x0023)
-    public abstract DeadlineQosPolicy getDeadline();
+    public Deadline getDeadline();
 
     /**
      * @return the latencyBudget
      */
     @ID(0x0027)
-    public abstract LatencyBudgetQosPolicy getLatencyBudget();
+    public LatencyBudget getLatencyBudget();
 
     /**
      * @return the liveliness
      */
     @ID(0x001B)
-    public abstract LivelinessQosPolicy getLiveliness();
+    public Liveliness getLiveliness();
 
     /**
      * @return the reliability
      */
     @ID(0x001A)
-    public abstract ReliabilityQosPolicy getReliability();
+    public Reliability getReliability();
 
     /**
      * @return the transportPriority
      */
     @ID(0x0049)
-    public abstract TransportPriorityQosPolicy getTransportPriority();
+    public TransportPriority getTransportPriority();
 
     /**
      * @return the lifespan
      */
     @ID(0x002B)
-    public abstract LifespanQosPolicy getLifespan();
+    public Lifespan getLifespan();
 
     /**
      * @return the destinationOrder
      */
     @ID(0x0025)
-    public abstract DestinationOrderQosPolicy getDestinationOrder();
+    public DestinationOrder getDestinationOrder();
 
     /**
      * @return the history
      */
     @ID(0x0040)
-    public abstract HistoryQosPolicy getHistory();
+    public History getHistory();
 
     /**
      * @return the resourceLimits
      */
     @ID(0x0041)
-    public abstract ResourceLimitsQosPolicy getResourceLimits();
+    public ResourceLimits getResourceLimits();
 
     /**
      * @return the ownership
      */
     @ID(0x001F)
-    public abstract OwnershipQosPolicy getOwnership();
+    public Ownership getOwnership();
 
     /**
      * @return the topicData
      */
     @ID(0x002E)
-    public abstract TopicDataQosPolicy getTopicData();
+    public TopicData getTopicData();
 
     @ID(0x0073)
-    public abstract DataRepresentationQosPolicy getRepresentation();
+    public DataRepresentation getRepresentation();
 
     @ID(0x0074)
-    public abstract TypeConsistencyEnforcementQosPolicy getTypeConsistency();
+    public TypeConsistencyEnforcement getTypeConsistency();
+
+
+    // -----------------------------------------------------------------------
+
+    /**
+     * Overwrite the state of this object with that of the given object.
+     */
+    public void copyFrom(TopicBuiltinTopicData src);
 
 
     // --- From Object: ------------------------------------------------------
 
-    @Override
-    public abstract TopicBuiltinTopicData clone();
+    public TopicBuiltinTopicData clone();
 }

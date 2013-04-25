@@ -18,14 +18,16 @@
 
 package org.omg.dds.type.dynamic;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.Value;
-import org.omg.dds.type.dynamic.modifiable.ModifiableMemberDescriptor;
+import org.omg.dds.core.DDSObject;
 
 
-public interface MemberDescriptor
-extends Value<MemberDescriptor, ModifiableMemberDescriptor>
+/**
+ * Objects of this type are immutable.
+ */
+public interface MemberDescriptor extends Serializable, DDSObject
 {
     public abstract boolean isConsistent();
 
@@ -63,4 +65,56 @@ extends Value<MemberDescriptor, ModifiableMemberDescriptor>
      * @return the defaultLabel
      */
     public boolean isDefaultLabel();
+
+
+    // --- Modification: -----------------------------------------------------
+
+    /**
+     * Copy this descriptor and apply the given name.
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withName(String name);
+
+    /**
+     * Copy this descriptor and apply the given ID.
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withId(int id);
+
+    /**
+     * Copy this descriptor and apply the given type.
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withType(DynamicType type);
+
+    /**
+     * Copy this descriptor and apply the given default value.
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withDefaultValue(String defaultValue);
+
+    /**
+     * Copy this descriptor and apply the given index.
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withIndex(int index);
+
+    /**
+     * Copy this descriptor and apply the given label(s).
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withLabel(int... label);
+
+    /**
+     * Copy this descriptor and apply the given default label.
+     * 
+     * @return  a new descriptor
+     */
+    public MemberDescriptor withDefaultLabel(boolean defaultLabel);
 }

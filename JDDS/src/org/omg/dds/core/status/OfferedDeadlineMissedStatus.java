@@ -18,40 +18,23 @@
 
 package org.omg.dds.core.status;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.modifiable.ModifiableInstanceHandle;
-import org.omg.dds.pub.DataWriter;
+import org.omg.dds.core.InstanceHandle;
 
 
-public abstract class OfferedDeadlineMissedStatus<TYPE>
-extends Status<OfferedDeadlineMissedStatus<TYPE>, DataWriter<TYPE>> {
+/**
+ * The deadline that the {@link org.omg.dds.pub.DataWriter} has committed through its
+ * {@link org.omg.dds.core.policy.Deadline} was not respected for a specific instance.
+ *
+ * @see org.omg.dds.core.event.OfferedDeadlineMissedEvent
+ * @see RequestedDeadlineMissedStatus
+ */
+public abstract class OfferedDeadlineMissedStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = 7958557115889148585L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> OfferedDeadlineMissedStatus<TYPE>
-    newOfferedDeadlineMissedStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newOfferedDeadlineMissedStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected OfferedDeadlineMissedStatus(DataWriter<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = 6088889577826357336L;
 
 
 
@@ -60,15 +43,22 @@ extends Status<OfferedDeadlineMissedStatus<TYPE>, DataWriter<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative number of offered deadline periods elapsed during
+     * which a DataWriter failed to provide data. Missed deadlines
+     * accumulate; that is, each deadline period the totalCount will be
+     * incremented by one.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The change in totalCount since the last time the listener was called
+     * or the status was read.
      */
     public abstract int getTotalCountChange();
 
-    public abstract ModifiableInstanceHandle getLastInstanceHandle();
-
+    /**
+     * Handle to the last instance in the {@link org.omg.dds.pub.DataWriter} for which an
+     * offered deadline was missed.
+     */
+    public abstract InstanceHandle getLastInstanceHandle();
 }

@@ -27,7 +27,7 @@ import java.util.List;
  * 
  * ContentFilteredTopic describes a more sophisticated subscription that
  * indicates the subscriber does not want to necessarily see all values of
- * each instance published under the {@link Topic}. Rather, it wants to see
+ * each instance published under the {@link org.omg.dds.topic.Topic}. Rather, it wants to see
  * only the values whose contents satisfy certain criteria. This class
  * therefore can be used to request content-based subscriptions.
  * 
@@ -48,14 +48,38 @@ import java.util.List;
  *                  topic description.
  */
 public interface ContentFilteredTopic<TYPE> extends TopicDescription<TYPE> {
+    /**
+     * @return  the filter expression associated with the
+     *          ContentFilteredTopic, that is, the expression specified when
+     *          the ContentFilteredTopic was created.
+     */
     public String getFilterExpression();
 
     /**
+     * This operation returns the expression parameters associated with the
+     * ContentFilteredTopic, that is, the parameters specified on the last
+     * successful call to {@link #setExpressionParameters(List)}, or if
+     * {@link #setExpressionParameters(List)} was never called, the
+     * parameters specified when the ContentFilteredTopic was created.
+     * 
      * @return  an unmodifiable list.
+     * 
+     * @see     #setExpressionParameters(List)
      */
     public List<String> getExpressionParameters();
 
+    /**
+     * This operation changes the expression parameters associated with the
+     * ContentFilteredTopic.
+     * 
+     * @see     #getExpressionParameters()
+     */
     public void setExpressionParameters(List<String> expressionParameters);
 
+    /**
+     * @return  the {@link org.omg.dds.topic.Topic} associated with the ContentFilteredTopic,
+     *          that is, the Topic specified when the ContentFilteredTopic
+     *          was created.
+     */
     public Topic<? extends TYPE> getRelatedTopic();
 }

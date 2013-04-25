@@ -18,18 +18,20 @@
 
 package org.omg.dds.type.dynamic;
 
+import java.io.Serializable;
 import java.util.Map;
 
-import org.omg.dds.core.Value;
-import org.omg.dds.type.dynamic.modifiable.ModifiableAnnotationDescriptor;
+import org.omg.dds.core.DDSObject;
 
 
-public interface AnnotationDescriptor
-extends Value<AnnotationDescriptor, ModifiableAnnotationDescriptor>
+/**
+ * Objects of this type are immutable.
+ */
+public interface AnnotationDescriptor extends Serializable, DDSObject
 {
     public String getValue(String key);
 
-    public Map<String, String> getAllValue(Map<String, String> value);
+    public Map<String, String> getAllValue();
 
     public boolean isConsistent();
 
@@ -37,4 +39,21 @@ extends Value<AnnotationDescriptor, ModifiableAnnotationDescriptor>
      * @return the type
      */
     public DynamicType getType();
+
+
+    // --- Modification: -----------------------------------------------------
+
+    /**
+     * Copy this descriptor and apply the given value.
+     * 
+     * @return  a new descriptor
+     */
+    public AnnotationDescriptor withValue(String key, String value);
+
+    /**
+     * Copy this descriptor and apply the given type.
+     * 
+     * @return  a new descriptor
+     */
+    public AnnotationDescriptor withType(DynamicType type);
 }

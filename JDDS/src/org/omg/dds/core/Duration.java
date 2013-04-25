@@ -18,19 +18,22 @@
 
 package org.omg.dds.core;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-import org.omg.dds.core.modifiable.ModifiableDuration;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
 
 /**
  * A span of elapsed time expressed with nanosecond precision.
+ * 
+ * Instances of this type are immutable.
  */
 @Extensibility(Extensibility.Kind.FINAL_EXTENSIBILITY)
 @Nested
-public abstract class Duration implements Value<Duration, ModifiableDuration>
+public abstract class Duration
+implements Comparable<Duration>, Serializable, DDSObject
 {
     // -----------------------------------------------------------------------
     // Private Constants
@@ -50,37 +53,42 @@ public abstract class Duration implements Value<Duration, ModifiableDuration>
      * A duration of magnitude {@link Long#MAX_VALUE} indicates an infinite
      * duration, regardless of the units specified.
      * 
-     * @param bootstrap Identifies the Service instance to which the new
+     * @param env       Identifies the Service instance to which the new
      *                  object will belong.
      * 
      * @see     #isInfinite()
-     * @see     #infiniteDuration(Bootstrap)
+     * @see     #infiniteDuration(ServiceEnvironment)
      */
-    public static ModifiableDuration newDuration(
-            long duration, TimeUnit unit, Bootstrap bootstrap) {
-        return bootstrap.getSPI().newDuration(duration, unit);
+    public static Duration newDuration(
+            long duration,
+            TimeUnit unit,
+            ServiceEnvironment env)
+    {
+        return env.getSPI().newDuration(duration, unit);
     }
 
 
     /**
-     * @param bootstrap Identifies the Service instance to which the
+     * @param env       Identifies the Service instance to which the
      *                  object will belong.
      * 
-     * @return  An unmodifiable {@link Duration} of infinite length.
+     * @return  An unmodifiable {@link org.omg.dds.core.Duration} of infinite length.
      */
-    public static Duration infiniteDuration(Bootstrap bootstrap) {
-        return bootstrap.getSPI().infiniteDuration();
+    public static Duration infiniteDuration(ServiceEnvironment env)
+    {
+        return env.getSPI().infiniteDuration();
     }
 
 
     /**
-     * @param bootstrap Identifies the Service instance to which the
+     * @param env       Identifies the Service instance to which the
      *                  object will belong.
      * 
-     * @return  A {@link Duration} of zero length.
+     * @return  A {@link org.omg.dds.core.Duration} of zero length.
      */
-    public static Duration zeroDuration(Bootstrap bootstrap) {
-        return bootstrap.getSPI().zeroDuration();
+    public static Duration zeroDuration(ServiceEnvironment env)
+    {
+        return env.getSPI().zeroDuration();
     }
 
 
@@ -169,15 +177,36 @@ public abstract class Duration implements Value<Duration, ModifiableDuration>
      * If this duration is infinite, the following relationship shall be
      * true:
      * 
-     * <code>this.equals(infiniteDuration(this.getBootstrap()))</code>
+     * <code>this.equals(infiniteDuration(this.getEnvironment()))</code>
      * 
-     * @see     #infiniteDuration(Bootstrap)
+     * @see     #infiniteDuration(ServiceEnvironment)
      */
     public abstract boolean isInfinite();
 
 
-    // --- From Object: ------------------------------------------------------
+    // --- Manipulation: -----------------------------------------------------
 
-    @Override
-    public abstract Duration clone();
+    /**
+     * @return  a new Duration that is the sum of this Duration and the
+     *          given Duration.
+     */
+    public abstract Duration add(Duration duration);
+
+    /**
+     * @return  a new Duration that is the sum of this Duration and the
+     *          given duration.
+     */
+    public abstract Duration add(long duration, TimeUnit unit);
+
+    /**
+     * @return  a new Duration that is the difference after subtracting the
+     *          given Duration.
+     */
+    public abstract Duration subtract(Duration duration);
+
+    /**
+     * @return  a new Duration that is the difference after subtracting the
+     *          given Duration.
+     */
+    public abstract Duration subtract(long duration, TimeUnit unit);
 }

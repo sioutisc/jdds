@@ -19,34 +19,40 @@
 package org.omg.dds.pub;
 
 import org.omg.dds.core.EntityQos;
-import org.omg.dds.core.policy.EntityFactoryQosPolicy;
-import org.omg.dds.core.policy.GroupDataQosPolicy;
-import org.omg.dds.core.policy.PartitionQosPolicy;
-import org.omg.dds.core.policy.PresentationQosPolicy;
-import org.omg.dds.pub.modifiable.ModifiablePublisherQos;
+import org.omg.dds.core.policy.EntityFactory;
+import org.omg.dds.core.policy.GroupData;
+import org.omg.dds.core.policy.Partition;
+import org.omg.dds.core.policy.Presentation;
+import org.omg.dds.core.policy.QosPolicy;
 
 
 public interface PublisherQos
-extends EntityQos<PublisherQos, ModifiablePublisherQos>
+extends EntityQos<QosPolicy.ForPublisher>
 {
     /**
      * @return the presentation
      */
-    public PresentationQosPolicy getPresentation();
+    public Presentation getPresentation();
 
     /**
      * @return the partition
      */
-    public PartitionQosPolicy getPartition();
+    public Partition getPartition();
 
     /**
      * @return the groupData
      */
-    public GroupDataQosPolicy getGroupData();
+    public GroupData getGroupData();
 
     /**
      * @return the entityFactory
      */
-    public EntityFactoryQosPolicy getEntityFactory();
+    public EntityFactory getEntityFactory();
 
+
+    // --- Modification: -----------------------------------------------------
+
+    public PublisherQos withPolicy(QosPolicy.ForPublisher policy);
+
+    public PublisherQos withPolicies(QosPolicy.ForPublisher... policy);
 }

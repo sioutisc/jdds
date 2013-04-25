@@ -29,21 +29,15 @@ import org.omg.dds.type.Nested;
 @Nested
 public interface BitSetType extends Type
 {
+    // -----------------------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------------------
+
     @ID(MemberId.BIT_BOUND_BITSETTYPE_MEMBER_ID)
     public int getBitBound();
 
-    /**
-     * @return  this
-     */
-    public BitSetType setBitBound(int newBitBound);
-
     @ID(MemberId.BIT_BITSETTYPE_MEMBER_ID)
     public List<Bit> getBit();
-
-    /**
-     * @return  this
-     */
-    public BitSetType setBit(List<Bit> newBit);
 
 
 

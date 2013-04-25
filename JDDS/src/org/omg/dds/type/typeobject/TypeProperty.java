@@ -18,49 +18,23 @@
 
 package org.omg.dds.type.typeobject;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import java.io.Serializable;
+
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface TypeProperty
-extends ModifiableValue<TypeProperty, TypeProperty>
+public interface TypeProperty extends Serializable, DDSObject
 {
-    /**
-     * @param flag the flag to set
-     * 
-     * @return  this
-     */
-    public TypeProperty setFlag(TypeFlag flag);
-
-    /**
-     * @return the flag
-     */
     public TypeFlag getFlag();
 
-    /**
-     * @param typeId the typeId to set
-     * 
-     * @return  this
-     */
-    public TypeProperty setTypeId(int typeId);
-
-    /**
-     * @return the typeId
-     */
     public int getTypeId();
 
-    /**
-     * @param name the name to set
-     * 
-     * @return  this
-     */
-    public TypeProperty setName(String name);
-
-    /**
-     * @return the name
-     */
     public String getName();
 }

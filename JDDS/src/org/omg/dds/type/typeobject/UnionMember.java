@@ -36,11 +36,6 @@ public interface UnionMember extends Member
     @ID(MemberId.LABEL_UNIONMEMBER_MEMBER_ID)
     public List<Integer> getLabel();
 
-    /**
-     * @return  this
-     */
-    public UnionMember setLabel(List<Integer> newLabel);
-
 
 
     // -----------------------------------------------------------------------

@@ -18,36 +18,21 @@
 
 package org.omg.dds.type.typeobject;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import java.io.Serializable;
+
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface Bit extends ModifiableValue<Bit, Bit>
+public interface Bit extends Comparable<Bit>, Serializable, DDSObject
 {
-    /**
-     * @param index the index to set
-     * 
-     * @return  this
-     */
-    public Bit setIndex(int index);
-
-    /**
-     * @return the index
-     */
     public int getIndex();
 
-    /**
-     * @param name the name to set
-     * 
-     * @return  this
-     */
-    public Bit setName(String name);
-
-    /**
-     * @return the name
-     */
     public String getName();
 }

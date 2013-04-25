@@ -18,10 +18,6 @@
 
 package org.omg.dds.sub;
 
-import java.util.Set;
-
-import org.omg.dds.core.Bootstrap;
-
 
 public enum InstanceState {
     // -----------------------------------------------------------------------
@@ -44,28 +40,6 @@ public enum InstanceState {
 
     // -----------------------------------------------------------------------
     // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the
-     *                  object will belong.
-     */
-    public static Set<InstanceState> anyInstanceStateSet(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().anyInstanceStateSet();
-    }
-
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the
-     *                  object will belong.
-     */
-    public static Set<InstanceState> notAliveInstanceStateSet(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().anyInstanceStateSet();
-    }
-
-
     // -----------------------------------------------------------------------
 
     private InstanceState(int value) {

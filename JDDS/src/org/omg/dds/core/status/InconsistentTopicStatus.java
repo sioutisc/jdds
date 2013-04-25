@@ -18,39 +18,21 @@
 
 package org.omg.dds.core.status;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.topic.Topic;
 
 
-public abstract class InconsistentTopicStatus<TYPE>
-extends Status<InconsistentTopicStatus<TYPE>, Topic<TYPE>> {
+
+/**
+ * Another topic exists with the same name but different characteristics.
+ * 
+ * @see org.omg.dds.core.event.InconsistentTopicEvent
+ */
+public abstract class InconsistentTopicStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = 4436349983298916816L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> InconsistentTopicStatus<TYPE>
-    newInconsistentTopicStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newInconsistentTopicStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected InconsistentTopicStatus(Topic<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = -1695476267550323893L;
 
 
 
@@ -59,12 +41,15 @@ extends Status<InconsistentTopicStatus<TYPE>, Topic<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative count of the {@link org.omg.dds.topic.Topic}s discovered whose name
+     * matches the Topic to which this status is attached and whose type is
+     * inconsistent with the Topic.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The incremental number of inconsistent topics discovered since the
+     * last time the listener was called or the status was read.
      */
     public abstract int getTotalCountChange();
 

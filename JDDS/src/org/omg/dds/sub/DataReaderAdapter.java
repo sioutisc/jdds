@@ -18,50 +18,50 @@
 
 package org.omg.dds.sub;
 
-import org.omg.dds.core.status.DataAvailableStatus;
-import org.omg.dds.core.status.LivelinessChangedStatus;
-import org.omg.dds.core.status.RequestedDeadlineMissedStatus;
-import org.omg.dds.core.status.RequestedIncompatibleQosStatus;
-import org.omg.dds.core.status.SampleLostStatus;
-import org.omg.dds.core.status.SampleRejectedStatus;
-import org.omg.dds.core.status.SubscriptionMatchedStatus;
+import org.omg.dds.core.event.DataAvailableEvent;
+import org.omg.dds.core.event.LivelinessChangedEvent;
+import org.omg.dds.core.event.RequestedDeadlineMissedEvent;
+import org.omg.dds.core.event.RequestedIncompatibleQosEvent;
+import org.omg.dds.core.event.SampleLostEvent;
+import org.omg.dds.core.event.SampleRejectedEvent;
+import org.omg.dds.core.event.SubscriptionMatchedEvent;
 
 
 public class DataReaderAdapter<TYPE> implements DataReaderListener<TYPE>
 {
-    public void onDataAvailable(DataAvailableStatus<TYPE> status)
+    public void onDataAvailable(DataAvailableEvent<TYPE> status)
     {
         // empty
     }
 
-    public void onLivelinessChanged(LivelinessChangedStatus<TYPE> status)
+    public void onLivelinessChanged(LivelinessChangedEvent<TYPE> status)
     {
         // empty
     }
 
     public void onRequestedDeadlineMissed(
-            RequestedDeadlineMissedStatus<TYPE> status)
+            RequestedDeadlineMissedEvent<TYPE> status)
     {
         // empty
     }
 
     public void onRequestedIncompatibleQos(
-            RequestedIncompatibleQosStatus<TYPE> status)
+            RequestedIncompatibleQosEvent<TYPE> status)
     {
         // empty
     }
 
-    public void onSampleLost(SampleLostStatus<TYPE> status)
+    public void onSampleLost(SampleLostEvent<TYPE> status)
     {
         // empty
     }
 
-    public void onSampleRejected(SampleRejectedStatus<TYPE> status)
+    public void onSampleRejected(SampleRejectedEvent<TYPE> status)
     {
         // empty
     }
 
-    public void onSubscriptionMatched(SubscriptionMatchedStatus<TYPE> status)
+    public void onSubscriptionMatched(SubscriptionMatchedEvent<TYPE> status)
     {
         // empty
     }

@@ -36,20 +36,8 @@ public interface StructureType extends Type
     @ID(MemberId.BASE_TYPE_STRUCTURETYPE_MEMBER_ID)
     public int getBaseType();
 
-    /**
-     * @return  this
-     */
-    @ID(MemberId.BASE_TYPE_STRUCTURETYPE_MEMBER_ID)
-    public StructureType setBaseType(int newBaseTypeId);
-
     @ID(MemberId.MEMBER_STRUCTURETYPE_MEMBER_ID)
     public List<Member> getMember();
-
-    /**
-     * @return  this
-     */
-    @ID(MemberId.MEMBER_STRUCTURETYPE_MEMBER_ID)
-    public StructureType setMember(List<Member> newMember);
 
 
 

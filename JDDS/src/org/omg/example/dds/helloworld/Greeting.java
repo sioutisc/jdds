@@ -18,16 +18,9 @@
 
 package org.omg.example.dds.helloworld;
 
-import java.io.Serializable;
 
-
-public class Greeting implements Serializable {
-	private static final long serialVersionUID = 1950419010588824145L;
-	private final String value;
-
-    public Greeting(String value) {
-        this.value = value;
-    }
+public class Greeting {
+    private final String value = "Hello, World";
 
     public String getValue() {
         return value;

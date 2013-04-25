@@ -18,40 +18,25 @@
 
 package org.omg.dds.core.status;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.modifiable.ModifiableInstanceHandle;
-import org.omg.dds.pub.DataWriter;
+import org.omg.dds.core.InstanceHandle;
 
 
-public abstract class PublicationMatchedStatus<TYPE>
-extends Status<PublicationMatchedStatus<TYPE>, DataWriter<TYPE>> {
+
+/**
+ * The {@link org.omg.dds.pub.DataWriter} has found a {@link org.omg.dds.sub.DataReader} that matches the
+ * {@link org.omg.dds.topic.Topic} and has compatible QoS, or has ceased to be matched with a
+ * DataReader that was previously considered to be matched.
+ *
+ * @see org.omg.dds.core.event.PublicationMatchedEvent
+ * @see SubscriptionMatchedStatus
+ */
+public abstract class PublicationMatchedStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = -2133794660702966974L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> PublicationMatchedStatus<TYPE>
-    newPublicationMatchedStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newPublicationMatchedStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected PublicationMatchedStatus(DataWriter<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = 275828934444687975L;
 
 
 
@@ -60,25 +45,34 @@ extends Status<PublicationMatchedStatus<TYPE>, DataWriter<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative count the concerned {@link org.omg.dds.pub.DataWriter} discovered a
+     * "match" with a {@link org.omg.dds.sub.DataReader}. That is, it found a DataReader for
+     * the same {@link org.omg.dds.topic.Topic} with a requested QoS that is compatible with
+     * that offered by the DataWriter.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The change in totalCcount since the last time the listener was called
+     * or the status was read.
      */
     public abstract int getTotalCountChange();
 
     /**
-     * @return the currentCount
+     * The number of {@link org.omg.dds.sub.DataReader}s currently matched to the concerned
+     * {@link org.omg.dds.pub.DataWriter}.
      */
     public abstract int getCurrentCount();
 
     /**
-     * @return the currentCountChange
+     * The change in currentCount since the last time the listener was called
+     * or the status was read.
      */
     public abstract int getCurrentCountChange();
 
-    public abstract ModifiableInstanceHandle getLastSubscriptionHandle();
-
+    /**
+     * Handle to the last {@link org.omg.dds.sub.DataReader} that matched the
+     * {@link org.omg.dds.pub.DataWriter}, causing the status to change.
+     */
+    public abstract InstanceHandle getLastSubscriptionHandle();
 }

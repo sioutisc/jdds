@@ -21,9 +21,9 @@ package org.omg.example.dds.helloworld;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.InstanceHandle;
-import org.omg.dds.core.status.DataAvailableStatus;
+import org.omg.dds.core.ServiceEnvironment;
+import org.omg.dds.core.event.DataAvailableEvent;
 import org.omg.dds.domain.DomainParticipant;
 import org.omg.dds.domain.DomainParticipantFactory;
 import org.omg.dds.sub.DataReader;
@@ -36,9 +36,11 @@ import org.omg.dds.topic.Topic;
 
 public class GreetingSubscribingApp {
     public static void main(String[] args) {
-        Bootstrap bstp = Bootstrap.createInstance();
-        DomainParticipant dp =
-            DomainParticipantFactory.getInstance(bstp).createParticipant();
+        ServiceEnvironment env = ServiceEnvironment.createInstance(
+                GreetingSubscribingApp.class.getClassLoader());
+        DomainParticipantFactory factory =
+                DomainParticipantFactory.getInstance(env);
+        DomainParticipant dp = factory.createParticipant();
 
         // Implicitly create TypeSupport and register type:
         Topic<Greeting> tp = dp.createTopic("My Topic", Greeting.class);
@@ -82,17 +84,27 @@ public class GreetingSubscribingApp {
     private static class MyListener extends DataReaderAdapter<Greeting>
     {
         @Override
-        public void onDataAvailable(DataAvailableStatus<Greeting> status)
+        public void onDataAvailable(DataAvailableEvent<Greeting> evt)
         {
-            DataReader<Greeting> dr = status.getSource();
+            DataReader<Greeting> dr = evt.getSource();
             Sample.Iterator<Greeting> it = dr.take();
-            while (it.hasNext()) {
-                Sample<Greeting> smp = it.next();
-                // SampleInfo stuff is built into Sample:
-                InstanceHandle inst = smp.getInstanceHandle();
-                // Data accessible from Sample; null if invalid:
-                Greeting dt = smp.getData();
-                // ...
+            try {
+                while (it.hasNext()) {
+                    Sample<Greeting> smp = it.next();
+                    // SampleInfo stuff is built into Sample:
+                    InstanceHandle inst = smp.getInstanceHandle();
+                    System.out.println("Instance: " + inst);
+                    // Data accessible from Sample; null if invalid:
+                    Greeting dt = smp.getData();
+                    System.out.println("Data: " + dt);
+                }
+            } finally {
+        		try {
+        			it.close();
+        		}
+        		catch (java.io.IOException e) {
+        	    	System.out.println(e);	
+        		}
             }
         }
     }

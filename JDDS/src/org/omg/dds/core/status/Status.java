@@ -18,35 +18,33 @@
 
 package org.omg.dds.core.status;
 
-import java.util.EventObject;
+import java.io.Serializable;
 import java.util.Set;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.core.Entity;
-import org.omg.dds.core.StatusCondition;
-import org.omg.dds.core.modifiable.ModifiableValue;
+import org.omg.dds.core.DDSObject;
+import org.omg.dds.core.ServiceEnvironment;
 
 
 /**
  * Status is the abstract root class for all communication status objects.
  * All concrete kinds of Status classes extend this class.
  * 
- * Each concrete {@link Entity} is associated with a set of Status objects
+ * Each concrete {@link org.omg.dds.core.Entity} is associated with a set of Status objects
  * whose value represents the "communication status" of that entity. These
  * status values can be accessed with corresponding methods on the Entity.
  * The changes on these status values are the ones that both cause activation
- * of the corresponding {@link StatusCondition} objects and trigger invocation
+ * of the corresponding {@link org.omg.dds.core.StatusCondition} objects and trigger invocation
  * of the proper Listener objects to asynchronously inform the application.
+ * 
+ * @see org.omg.dds.core.event.StatusChangedEvent
  */
-public abstract class Status<SELF extends Status<SELF, SOURCE>,
-                             SOURCE extends Entity<SOURCE, ?, ?>>
-extends EventObject
-implements ModifiableValue<SELF, SELF> {
+public abstract class Status implements Serializable, DDSObject
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = 1989817719529565165L;
+    private static final long serialVersionUID = 8294883446033723160L;
 
 
 
@@ -55,50 +53,23 @@ implements ModifiableValue<SELF, SELF> {
     // -----------------------------------------------------------------------
 
     /**
-     * @param bootstrap Identifies the Service instance to which the
+     * @param env       Identifies the Service instance to which the
      *                  object will belong.
      */
-    public static Set<Class<? extends Status<?, ?>>> allStatuses(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().allStatusKinds();
+    public static Set<Class<? extends Status>> allStatuses(
+            ServiceEnvironment env)
+    {
+        return env.getSPI().allStatusKinds();
     }
 
 
     /**
-     * @param bootstrap Identifies the Service instance to which the
+     * @param env Identifies the Service instance to which the
      *                  object will belong.
      */
-    public static Set<Class<? extends Status<?, ?>>> noStatuses(
-            Bootstrap bootstrap) {
-        return bootstrap.getSPI().noStatusKinds();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected Status(SOURCE source) {
-        super(source);
-    }
-
-
-
-    // -----------------------------------------------------------------------
-    // Methods
-    // -----------------------------------------------------------------------
-
-    // --- API: --------------------------------------------------------------
-
-    @Override
-    public abstract SOURCE getSource();
-
-
-    @Override
-    public abstract SELF clone();
-
-
-    // --- SPI: --------------------------------------------------------------
-
-    protected void setSource(SOURCE source) {
-        super.source = source;
+    public static Set<Class<? extends Status>> noStatuses(
+            ServiceEnvironment env)
+    {
+        return env.getSPI().noStatusKinds();
     }
 }

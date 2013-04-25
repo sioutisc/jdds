@@ -25,7 +25,7 @@ package org.omg.dds.core;
  * the triggerValue is set to false.
  * 
  * The purpose of the GuardCondition is to provide the means for the
- * application to manually wake up a {@link WaitSet}. This is accomplished by
+ * application to manually wake up a {@link org.omg.dds.core.WaitSet}. This is accomplished by
  * attaching the GuardCondition to the WaitSet and then setting the
  * triggerValue by means of the {@link #setTriggerValue(boolean)} operation.
  */
@@ -36,11 +36,12 @@ public abstract class GuardCondition implements Condition
     // -----------------------------------------------------------------------
 
     /**
-     * @param bootstrap Identifies the Service instance to which the new
+     * @param env       Identifies the Service instance to which the new
      *                  object will belong.
      */
-    public static GuardCondition newGuardCondition(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newGuardCondition();
+    public static GuardCondition newGuardCondition(ServiceEnvironment env)
+    {
+        return env.getSPI().newGuardCondition();
     }
 
 
@@ -49,5 +50,15 @@ public abstract class GuardCondition implements Condition
     // Instance Methods
     // -----------------------------------------------------------------------
 
+    /**
+     * This operation sets the triggerValue of the GuardCondition.
+     * 
+     * {@link org.omg.dds.core.WaitSet} objects' behavior depends on the changes of the
+     * triggerValue of their attached conditions. Therefore, any WaitSet
+     * to which the GuardCondition is attached is potentially affected by
+     * this operation.
+     * 
+     * @see     Condition#getTriggerValue()
+     */
     public abstract void setTriggerValue(boolean value);
 }

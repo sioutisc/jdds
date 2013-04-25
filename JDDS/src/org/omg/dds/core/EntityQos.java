@@ -18,46 +18,75 @@
 
 package org.omg.dds.core;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.omg.dds.core.policy.QosPolicy;
+import org.omg.dds.core.policy.PolicyFactory;
 import org.omg.dds.type.Extensibility;
 
 
 /**
- * A base interface for all entity QoS types.
+ * The Data-Distribution Service (DDS) relies on the use of QoS. A QoS
+ * (Quality of Service) is a set of characteristics that controls some aspect
+ * of the behavior of the DDS Service. QoS is comprised of individual QoS
+ * policies (objects of type deriving from {@link org.omg.dds.core.policy.QosPolicy}).
+ * 
+ * QoS (i.e., a collection of QosPolicy objects) may be associated with all
+ * {@link org.omg.dds.core.Entity} objects in the system such as {@link org.omg.dds.topic.Topic},
+ * {@link org.omg.dds.pub.DataWriter}, {@link org.omg.dds.sub.DataReader}, {@link org.omg.dds.pub.Publisher},
+ * {@link org.omg.dds.sub.Subscriber}, and {@link org.omg.dds.domain.DomainParticipant}.
+ * 
+ * Some QosPolicy values may not be consistent with other ones. When a set of
+ * QosPolicy is passed ({@link org.omg.dds.core.Entity#setQos(EntityQos)} operations), the set
+ * resulting from adding the new policies on top of the previous is checked
+ * for consistency. If the resulting QoS is inconsistent, the change of QoS
+ * operation fails and the previous values are retained.
+ * 
+ * Objects of this type are immutable.
  */
 @Extensibility(Extensibility.Kind.MUTABLE_EXTENSIBILITY)
-public interface EntityQos<UNMOD_SELF extends EntityQos<UNMOD_SELF, MOD_SELF>,
-                           MOD_SELF extends UNMOD_SELF>
-extends Value<UNMOD_SELF, MOD_SELF>, Map<QosPolicy.Id, QosPolicy<?, ?>>
+public interface EntityQos<P extends QosPolicy>
+extends Map<Class<? extends P>, P>, Serializable, DDSObject
 {
     /**
      * @return  a reference to the corresponding policy in this
-     *          <code>EntityQos</code>. The returned object is not a copy; changes
-     *          to the returned object will be reflected in subsequent
-     *          accesses.
+     *          <code>EntityQos</code>.
      *
      * @see Map#get(Object)
      */
-    public <POLICY extends QosPolicy<POLICY, ?>> POLICY get(QosPolicy.Id id);
+    public <POLICY extends P> POLICY get(Class<POLICY> id);
+
+
+    // --- Modification: -----------------------------------------------------
 
     /**
-     * @throws  UnsupportedOperationException   if this <code>EntityQos</code> is
-     *          not a <code>ModifiableEntityQos</code>.
+     * Copy this object and override the value of the given policy.
+     * 
+     * @return  a new object
+     * 
+     * @throws  IllegalArgumentException        if the given policy is not
+     *          applicable to the concrete type of this EntityQos.
+     *
+     * @see     #withPolicies(QosPolicy...)
      */
-    public QosPolicy<?, ?> put(QosPolicy.Id key, QosPolicy<?, ?> value);
+    public EntityQos<P> withPolicy(P policy);
 
     /**
-     * @throws  UnsupportedOperationException   always: the <tt>remove</tt>
-     *          operation is not supported by this map.
+     * Copy this object and override the values of the given policies.
+     *
+     * @return  a new object
+     *
+     * @throws  IllegalArgumentException        if any given policy is not
+     *          applicable to the concrete type of this EntityQos.
+     *
+     * @see     #withPolicy(QosPolicy)
      */
-    public QosPolicy<?, ?> remove(Object key);
-
+    public EntityQos<P> withPolicies(P... policy);
+    
     /**
-     * @throws  UnsupportedOperationException   always: the <tt>clear</tt>
-     *          operation is not supported by this map.
+     * Provides an instance of {@link org.omg.dds.core.policy.PolicyFactory}.
+     * @return An instance of {@link org.omg.dds.core.policy.PolicyFactory}
      */
-    public void clear();
-
+    public PolicyFactory getPolicyFactory();
 }

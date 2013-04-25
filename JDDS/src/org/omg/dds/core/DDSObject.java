@@ -19,10 +19,13 @@
 package org.omg.dds.core;
 
 
+/**
+ * A supertype of all DDS classes and interfaces.
+ */
 public interface DDSObject {
     /**
-     * @return  the {@link Bootstrap} object that directly or indirectly
-     *          created this object.
+     * @return  the {@link org.omg.dds.core.ServiceEnvironment} object that directly or
+     *          indirectly was used to create this object.
      */
-    public Bootstrap getBootstrap();
+    public ServiceEnvironment getEnvironment();
 }

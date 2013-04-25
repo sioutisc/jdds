@@ -18,40 +18,62 @@
 
 package org.omg.dds.type.builtin;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import java.io.Serializable;
 
+import org.omg.dds.core.DDSObject;
+import org.omg.dds.core.ServiceEnvironment;
 
-public interface KeyedBytes
-extends ModifiableValue<KeyedBytes, KeyedBytes>
+public abstract class KeyedBytes implements Cloneable, Serializable, DDSObject
 {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2666227708313407807L;
+
+    public static KeyedBytes newKeyedBytes(ServiceEnvironment env)
+    {
+        return env.getSPI().newKeyedBytes();
+    }
+
+	
+	/**
      * @return the key
      */
-    public String getKey();
+    public abstract String getKey();
 
     /**
      * @param key the key to set
      * 
      * @return  this
      */
-    public KeyedBytes setKey(CharSequence key);
+    public abstract KeyedBytes setKey(CharSequence key);
 
     /**
      * @return the value
      */
-    public byte[] getValue();
+    public abstract byte[] getValue();
 
     /**
      * @param value the value to set
      * 
      * @return  this
      */
-    public KeyedBytes setValue(byte value[]);
+    public abstract KeyedBytes setValue(byte value[]);
 
     /**
      * @param value the value to set
      * 
      * @return  this
      */
-    public KeyedBytes setValue(byte value[], int offset, int length);
+    public abstract KeyedBytes setValue(byte value[], int offset, int length);
+
+
+    // -----------------------------------------------------------------------
+
+    /**
+     * Overwrite the state of this object with that of the given object.
+     */
+    public abstract void copyFrom(KeyedBytes src);
+
+    public abstract KeyedBytes clone();
 }

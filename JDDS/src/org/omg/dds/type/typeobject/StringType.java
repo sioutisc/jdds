@@ -34,11 +34,6 @@ public interface StringType extends CollectionType
     @ID(MemberId.BOUND_STRINGTYPE_MEMBER_ID)
     public long getBound();
 
-    /**
-     * @return  this
-     */
-    public StringType setBound(long newBound);
-
 
 
     // -----------------------------------------------------------------------

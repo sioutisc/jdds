@@ -30,20 +30,24 @@ public interface DynamicData extends DDSObject, Cloneable
     public DynamicType getType();
 
     /**
-     * Modifying an element of the given list modifies the descriptor of this
-     * DynamicData object, not a copy. Adding to or removing from the list
-     * is not allowed.
+     * @return  an unmodifiable list.
      */
     public List<MemberDescriptor> getDescriptors();
 
-    int getMemberIdByName(String name);
-    int getMemberIdAtIndex(int index);
+    public int getMemberIdByName(String name);
+    public int getMemberIdAtIndex(int index);
 
 
     public void clearAllValues();
     public void clearNonkeyValues();
     public void clearValue(int id);
-
+    public void clearValue(String name);
+    
+    public <T> void setValue (int id, T value, Class<T> type);
+    public <T> void setValue (String name, T value, Class<T> type);
+    
+    public <T> T getValue (int id, Class<T> type);
+    public <T> T getValue (String name, Class<T> type);
 
     public DynamicData loanValue(int id);
     public void returnLoanedValue(DynamicData value);
@@ -115,7 +119,9 @@ public interface DynamicData extends DDSObject, Cloneable
      */
     public DynamicData setStringValue(int id, CharSequence value);
 
-    public DynamicData getComplexValue(DynamicData value, int id);
+    public DynamicData getComplexValue(int id);
+    public DynamicData getComplexValue(String name);
+
     /**
      * @return  this
      */
@@ -129,10 +135,6 @@ public interface DynamicData extends DDSObject, Cloneable
      */
     public DynamicData setInt32Values(
             int id, int[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setInt32Values(int id, int... value);
 
     public int getInt16Values(
             short[] value, int offset, int length, int id);
@@ -141,10 +143,6 @@ public interface DynamicData extends DDSObject, Cloneable
      */
     public DynamicData setInt16Values(
             int id, short[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setInt16Values(int id, short... value);
 
     public int getInt64Values(
             long[] value, int offset, int length, int id);
@@ -153,20 +151,9 @@ public interface DynamicData extends DDSObject, Cloneable
      */
     public DynamicData setInt64Values(
             int id, long[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setInt64Values(int id, long... value);
 
-    public int getBigIntegerValues(
-            BigInteger[] value, int offset, int length, int id);
     public List<BigInteger> getBigIntegerValues(
             List<BigInteger> value, int id);
-    /**
-     * @return  this
-     */
-    public DynamicData setBigIntegerValues(
-            int id, BigInteger[] value, int offset, int length);
     /**
      * @return  this
      */
@@ -179,10 +166,6 @@ public interface DynamicData extends DDSObject, Cloneable
      */
     public DynamicData setFloat32Values(
             int id, float[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setFloat32Values(int id, float... value);
 
     public int getFloat64Values(
             double[] value, int offset, int length, int id);
@@ -191,20 +174,10 @@ public interface DynamicData extends DDSObject, Cloneable
      */
     public DynamicData setFloat64Values(
             int id, double[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setFloat64Values(int id, double... value);
 
-    public int getBigDecimalValues(
-            BigDecimal[] value, int offset, int length, int id);
     public List<BigDecimal> getBigDecimalValues(
             List<BigDecimal> value, int id);
-    /**
-     * @return  this
-     */
-    public DynamicData setBigDecimalValues(
-            int id, BigDecimal[] value, int offset, int length);
+
     /**
      * @return  this
      */
@@ -221,10 +194,6 @@ public interface DynamicData extends DDSObject, Cloneable
     /**
      * @return  this
      */
-    public DynamicData setCharValues(int id, char... value);
-    /**
-     * @return  this
-     */
     public DynamicData setCharValues(int id, CharSequence value);
 
     public int getByteValues(
@@ -237,29 +206,18 @@ public interface DynamicData extends DDSObject, Cloneable
 
     public int getBooleanValues(
             boolean[] value, int offset, int length, int id);
-    public void getBooleanValues(List<Boolean> value, int id);
     /**
      * @return  this
      */
     public DynamicData setBooleanValues(
             int id, boolean[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setBooleanValues(int id, boolean... value);
 
-    public int getStringValues(
-            String[] value, int offset, int length, int id);
     public void getStringValues(List<String> value, int id);
     /**
      * @return  this
      */
     public DynamicData setStringValues(
             int id, String[] value, int offset, int length);
-    /**
-     * @return  this
-     */
-    public DynamicData setStringValues(int id, String... value);
     /**
      * @return  this
      */

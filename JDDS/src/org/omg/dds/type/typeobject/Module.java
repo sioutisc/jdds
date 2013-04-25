@@ -18,33 +18,23 @@
 
 package org.omg.dds.type.typeobject;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import java.io.Serializable;
+
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.Nested;
 import org.omg.dds.type.Shared;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.EXTENSIBLE_EXTENSIBILITY)
 @Nested
-public interface Module extends ModifiableValue<Module, Module>
+public interface Module extends Serializable, DDSObject, TypeLibraryElement
 {
-    /**
-     * @param name the name to set
-     * 
-     * @return  this
-     */
-    public Module setName(String name);
-
-    /**
-     * @return the name
-     */
     public String getName();
 
     @Shared
     public TypeLibrary getLibrary();
-
-    /**
-     * @return  this
-     */
-    public Module setLibrary(TypeLibrary newLibrary);
 }

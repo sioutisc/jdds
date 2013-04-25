@@ -18,17 +18,21 @@
 
 package org.omg.dds.type.typeobject;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.omg.dds.core.modifiable.ModifiableValue;
+import org.omg.dds.core.DDSObject;
 import org.omg.dds.type.Extensibility;
 import org.omg.dds.type.ID;
 import org.omg.dds.type.Nested;
 
 
+/**
+ * Objects of this type are immutable.
+ */
 @Extensibility(Extensibility.Kind.MUTABLE_EXTENSIBILITY)
 @Nested
-public interface Member extends ModifiableValue<Member, Member>
+public interface Member extends Serializable, DDSObject
 {
     // -----------------------------------------------------------------------
     // Constants
@@ -45,20 +49,8 @@ public interface Member extends ModifiableValue<Member, Member>
     @ID(MemberId.PROPERTY_MEMBER_MEMBER_ID)
     public MemberProperty getProperty();
 
-    /**
-     * @return  this
-     */
-    @ID(MemberId.PROPERTY_MEMBER_MEMBER_ID)
-    public Member setProperty(MemberProperty newProperty);
-
     @ID(MemberId.ANNOTATION_MEMBER_MEMBER_ID)
     public List<AnnotationUsage> getAnnotation();
-
-    /**
-     * @return  this
-     */
-    @ID(MemberId.ANNOTATION_MEMBER_MEMBER_ID)
-    public Member setAnnotation(List<AnnotationUsage> newAnnotation);
 
 
 

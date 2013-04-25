@@ -18,39 +18,20 @@
 
 package org.omg.dds.core.status;
 
-import org.omg.dds.core.Bootstrap;
-import org.omg.dds.sub.DataReader;
 
 
-public abstract class SampleLostStatus<TYPE>
-extends Status<SampleLostStatus<TYPE>, DataReader<TYPE>> {
+/**
+ * A sample has been lost (never received).
+ *
+ * @see org.omg.dds.core.event.SampleLostEvent
+ */
+public abstract class SampleLostStatus extends Status
+{
     // -----------------------------------------------------------------------
     // Constants
     // -----------------------------------------------------------------------
 
-    private static final long serialVersionUID = -520330521363610833L;
-
-
-
-    // -----------------------------------------------------------------------
-    // Object Life Cycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * @param bootstrap Identifies the Service instance to which the new
-     *                  object will belong.
-     */
-    public static <TYPE> SampleLostStatus<TYPE>
-    newSampleLostStatus(Bootstrap bootstrap) {
-        return bootstrap.getSPI().newSampleLostStatus();
-    }
-
-
-    // -----------------------------------------------------------------------
-
-    protected SampleLostStatus(DataReader<TYPE> source) {
-        super(source);
-    }
+    private static final long serialVersionUID = 6522885693257415947L;
 
 
 
@@ -59,12 +40,14 @@ extends Status<SampleLostStatus<TYPE>, DataReader<TYPE>> {
     // -----------------------------------------------------------------------
 
     /**
-     * @return the totalCount
+     * Total cumulative count of all samples lost across all instances of
+     * data published under the {@link org.omg.dds.topic.Topic}.
      */
     public abstract int getTotalCount();
 
     /**
-     * @return the totalCountChange
+     * The incremental number of samples lost since the last time the
+     * listener was called or the status was read.
      */
     public abstract int getTotalCountChange();
 
