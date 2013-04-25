@@ -27,6 +27,7 @@ package jdds.dds.domain;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -34,11 +35,11 @@ import java.util.concurrent.TimeoutException;
 import jdds.dds.pub.JDDS_Publisher;
 import jdds.dds.topic.JDDS_Topic;
 
-import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.Duration;
 import org.omg.dds.core.InstanceHandle;
+import org.omg.dds.core.ServiceEnvironment;
 import org.omg.dds.core.StatusCondition;
-import org.omg.dds.core.modifiable.ModifiableTime;
+import org.omg.dds.core.Time;
 import org.omg.dds.core.status.Status;
 import org.omg.dds.domain.DomainParticipant;
 import org.omg.dds.domain.DomainParticipantListener;
@@ -58,6 +59,7 @@ import org.omg.dds.topic.TopicDescription;
 import org.omg.dds.topic.TopicListener;
 import org.omg.dds.topic.TopicQos;
 import org.omg.dds.type.TypeSupport;
+import org.omg.dds.type.dynamic.DynamicType;
 
 public class JDDS_DomainParticipant implements DomainParticipant {
 	int domainId_ = 0;
@@ -73,39 +75,35 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 		domainId_ = domainId;
 	}
 
-	public JDDS_DomainParticipant(int domainId,
-			DomainParticipantQos qos, DomainParticipantListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		qos_ = qos;
-		listener_ = listener;
-		//TODO statuses?
-	}
-
-	public JDDS_DomainParticipant(int domainId,
-			String qosLibraryName, String qosProfileName,
-			DomainParticipantListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-	}
-	
-
 	@Override
 	public DomainParticipantListener getListener() {
-		return listener_;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void setListener(DomainParticipantListener listener) {
-		listener_ = listener;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setListener(DomainParticipantListener listener,
+			Collection<Class<? extends Status>> statuses) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public DomainParticipantQos getQos() {
-		return qos_;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void setQos(DomainParticipantQos qos) {
-		qos_ = qos;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -121,14 +119,7 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	}
 
 	@Override
-	public StatusCondition<DomainParticipant> getStatusCondition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Class<? extends Status<?, ?>>> getStatusChanges(
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Set<Class<? extends Status>> getStatusChanges() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -152,30 +143,27 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	}
 
 	@Override
-	public Bootstrap getBootstrap() {
+	public ServiceEnvironment getEnvironment() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Publisher createPublisher() {
-		JDDS_Publisher pub = new JDDS_Publisher(this);
-		publishers_.add(pub);
-		return pub;
-	}
-
-	@Override
-	public Publisher createPublisher(PublisherQos qos,
-			PublisherListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Publisher createPublisher(String qosLibraryName,
-			String qosProfileName, PublisherListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Publisher createPublisher(PublisherQos qos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Publisher createPublisher(PublisherQos qos,
+			PublisherListener listener,
+			Collection<Class<? extends Status>> statuses) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -187,17 +175,15 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	}
 
 	@Override
-	public Subscriber createSubscriber(SubscriberQos qos,
-			SubscriberListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Subscriber createSubscriber(SubscriberQos qos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Subscriber createSubscriber(String qosLibraryName,
-			String qosProfileName, SubscriberListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Subscriber createSubscriber(SubscriberQos qos,
+			SubscriberListener listener,
+			Collection<Class<? extends Status>> statuses) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -210,54 +196,62 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 
 	@Override
 	public <TYPE> Topic<TYPE> createTopic(String topicName, Class<TYPE> type) {
-		Topic<TYPE> topic = new JDDS_Topic<TYPE>(topicName,type);
-		topics_.add(topic);
-		return topic;
+		// TODO Auto-generated method stub
+		return new JDDS_Topic<TYPE>();
 	}
 
 	@Override
 	public <TYPE> Topic<TYPE> createTopic(String topicName, Class<TYPE> type,
 			TopicQos qos, TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		Topic<TYPE> topic = new JDDS_Topic<TYPE>(topicName,type,qos,listener,statuses);
-		topics_.add(topic);
-		return topic;
-	}
-
-	@Override
-	public <TYPE> Topic<TYPE> createTopic(String topicName, Class<TYPE> type,
-			String qosLibraryName, String qosProfileName,
-			TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		Topic<TYPE> topic = new JDDS_Topic<TYPE>(topicName,type,qosLibraryName,qosProfileName,listener,statuses);
-		topics_.add(topic);
-		return topic;
+			Collection<Class<? extends Status>> statuses) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public <TYPE> Topic<TYPE> createTopic(String topicName,
 			TypeSupport<TYPE> type) {
-		Topic<TYPE> topic = new JDDS_Topic<TYPE>(topicName,type);
-		topics_.add(topic);
-		return topic;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public <TYPE> Topic<TYPE> createTopic(String topicName,
 			TypeSupport<TYPE> type, TopicQos qos, TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		Topic<TYPE> topic = new JDDS_Topic<TYPE>(topicName,type,qos,listener,statuses);
-		topics_.add(topic);
-		return topic;	}
+			Collection<Class<? extends Status>> statuses) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public <TYPE> Topic<TYPE> createTopic(String topicName,
-			TypeSupport<TYPE> type, String qosLibraryName,
-			String qosProfileName, TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		Topic<TYPE> topic = new JDDS_Topic<TYPE>(topicName,type,qosLibraryName,qosProfileName,listener,statuses);
-		topics_.add(topic);
-		return topic;	}
+	public Topic<DynamicType> createTopic(String topicName, DynamicType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Topic<DynamicType> createTopic(String topicName, DynamicType type,
+			TopicQos qos, TopicListener<DynamicType> listener,
+			Collection<Class<? extends Status>> statuses) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Topic<DynamicType> createTopic(String topicName, DynamicType type,
+			TypeSupport<DynamicType> typeSupport) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Topic<DynamicType> createTopic(String topicName, DynamicType type,
+			TypeSupport<DynamicType> typeSupport, TopicQos qos,
+			TopicListener<DynamicType> listener,
+			Collection<Class<? extends Status>> statuses) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public <TYPE> Topic<TYPE> findTopic(String topicName, Duration timeout)
@@ -289,7 +283,15 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 
 	@Override
 	public <TYPE> MultiTopic<TYPE> createMultiTopic(String name,
-			String typeName, String subscriptionExpression,
+			Class<TYPE> type, String subscriptionExpression,
+			List<String> expressionParameters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <TYPE> MultiTopic<TYPE> createMultiTopic(String name,
+			TypeSupport<TYPE> type, String subscriptionExpression,
 			List<String> expressionParameters) {
 		// TODO Auto-generated method stub
 		return null;
@@ -327,7 +329,8 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 
 	@Override
 	public int getDomainId() {
-		return domainId_;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -349,13 +352,6 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	}
 
 	@Override
-	public void setDefaultPublisherQos(String qosLibraryName,
-			String qosProfileName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public SubscriberQos getDefaultSubscriberQos() {
 		// TODO Auto-generated method stub
 		return null;
@@ -363,13 +359,6 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 
 	@Override
 	public void setDefaultSubscriberQos(SubscriberQos qos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setDefaultSubscriberQos(String qosLibraryName,
-			String qosProfileName) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -387,36 +376,27 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	}
 
 	@Override
-	public void setDefaultTopicQos(String qosLibraryName, String qosProfileName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Collection<InstanceHandle> getDiscoveredParticipants(
-			Collection<InstanceHandle> participantHandles) {
+	public Set<InstanceHandle> getDiscoveredParticipants() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ParticipantBuiltinTopicData getDiscoveredParticipantData(
-			ParticipantBuiltinTopicData participantData,
 			InstanceHandle participantHandle) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<InstanceHandle> getDiscoveredTopics(
-			Collection<InstanceHandle> topicHandles) {
+	public Set<InstanceHandle> getDiscoveredTopics() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public TopicBuiltinTopicData getDiscoveredTopicData(
-			TopicBuiltinTopicData topicData, InstanceHandle topicHandle) {
+			InstanceHandle topicHandle) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -428,9 +408,24 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	}
 
 	@Override
-	public ModifiableTime getCurrentTime(ModifiableTime currentTime) {
+	public org.omg.dds.core.ModifiableTime getCurrentTime(
+			org.omg.dds.core.ModifiableTime currentTime) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Time getCurrentTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StatusCondition<DomainParticipant> getStatusCondition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

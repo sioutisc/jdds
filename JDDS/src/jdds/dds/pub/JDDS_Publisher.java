@@ -26,13 +26,14 @@
 package jdds.dds.pub;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.Duration;
 import org.omg.dds.core.InstanceHandle;
+import org.omg.dds.core.ServiceEnvironment;
 import org.omg.dds.core.StatusCondition;
 import org.omg.dds.core.status.Status;
 import org.omg.dds.domain.DomainParticipant;
@@ -42,28 +43,8 @@ import org.omg.dds.pub.DataWriterQos;
 import org.omg.dds.pub.Publisher;
 import org.omg.dds.pub.PublisherListener;
 import org.omg.dds.pub.PublisherQos;
-import org.omg.dds.sub.DataReader;
-import org.omg.dds.sub.DataReaderListener;
-import org.omg.dds.sub.DataReaderQos;
-import org.omg.dds.sub.InstanceState;
-import org.omg.dds.sub.SampleState;
-import org.omg.dds.sub.Subscriber;
-import org.omg.dds.sub.SubscriberListener;
-import org.omg.dds.sub.SubscriberQos;
-import org.omg.dds.sub.ViewState;
 import org.omg.dds.topic.Topic;
-import org.omg.dds.topic.TopicDescription;
 import org.omg.dds.topic.TopicQos;
-import org.omg.dds.type.builtin.BytesDataReader;
-import org.omg.dds.type.builtin.BytesDataWriter;
-import org.omg.dds.type.builtin.KeyedBytes;
-import org.omg.dds.type.builtin.KeyedBytesDataReader;
-import org.omg.dds.type.builtin.KeyedBytesDataWriter;
-import org.omg.dds.type.builtin.KeyedString;
-import org.omg.dds.type.builtin.KeyedStringDataReader;
-import org.omg.dds.type.builtin.KeyedStringDataWriter;
-import org.omg.dds.type.builtin.StringDataReader;
-import org.omg.dds.type.builtin.StringDataWriter;
 
 public class JDDS_Publisher implements Publisher {
 	DomainParticipant dp_;
@@ -75,31 +56,6 @@ public class JDDS_Publisher implements Publisher {
 		dp_ = dp;
 	}
 
-	public JDDS_Publisher(DomainParticipant dp,
-			PublisherQos qos,
-			PublisherListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		dp_ = dp;
-		qos_ = qos;
-		listener_ = listener;
-		//TODO statuses
-	}
-
-	public JDDS_Publisher(DomainParticipant dp,
-			String qosLibraryName,
-			String qosProfileName, PublisherListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		dp_ = dp;
-		listener_ = listener;
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public DomainParticipant getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public PublisherListener getListener() {
 		// TODO Auto-generated method stub
@@ -108,6 +64,13 @@ public class JDDS_Publisher implements Publisher {
 
 	@Override
 	public void setListener(PublisherListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setListener(PublisherListener listener,
+			Collection<Class<? extends Status>> statuses) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -137,14 +100,7 @@ public class JDDS_Publisher implements Publisher {
 	}
 
 	@Override
-	public StatusCondition<Publisher> getStatusCondition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Class<? extends Status<?, ?>>> getStatusChanges(
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Set<Class<? extends Status>> getStatusChanges() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -168,127 +124,28 @@ public class JDDS_Publisher implements Publisher {
 	}
 
 	@Override
-	public Bootstrap getBootstrap() {
+	public ServiceEnvironment getEnvironment() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public <TYPE> DataWriter<TYPE> createDataWriter(Topic<TYPE> topic) {
-		DataWriter<TYPE> dw = new JDDS_DataWriter<TYPE>(this,topic);
-		writers_.add(dw);
-		return dw;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public <TYPE> DataWriter<TYPE> createDataWriter(Topic<TYPE> topic,
 			DataWriterQos qos, DataWriterListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+			Collection<Class<? extends Status>> statuses) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public <TYPE> DataWriter<TYPE> createDataWriter(Topic<TYPE> topic,
-			String qosLibraryName, String qosProfileName,
-			DataWriterListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BytesDataWriter createBytesDataWriter(Topic<byte[]> topic) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BytesDataWriter createBytesDataWriter(Topic<byte[]> topic,
-			DataWriterQos qos, DataWriterListener<byte[]> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BytesDataWriter createBytesDataWriter(Topic<byte[]> topic,
-			String qosLibraryName, String qosProfileName,
-			DataWriterListener<byte[]> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedBytesDataWriter createKeyedBytesDataWriter(
-			Topic<KeyedBytes> topic) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedBytesDataWriter createKeyedBytesDataWriter(
-			Topic<KeyedBytes> topic, DataWriterQos qos,
-			DataWriterListener<KeyedBytes> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedBytesDataWriter createKeyedBytesDataWriter(
-			Topic<KeyedBytes> topic, String qosLibraryName,
-			String qosProfileName, DataWriterListener<KeyedBytes> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public StringDataWriter createStringDataWriter(Topic<String> topic) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public StringDataWriter createStringDataWriter(Topic<String> topic,
-			DataWriterQos qos, DataWriterListener<String> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public StringDataWriter createStringDataWriter(Topic<String> topic,
-			String qosLibraryName, String qosProfileName,
-			DataWriterListener<String> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedStringDataWriter createKeyedStringDataWriter(
-			Topic<KeyedString> topic) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedStringDataWriter createKeyedStringDataWriter(
-			Topic<KeyedString> topic, DataWriterQos qos,
-			DataWriterListener<KeyedString> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedStringDataWriter createKeyedStringDataWriter(
-			Topic<KeyedString> topic, String qosLibraryName,
-			String qosProfileName, DataWriterListener<KeyedString> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+			DataWriterQos qos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -300,33 +157,7 @@ public class JDDS_Publisher implements Publisher {
 	}
 
 	@Override
-	public <TYPE> DataWriter<TYPE> lookupDataWriter(Topic<TYPE> topicName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BytesDataWriter lookupBytesDataWriter(Topic<byte[]> topicName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedBytesDataWriter lookupKeyedBytesDataWriter(
-			Topic<KeyedBytes> topicName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public StringDataWriter lookupStringDataWriter(Topic<String> topicName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public KeyedStringDataWriter lookupKeyedStringDataWriter(
-			Topic<KeyedString> topicName) {
+	public <TYPE> DataWriter<TYPE> lookupDataWriter(Topic<TYPE> topic) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -388,17 +219,21 @@ public class JDDS_Publisher implements Publisher {
 	}
 
 	@Override
-	public void setDefaultDataWriterQos(String qosLibraryName,
-			String qosProfileName) {
+	public DataWriterQos copyFromTopicQos(DataWriterQos dwQos, TopicQos tQos) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void copyFromTopicQos(DataWriterQos dst, TopicQos src) {
+	public StatusCondition<Publisher> getStatusCondition() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-	
+
+	@Override
+	public DomainParticipant getParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

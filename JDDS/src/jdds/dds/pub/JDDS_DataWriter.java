@@ -26,15 +26,15 @@
 package jdds.dds.pub;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.Duration;
 import org.omg.dds.core.InstanceHandle;
+import org.omg.dds.core.ServiceEnvironment;
 import org.omg.dds.core.StatusCondition;
 import org.omg.dds.core.Time;
-import org.omg.dds.core.modifiable.ModifiableInstanceHandle;
 import org.omg.dds.core.status.LivelinessLostStatus;
 import org.omg.dds.core.status.OfferedDeadlineMissedStatus;
 import org.omg.dds.core.status.OfferedIncompatibleQosStatus;
@@ -56,13 +56,6 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 		topic_ = topic;
 	}
 
-
-	@Override
-	public Publisher getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public DataWriterListener<TYPE> getListener() {
 		// TODO Auto-generated method stub
@@ -71,6 +64,13 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 
 	@Override
 	public void setListener(DataWriterListener<TYPE> listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setListener(DataWriterListener<TYPE> listener,
+			Collection<Class<? extends Status>> statuses) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -100,14 +100,7 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 	}
 
 	@Override
-	public StatusCondition<DataWriter<TYPE>> getStatusCondition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Class<? extends Status<?, ?>>> getStatusChanges(
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Set<Class<? extends Status>> getStatusChanges() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -131,13 +124,7 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 	}
 
 	@Override
-	public Bootstrap getBootstrap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Class<TYPE> getType() {
+	public ServiceEnvironment getEnvironment() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -169,29 +156,25 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 	}
 
 	@Override
-	public LivelinessLostStatus<TYPE> getLivelinessLostStatus(
-			LivelinessLostStatus<TYPE> status) {
+	public LivelinessLostStatus getLivelinessLostStatus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OfferedDeadlineMissedStatus<TYPE> getOfferedDeadlineMissedStatus(
-			OfferedDeadlineMissedStatus<TYPE> status) {
+	public OfferedDeadlineMissedStatus getOfferedDeadlineMissedStatus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OfferedIncompatibleQosStatus<TYPE> getOfferedIncompatibleQosStatus(
-			OfferedIncompatibleQosStatus<TYPE> status) {
+	public OfferedIncompatibleQosStatus getOfferedIncompatibleQosStatus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PublicationMatchedStatus<TYPE> getPublicationMatchedStatus(
-			PublicationMatchedStatus<TYPE> status) {
+	public PublicationMatchedStatus getPublicationMatchedStatus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -203,15 +186,13 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 	}
 
 	@Override
-	public Collection<InstanceHandle> getMatchedSubscriptions(
-			Collection<InstanceHandle> subscriptionHandles) {
+	public Set<InstanceHandle> getMatchedSubscriptions() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public SubscriptionBuiltinTopicData getMatchedSubscriptionData(
-			SubscriptionBuiltinTopicData subscriptionData,
 			InstanceHandle subscriptionHandle) {
 		// TODO Auto-generated method stub
 		return null;
@@ -341,10 +322,36 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 	}
 
 	@Override
-	public ModifiableInstanceHandle lookupInstance(
-			ModifiableInstanceHandle handle, TYPE keyHolder) {
+	public TYPE getKeyValue(InstanceHandle handle) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public org.omg.dds.core.ModifiableInstanceHandle lookupInstance(
+			org.omg.dds.core.ModifiableInstanceHandle handle, TYPE keyHolder) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InstanceHandle lookupInstance(TYPE keyHolder) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StatusCondition<DataWriter<TYPE>> getStatusCondition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Publisher getParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

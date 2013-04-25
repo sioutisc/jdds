@@ -26,9 +26,10 @@
 package jdds.dds.topic;
 
 import java.util.Collection;
+import java.util.Set;
 
-import org.omg.dds.core.Bootstrap;
 import org.omg.dds.core.InstanceHandle;
+import org.omg.dds.core.ServiceEnvironment;
 import org.omg.dds.core.StatusCondition;
 import org.omg.dds.core.status.InconsistentTopicStatus;
 import org.omg.dds.core.status.Status;
@@ -40,38 +41,9 @@ import org.omg.dds.topic.TopicQos;
 import org.omg.dds.type.TypeSupport;
 
 public class JDDS_Topic<TYPE> implements Topic<TYPE>{
-	
-	public JDDS_Topic(String topicName, Class<TYPE> type) {
-	}
-
-	public JDDS_Topic(String topicName, Class<TYPE> type,
-			TopicQos qos, TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-	}
-	
-	public JDDS_Topic(String topicName, Class<TYPE> type,
-			String qosLibraryName, String qosProfileName,
-			TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-	}
-
-	public JDDS_Topic(String topicName,
-			TypeSupport<TYPE> type) {
-	}
-
-	public JDDS_Topic(String topicName,
-			TypeSupport<TYPE> type, TopicQos qos, TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-	}
-
-	public JDDS_Topic(String topicName,
-			TypeSupport<TYPE> type, String qosLibraryName,
-			String qosProfileName, TopicListener<TYPE> listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-	}
 
 	@Override
-	public Class<TYPE> getType() {
+	public TypeSupport<TYPE> getTypeSupport() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -95,19 +67,13 @@ public class JDDS_Topic<TYPE> implements Topic<TYPE>{
 	}
 
 	@Override
-	public DomainParticipant getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void close() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Bootstrap getBootstrap() {
+	public ServiceEnvironment getEnvironment() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -120,6 +86,13 @@ public class JDDS_Topic<TYPE> implements Topic<TYPE>{
 
 	@Override
 	public void setListener(TopicListener<TYPE> listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setListener(TopicListener<TYPE> listener,
+			Collection<Class<? extends Status>> statuses) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -149,14 +122,7 @@ public class JDDS_Topic<TYPE> implements Topic<TYPE>{
 	}
 
 	@Override
-	public StatusCondition<Topic<TYPE>> getStatusCondition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<Class<? extends Status<?, ?>>> getStatusChanges(
-			Collection<Class<? extends Status<?, ?>>> statuses) {
+	public Set<Class<? extends Status>> getStatusChanges() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -174,10 +140,21 @@ public class JDDS_Topic<TYPE> implements Topic<TYPE>{
 	}
 
 	@Override
-	public InconsistentTopicStatus<TYPE> getInconsistentTopicStatus(
-			InconsistentTopicStatus<TYPE> status) {
+	public InconsistentTopicStatus getInconsistentTopicStatus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public StatusCondition<Topic<TYPE>> getStatusCondition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DomainParticipant getParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

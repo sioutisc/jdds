@@ -27,7 +27,7 @@ package jdds.dds.domain;
 
 import java.util.Collection;
 
-import org.omg.dds.core.Bootstrap;
+import org.omg.dds.core.ServiceEnvironment;
 import org.omg.dds.core.status.Status;
 import org.omg.dds.domain.DomainParticipant;
 import org.omg.dds.domain.DomainParticipantFactory;
@@ -38,34 +38,29 @@ import org.omg.dds.domain.DomainParticipantQos;
 public class JDDS_DomainParticipantFactory extends DomainParticipantFactory {
 
 	@Override
-	public Bootstrap getBootstrap() {
+	public ServiceEnvironment getEnvironment() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public DomainParticipant createParticipant() {
+		// TODO Auto-generated method stub
 		return new JDDS_DomainParticipant();
 	}
 
 	@Override
 	public DomainParticipant createParticipant(int domainId) {
-		return new JDDS_DomainParticipant(domainId);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public DomainParticipant createParticipant(int domainId,
 			DomainParticipantQos qos, DomainParticipantListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		return new JDDS_DomainParticipant(domainId,qos,listener,statuses);
-	}
-
-	@Override
-	public DomainParticipant createParticipant(int domainId,
-			String qosLibraryName, String qosProfileName,
-			DomainParticipantListener listener,
-			Collection<Class<? extends Status<?, ?>>> statuses) {
-		return new JDDS_DomainParticipant(domainId,qosLibraryName,qosProfileName,listener,statuses);
+			Collection<Class<? extends Status>> statuses) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -98,11 +93,5 @@ public class JDDS_DomainParticipantFactory extends DomainParticipantFactory {
 		
 	}
 
-	@Override
-	public void setDefaultParticipantQos(String qosLibraryName,
-			String qosProfileName) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
