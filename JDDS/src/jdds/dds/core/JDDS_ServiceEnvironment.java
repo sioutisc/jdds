@@ -47,6 +47,7 @@ import org.omg.dds.type.dynamic.DynamicDataFactory;
 import org.omg.dds.type.dynamic.DynamicTypeFactory;
 
 import jdds.dds.domain.JDDS_DomainParticipantFactory;
+import jdds.dds.type.JDDS_TypeSupport;
 
 
 public class JDDS_ServiceEnvironment extends ServiceEnvironment{
@@ -86,7 +87,7 @@ public class JDDS_ServiceEnvironment extends ServiceEnvironment{
 			public <TYPE> TypeSupport<TYPE> newTypeSupport(Class<TYPE> type,
 					String registeredName) {
 				// TODO Auto-generated method stub
-				return null;
+				return new JDDS_TypeSupport<TYPE>();
 			}
 			
 			@Override

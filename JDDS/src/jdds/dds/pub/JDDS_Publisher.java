@@ -131,8 +131,7 @@ public class JDDS_Publisher implements Publisher {
 
 	@Override
 	public <TYPE> DataWriter<TYPE> createDataWriter(Topic<TYPE> topic) {
-		// TODO Auto-generated method stub
-		return null;
+		return new JDDS_DataWriter<TYPE>(this, topic);
 	}
 
 	@Override

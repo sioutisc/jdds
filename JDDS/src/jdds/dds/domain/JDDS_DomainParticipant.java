@@ -151,7 +151,7 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	@Override
 	public Publisher createPublisher() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JDDS_Publisher(this);
 	}
 
 	@Override
@@ -212,7 +212,7 @@ public class JDDS_DomainParticipant implements DomainParticipant {
 	public <TYPE> Topic<TYPE> createTopic(String topicName,
 			TypeSupport<TYPE> type) {
 		// TODO Auto-generated method stub
-		return null;
+		return new JDDS_Topic<TYPE>();
 	}
 
 	@Override
