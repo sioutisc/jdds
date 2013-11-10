@@ -51,6 +51,7 @@ public class JDDS_DataWriter<TYPE> implements DataWriter<TYPE>{
 	Topic<TYPE> topic_;
 	Publisher pub_;
 	
+	
 	public JDDS_DataWriter(Publisher pub, Topic<TYPE> topic) {
 		pub_ = pub;
 		topic_ = topic;
