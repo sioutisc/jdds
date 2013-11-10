@@ -361,6 +361,7 @@ module RTPS {
 		LocatorUDPv4 multicastLocator;
 	};
 	
+    const string DEFAULT_MULTICAST_GROUP     = "239.255.0.1";
     const short DEFAULT_PORT_BASE_NUMBER     = 7400;
     const short DEFAULT_DOMAIN_ID_GAIN       = 250;
     const short DEFAULT_PARTICIPANT_ID_GAIN  = 2;

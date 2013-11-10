@@ -30,23 +30,20 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-public class RTPS_Socket {
+public class MulticastLocator {
 	InetAddress group;
-	String ip = "239.255.0.1";
-	int port = 7400;
-	 MulticastSocket sock;
-	 
-	 public RTPS_Socket() throws Exception{
-		// TODO Auto-generated constructor stub
+	String ip;
+	int port;
+	MulticastSocket sock;
+	
+	public MulticastLocator(String ip, int port) throws Exception {
 		group = InetAddress.getByName(ip);
 		sock = new MulticastSocket(port);
-		 sock.joinGroup(group);
-		 
-		 // get their responses!
-		 //...
-		 // OK, I'm done talking - leave the group...
-		 //s.leaveGroup(group);	
-		 
+		sock.joinGroup(group);
+	}
+	 
+	public MulticastLocator() throws Exception{
+		this(RTPS.DEFAULT_MULTICAST_GROUP.value,RTPS.DEFAULT_PORT_BASE_NUMBER.value);
 	}
 	 
 	 public void send(byte[] bytes) throws IOException{
@@ -59,6 +56,10 @@ public class RTPS_Socket {
 		 DatagramPacket p = new DatagramPacket(buff, buff.length);
 		 sock.receive(p);
 		 return buff;
+	 }
+	 
+	 public void close() throws IOException{
+		 sock.leaveGroup(group);	
 	 }
 
 }
